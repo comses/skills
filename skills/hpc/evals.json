@@ -1,0 +1,51 @@
+{
+  "skill_name": "hpc",
+  "description": "Evaluation cases for HPC Slurm job scaffolding skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I have a multi-node MPI model and want to run on an HPC cluster. Generate a Slurm job script.",
+      "should_trigger": true,
+      "expected_output": "Slurm batch script with node/task/CPU allocation, module loading, srun MPI launch",
+      "success_criteria": [
+        "Script includes #SBATCH directives for nodes, ntasks-per-node, cpus-per-task",
+        "Script uses srun for MPI job launch",
+        "Resource requests are reasonable (not exceeding typical cluster limits)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Submit a job to OSPool",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; ospool handles OSPool. This skill is for Slurm HPC only."
+    },
+    {
+      "id": 3,
+      "prompt": "Set up a job array for 500 parameter combinations on a Slurm cluster.",
+      "should_trigger": true,
+      "expected_output": "Slurm array submit file, parameter list (one per line), submission command with %maxjobs",
+      "success_criteria": [
+        "Array directive specifies correct job count: #SBATCH --array=1-500",
+        "Script reads parameters using $SLURM_ARRAY_TASK_ID",
+        "Output includes guidance on managing job throughput (% throttling)"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "I need a GPU accelerated job on HPC. Generate Slurm script with CUDA/GPU support.",
+      "should_trigger": true,
+      "expected_output": "Slurm script with GPU resource request (#SBATCH --gres=gpu:N) and CUDA module loading",
+      "success_criteria": [
+        "Script includes #SBATCH --gres=gpu:2 (or appropriate GPU count)",
+        "Script loads CUDA/cuDNN modules if available",
+        "Script includes guidance on GPU-specific environment variables"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Generate HTCondor configuration for parameter sweeps",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; ospool handles HTCondor. This skill is for Slurm HPC only."
+    }
+  ]
+}

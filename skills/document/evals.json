@@ -1,0 +1,51 @@
+{
+  "skill_name": "document",
+  "description": "Evaluation cases for ODD+2 narrative documentation skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I have a Python ABM with simple Agent and Environment classes. Generate an ODD+2 narrative for my model.",
+      "should_trigger": true,
+      "expected_output": "ODD sections covering entities, state variables, processes, stochasticity (if any), parameters, and initialization logic",
+      "success_criteria": [
+        "Output identifies at least 2 entities (e.g., Agent, Environment)",
+        "State variables are listed with types and ranges for each entity",
+        "Output explains processes in pseudocode or plain English",
+        "ODD+2 checklist completion score reported"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a timeline for documenting my project milestones",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; falls through to other capabilities"
+    },
+    {
+      "id": 3,
+      "prompt": "I'm preparing a paper on an agent-based forest fire model. I need publication-ready ODD narrative.",
+      "should_trigger": true,
+      "expected_output": "Complete ODD+2 sections with validation feedback against the 23-point checklist",
+      "success_criteria": [
+        "Output includes Overview, Design Concepts, and Details sections",
+        "Validation report notes any missing ODD+2 checklist items",
+        "Markdown is properly formatted and ready to paste into a LaTeX document"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "My model code has no docstrings. Can the ODD skill still help?",
+      "should_trigger": true,
+      "expected_output": "Skill asks clarifying questions (entity names, state variables, process descriptions) rather than guessing",
+      "success_criteria": [
+        "Skill prompts user for entity definitions",
+        "Skill does not hallucinate model components"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Generate documentation for my API endpoints",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; not related to computational model documentation"
+    }
+  ]
+}

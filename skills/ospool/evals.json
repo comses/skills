@@ -1,0 +1,49 @@
+{
+  "skill_name": "ospool",
+  "description": "Evaluation cases for OSPool HTCondor job scaffolding skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I have a Python simulation model and want to run a 100-combination parameter sweep on OSPool. Generate an HTCondor submit file.",
+      "should_trigger": true,
+      "expected_output": "HTCondor submit file, parameter sweep specification (CSV), and validation checklist",
+      "success_criteria": [
+        "Submit file includes valid HTCondor directives (universe, executable, arguments)",
+        "Parameter sweep covers all 100 combinations",
+        "Output includes dry-run validation result"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Submit a job to my local cluster",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; OSPool/HTCondor scaffolder is specific to distributed HTC, not local cluster jobs"
+    },
+    {
+      "id": 3,
+      "prompt": "I'm running a large sensitivity analysis with 50 agents × 10 patches × 5 random seeds on OSG. Generate HTCondor configuration.",
+      "should_trigger": true,
+      "expected_output": "HTCondor submit file with job parameters, DAG file for job coordination (if applicable)",
+      "success_criteria": [
+        "Total jobs calculated correctly: 50 × 10 × 5 = 2,500 jobs",
+        "Output includes checkpoint/restart guidance for long simulations"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "My model has large input files (100 MB each). Set up HTCondor with proper file staging.",
+      "should_trigger": true,
+      "expected_output": "Submit file with input/output staging directives; guidance on data cache or HTTP access",
+      "success_criteria": [
+        "Output warns about file size and suggests HTTP staging or OSPool data cache",
+        "Input/output paths use relative references, not absolute paths"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Generate a Slurm batch script for my HPC cluster",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; hpc is responsible for Slurm. This skill handles OSPool/HTCondor only."
+    }
+  ]
+}

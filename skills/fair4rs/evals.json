@@ -1,0 +1,71 @@
+{
+  "skill_name": "fair4rs",
+  "description": "Evaluation cases for FAIR4RS publication readiness skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm preparing my Python ABM for publication on Zenodo. What metadata and files do I need?",
+      "should_trigger": true,
+      "expected_output": "FAIR4RS publication checklist, codemeta.json artifact, CITATION.cff generated from codemeta.json, DMP and SMP guidance, metadata requirements, Zenodo deposit workflow"
+    },
+    {
+      "id": 2,
+      "prompt": "Create a timeline for my project",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; not related to model publication"
+    },
+    {
+      "id": 3,
+      "prompt": "I have a model on GitHub and I want to make it citable. Generate CITATION.cff.",
+      "should_trigger": true,
+      "expected_output": "codemeta.json plus CITATION.cff content in RFC 8949 format with author, license, repository URL",
+      "success_criteria": [
+        "codemeta.json includes @context, @type, name, version, codeRepository, license, and author metadata",
+        "CITATION.cff includes cff-version, title, authors, license, repository-code",
+        "CITATION.cff values are consistent with codemeta.json fields",
+        "Output renders correctly on GitHub as a cite button"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Prepare both a data management plan and a software management plan for my published model",
+      "should_trigger": true,
+      "expected_output": "DMP plus EVERSE-aligned SMP addressing lifecycle governance, QA, releases, maintenance, and archival",
+      "success_criteria": [
+        "DMP covers all FAIR4RS pillars (Findability, Accessibility, Interoperability, Reusability)",
+        "DMP includes specific Zenodo/OSF/institutional repository recommendations",
+        "SMP includes software lifecycle coverage (collaboration/licensing, design/implementation, testing/QA, deployment, versioning/releases)",
+        "SMP is framed as a living document with roles, maintenance expectations, and contingency planning"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Write a README for my code",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; README generation is a generic writing task"
+    },
+    {
+      "id": 6,
+      "prompt": "Use EVERSE guidance to draft a software management plan for my reusable research software package.",
+      "should_trigger": true,
+      "expected_output": "Software Management Plan structured with lifecycle sections and software-type-aware priorities",
+      "success_criteria": [
+        "SMP includes explicit scope and software type classification",
+        "SMP defines stakeholder roles and governance responsibilities",
+        "SMP includes CI/testing/code review and release/deprecation practices",
+        "SMP includes discoverability and preservation actions (e.g., Zenodo, Software Heritage)"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Create a codemeta.json for my model repository and then derive a matching CITATION.cff.",
+      "should_trigger": true,
+      "expected_output": "A valid codemeta.json artifact and a synchronized CITATION.cff derived from it",
+      "success_criteria": [
+        "codemeta.json uses CodeMeta JSON-LD context and SoftwareSourceCode type",
+        "codemeta.json includes core project metadata and at least one author",
+        "CITATION.cff can be traced back to codemeta.json values without conflicts"
+      ]
+    }
+  ]
+}
