@@ -6,16 +6,91 @@ This repository hosts a curated collection of [Agent Skills](https://agentskills
 
 ## Quick Start
 
+### Install Node.js LTS with nvm (WSL, macOS, Linux)
+
+`npx skills ...` requires Node.js. Use `nvm` to install and manage Node versions without `sudo`.
+
+Security best practices:
+
+- Install only from the official `nvm-sh/nvm` repository.
+- Pin the installer to a specific release tag instead of running an unpinned command.
+- Review the installer script before executing it.
+- Avoid `sudo npm -g ...`; use user-level installs with `nvm`.
+
+1. Install prerequisites
+
+WSL / Linux:
+
+```bash
+sudo apt update
+sudo apt install -y curl ca-certificates git
+```
+
+macOS (with Homebrew):
+
+```bash
+brew install curl ca-certificates git
+```
+
+2. Install `nvm` from an official tagged release
+
+Choose the latest release tag from: https://github.com/nvm-sh/nvm/releases
+
+```bash
+export NVM_VERSION="v0.40.3"
+curl -fsSL -o /tmp/install_nvm.sh "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh"
+less /tmp/install_nvm.sh
+bash /tmp/install_nvm.sh
+```
+
+3. Load `nvm` in your current shell
+
+```bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+```
+
+If needed, restart your terminal so your shell profile changes take effect.
+
+4. Install and use the latest Node LTS
+
+```bash
+nvm install --lts
+nvm alias default 'lts/*'
+nvm use --lts
+```
+
+5. Verify toolchain
+
+```bash
+node -v
+npm -v
+npx -v
+```
+
+6. Keep Node LTS current
+
+```bash
+nvm install --lts --reinstall-packages-from=current
+nvm use --lts
+```
+
+7. Continue with skills installation
+
+```bash
+npx skills add comses/skills
+```
+
 ### Install a Skill
 
 ```bash
-npx skills add comses-network/skills
+npx skills add comses/skills
 ```
 
 Or install from GitHub directly:
 
 ```bash
-npx skills add https://github.com/comses-network/skills
+npx skills add https://github.com/comses/skills
 ```
 
 ### Use a Skill in Your Coding Agent
@@ -27,14 +102,14 @@ Once installed, mention the skill by name in your conversation:
 
 See the Agent Skills documentation for your platform for details on skill usage.
 
-## Starter Skills Overview
+## Skills Overview
 
-This repository includes four starter skills covering core computational modeling needs:
+This repository currently includes five skills covering core computational modeling needs:
 
 ### 1. **document**
 Generates and iteratively improves ODD+2 (Overview, Design Concepts, Details) documentation for agent-based models. Use when you have model code and need publication-ready narrative documentation that satisfies the 23-point ODD+2 checklist.
 
-**Triggers:** "Document my ABM", "Generate ODD", "Write model narrative"
+**Triggers:** "Document my model", "Generate ODD", "Write model narrative"
 
 ### 2. **fair4rs**
 Creates FAIR4RS metadata with codemeta.json as canonical machine-readable metadata, citation files derived from codemeta.json, publication checklists, and EVERSE-aligned software management plans to ensure your computational artifacts are ready for archival and publication. Use when preparing models for Zenodo, arXiv, or disciplinary repositories.
@@ -51,10 +126,35 @@ Generates Slurm job scripts, job arrays, and resource allocation templates for r
 
 **Triggers:** "Run on HPC", "Generate Slurm script", "Set up batch array job"
 
+### 5. **peer-review**
+Evaluates computational model submissions for peer review readiness using required CoMSES criteria (ease of execution, documentation thoroughness, and code quality) plus supporting research software quality indicators inspired by EVERSE.
+
+**Triggers:** "Peer review my model", "Is this model submission ready", "Review codebase quality", "Check reproducibility"
+
+## Repository-Local Maintainer Skill
+
+This repository also includes a local-only maintainer skill that is not part of the published `skills/` catalog:
+
+### **update-skill** (`.github/skills/update-skill`)
+Maintainer workflow for refreshing compressed artifacts, references, and eval expectations when upstream standards evolve.
+
+Use cases:
+- Refreshing rubric/indicator snapshots after upstream changes
+- Keeping `SKILL.md`, `references`, `assets`, and `evals.json` synchronized in one PR
+- Standardizing refresh PR notes for traceability
+
 ## Repository Structure
 
 ```
 skills/
+├── .github/
+│   └── skills/
+│       └── update-skill/        (repository-local maintainer skill)
+│           ├── SKILL.md
+│           ├── references/
+│           │   └── REFRESH-WORKFLOW.md
+│           └── assets/
+│               └── REFRESH-PR-NOTE-TEMPLATE.md
 ├── README.md                    (this file)
 ├── CONTRIBUTING.md              (contribution guidelines)
 ├── LICENSE                      (MIT)
@@ -72,7 +172,9 @@ skills/
     │   └── SKILL.md
     ├── ospool/
     │   └── SKILL.md
-    └── hpc/
+    ├── hpc/
+    │   └── SKILL.md
+    └── peer-review/
         └── SKILL.md
 ```
 
@@ -95,9 +197,22 @@ Each skill lives in its own folder with a required `SKILL.md` file:
 your-skill-name/
 ├── SKILL.md                     (required: frontmatter + instructions)
 ├── scripts/                     (optional: Python/shell scripts for automation)
-├── references/                  (optional: detailed docs, checklists, guides)
+├── references/                  (optional: compressed, detailed docs, checklists, guides)
 └── assets/                      (optional: templates, icons, example files)
 ```
+
+Recommended semantic purpose of each component:
+
+- `SKILL.md` -> orchestration and enforcement language (when to trigger, required workflow steps, output constraints)
+- `assets/` -> reusable output artifacts (templates, starter files, structured output skeletons)
+- `references/` -> normative guidance / rules / compressed artifacts (checklists, standards mappings, policy summaries)
+- `scripts/` -> deterministic automation helpers (validation, generation, extraction)
+
+Authoring guidance:
+
+- Keep operational decision logic in `SKILL.md`; do not duplicate it across assets.
+- Put reusable content the model can copy/fill into `assets/`.
+- Put standards and rule-oriented material in `references/`.
 
 **Frontmatter (required fields):**
 ```yaml

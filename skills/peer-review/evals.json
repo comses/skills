@@ -1,0 +1,77 @@
+{
+  "skill_name": "peer-review",
+  "description": "Evaluation cases for computational model peer review readiness skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Peer review my computational model repository for CoMSES readiness and give a final decision.",
+      "should_trigger": true,
+      "expected_output": "Structured report that evaluates ease of execution, documentation thoroughness, and code quality as required criteria, then returns a binary pass/fail recommendation",
+      "success_criteria": [
+        "Output includes all three CoMSES criteria with explicit ratings",
+        "Final recommendation is binary (Pass or Fail)",
+        "Report includes a required criteria status summary showing 3/3 required"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you review the scientific novelty of my model and decide if the theory is correct?",
+      "should_trigger": true,
+      "expected_output": "Skill activates but explicitly scopes review to software and documentation quality, noting scientific merit is out of scope"
+    },
+    {
+      "id": 3,
+      "prompt": "Review this model package. Tests are missing and CI is not configured, but it runs and has strong docs and clean code.",
+      "should_trigger": true,
+      "expected_output": "Report flags tests and CI as major nonblocking issues and still applies binary pass/fail from the three CoMSES required criteria",
+      "success_criteria": [
+        "Tests and CI are categorized as Major findings",
+        "Missing tests/CI alone does not automatically force Fail",
+        "Binary decision is based on required CoMSES criteria"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Assess my model documentation. I use a framework equivalent to ODD, not ODD itself.",
+      "should_trigger": true,
+      "expected_output": "Documentation is evaluated for equivalent coverage rather than failing solely for non-ODD format",
+      "success_criteria": [
+        "Report checks purpose, entities/components, processes, assumptions, parameters, initialization, inputs/outputs, and stochasticity where relevant",
+        "Equivalent framework is accepted when coverage is sufficient"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "I have ODD docs. Use the peer-review process to assess whether the documentation passes quality checks.",
+      "should_trigger": true,
+      "expected_output": "Review references ODD-oriented assessment and indicates use of the document skill for ODD completeness/checklist support",
+      "success_criteria": [
+        "Output mentions ODD structure/completeness assessment",
+        "Output indicates handoff or reference to the document skill for ODD checklist evaluation"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Write a Python script to parse CSV files into JSON.",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; task is generic programming and not peer review"
+    },
+    {
+      "id": 7,
+      "prompt": "Create a conference abstract about my simulation findings.",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; task is scientific writing, not computational model peer review"
+    },
+    {
+      "id": 8,
+      "prompt": "Run a peer-review readiness assessment and explicitly anchor your findings to the local compressed CoMSES and EVERSE rubric snapshots.",
+      "should_trigger": true,
+      "expected_output": "Structured review output cites the local compressed rubric assets and uses them as evidence anchors in the report",
+      "success_criteria": [
+        "Output references assets/COMSES-REVIEWS-COMPRESSED.md for CoMSES criteria grounding",
+        "Output references assets/EVERSE-INDICATORS-COMPRESSED.md for indicator grounding",
+        "Output still applies binary required-criteria pass/fail logic for the three CoMSES criteria"
+      ]
+    }
+  ]
+}
