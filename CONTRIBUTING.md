@@ -16,7 +16,7 @@ Thank you for contributing to this skills repository! This guide walks you throu
 
 - Familiarize yourself with the [Agent Skills specification](https://agentskills.io)
 - Review existing skills in `skills/` to understand the pattern
-- Read the [template skill](template/SKILL.md)
+- Copy [docs/SKILL-TEMPLATE.md](docs/SKILL-TEMPLATE.md) as your starting point
 - Ensure your skill addresses a concrete pain point for computational modelers
 - Confirm your skill does NOT substantially overlap with existing skills
 
@@ -34,10 +34,12 @@ Answer these questions before writing:
 
 ### 2. Create Your Skill Folder
 
+Run `/create-skill <name> — <one-sentence description>` in your coding agent. This scaffolds `skills/<name>/SKILL.md` from [docs/SKILL-TEMPLATE.md](docs/SKILL-TEMPLATE.md) with placeholders filled in, and generates a starter `evals.json`.
+
+Alternatively, copy manually:
 ```bash
 mkdir -p skills/your-skill-name
-cd skills/your-skill-name
-cp ../../template/SKILL.md ./SKILL.md
+cp docs/SKILL-TEMPLATE.md skills/your-skill-name/SKILL.md
 ```
 
 ### 3. Write SKILL.md

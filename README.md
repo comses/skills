@@ -159,12 +159,9 @@ skills/
 ├── CONTRIBUTING.md              (contribution guidelines)
 ├── LICENSE                      (MIT)
 ├── .gitignore
-├── spec/                        (Agent Skills specification & COMSES guidance)
-│   └── README.md
-├── template/                    (skill template for contributors)
-│   └── SKILL.md
 ├── docs/                        (repository-level documentation)
-│   └── roadmap.md
+│   ├── roadmap.md
+│   └── SKILL-TEMPLATE.md        (copy/fill template for new skills)
 └── skills/                      (all skill folders)
     ├── document/
     │   └── SKILL.md
@@ -183,11 +180,18 @@ skills/
 ### Adding a New Skill
 
 1. **Read** [CONTRIBUTING.md](CONTRIBUTING.md) for submission guidelines and naming conventions.
-2. **Copy** the template from `template/SKILL.md` to your skill folder: `skills/your-skill-name/SKILL.md`.
-3. **Fill in** the YAML frontmatter (`name`, `description`) and markdown instructions following the progressive disclosure pattern.
-4. **Include optional resources** (scripts, references, assets) as your skill grows.
-5. **Test** against should-trigger and should-not-trigger prompts before submitting a PR.
-6. **Submit** a pull request with your skill and evaluation strategy (see CONTRIBUTING.md).
+2. **Review** [Agent Skills best practices](https://agentskills.io/skill-creation/best-practices) before drafting.
+3. **Ground from real expertise**: start from real task runs, corrections, and project artifacts (not generic advice).
+4. **Scope coherently**: define one composable unit of work; avoid overly broad or ultra-narrow skills.
+5. **Design for context efficiency**: keep `SKILL.md` concise, move deep details to `references/`, and load references only when needed.
+6. **Prefer defaults over menus**: choose one default tool/approach and list alternatives only as fallbacks.
+7. **Include reusable control patterns**: gotchas, output templates, and validation loops/checklists where relevant.
+8. **Refine with real execution**: test should-trigger and should-not-trigger prompts, review execution traces, then iterate.
+9. **Copy** an existing skill folder as a starting point: `cp -r skills/hpc skills/your-skill-name`.
+10. **Fill in** the YAML frontmatter (`name`, `description`) and markdown instructions following the progressive disclosure pattern.
+11. **Include optional resources** (scripts, references, assets) as your skill grows.
+12. **Test** against should-trigger and should-not-trigger prompts before submitting a PR.
+13. **Submit** a pull request with your skill and evaluation strategy (see CONTRIBUTING.md).
 
 ### Skill Anatomy
 
@@ -224,7 +228,7 @@ description: Brief description of when and why to use this skill
 
 **Optional fields:**
 ```yaml
-license: MIT (default) | Apache-2.0 | Proprietary
+license: MIT (default) | Apache-2.0 | GPL-3.0-or-later
 compatibility: Tool/version requirements
 metadata:
   domain: computational-modeling | documentation | publication | execution
@@ -233,7 +237,7 @@ metadata:
 ---
 ```
 
-See [template/SKILL.md](template/SKILL.md) and [CONTRIBUTING.md](CONTRIBUTING.md) for full guidance.
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) for full guidance.
 
 ## Roadmap
 

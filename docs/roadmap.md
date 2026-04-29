@@ -246,7 +246,7 @@ Orchestrate ensembles of models (different implementations, parameters, or struc
 ## Sustainability & Governance
 
 ### Community Contributions
-All skills are open to community contributions. See [CONTRIBUTING.md](../CONTRIBUTING.md) and [spec/README.md](../spec/README.md) for guidelines.
+All skills are open to community contributions. See [CONTRIBUTING.md](../CONTRIBUTING.md) and [SKILL-TEMPLATE.md](./SKILL-TEMPLATE.md) for guidelines.
 
 ### Review & Acceptance
 - Skills undergo community review before merge (GitHub PR workflow)

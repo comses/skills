@@ -23,6 +23,20 @@ Skills undergo validation at multiple layers to ensure quality and reliability:
 | **Evaluation** | Contributor | Before/during PR | Test case results and grading rubric |
 | **Integration** | Maintainers | Post-merge | skills.sh listing, discoverability |
 
+## Best-Practice Alignment Checks
+
+Align each skill with guidance from: https://agentskills.io/skill-creation/best-practices
+
+- [ ] Skill is grounded in real project expertise (task traces, runbooks, issues, fixes), not generic advice
+- [ ] Skill scope is one coherent unit of work that composes with other skills
+- [ ] `SKILL.md` is concise, with progressive disclosure into `references/` and clear load conditions
+- [ ] Default approach/tool is explicit; alternatives are fallback-only
+- [ ] Procedures are reusable methods, not one-off answers
+- [ ] Gotchas section captures concrete, repeated failure patterns
+- [ ] Output templates/checklists are included when format or sequencing is critical
+- [ ] Validation loops are present for multi-step workflows
+- [ ] Real execution traces were reviewed for wasted steps or ambiguity
+
 ---
 
 ## Frontmatter Validation
@@ -50,6 +64,7 @@ license: MIT                         # (optional, defaults to MIT)
 - [ ] Valid YAML syntax (no unescaped colons in values, proper indentation)
 - [ ] If including `metadata`, it contains valid fields: `domain`, `maturity`, `audience`
 - [ ] If including `compatibility`, it lists actual tool/version requirements
+- [ ] Description avoids vague generic claims and includes domain-specific trigger context
 
 ### Quick Syntax Check
 
@@ -177,6 +192,8 @@ When activated, this skill produces:
 - [ ] Verify the output format matches what's promised
 - [ ] Check that output is usable downstream (can a user take it directly to publication?)
 - [ ] Verify error handling is clear (if something goes wrong, can user fix it?)
+- [ ] Verify the skill provides a clear default tool/path (not an equal-choice menu)
+- [ ] Verify deep detail is moved to `references/` or `assets/` with explicit load/use conditions
 
 ---
 
@@ -315,6 +332,7 @@ Before opening a PR, verify:
 - [ ] Output contract is clear and verifiable
 - [ ] Evals are documented in `evals/evals.json` with success criteria
 - [ ] Manual testing shows skill works as expected
+- [ ] Execution traces were reviewed for false positives, missed triggers, and wasted steps
 - [ ] No hardcoded paths, API keys, or user-specific settings
 - [ ] License field is present and reasonable (MIT or declared alternative)
 - [ ] README/docs sections align with repository conventions
