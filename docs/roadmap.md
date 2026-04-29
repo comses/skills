@@ -2,71 +2,178 @@
 
 This document outlines planned expansions to the COMSES skills repository, organized by domain and priority tier.
 
-## Tier 1: Core Literacy & Documentation (Current Release)
+## Tracking Issues
 
-**Status:** Actively developed; starter skills available
+- https://github.com/comses/skills/issues/1
+- https://github.com/comses/planning/issues/357
+
+## Initial Release
+
+**Status:** Active development; starter skills available
 
 ### Current Skills
-- **document** (beta): ODD+2 documentation for ABMs
-- **fair4rs** (beta): Publication metadata and archival readiness
-- **ospool** (beta): OSPool batch and parameter sweep scaffolding
-- **hpc** (beta): HPC cluster job submission and arrays
+- **document** (alpha): ODD+2 documentation for ABMs
+- **fair4rs** (alpha): Publication metadata and archival readiness
+- **ospool** (alpha): OSPool batch and parameter sweep scaffolding
+- **hpc** (alpha): HPC cluster job submission and arrays
+- **peer-review** (alpha): Computational model peer-review readiness assessment using required criteria and supporting quality indicators
 
 ### Outcomes
 - Researchers can document models following ODD+2 protocol
 - Models are publication-ready with FAIR4RS metadata
 - Parameter sweeps can be executed on OSPool or HPC infrastructure at scale
+- Model submissions can be assessed for peer-review readiness with standardized required criteria and evidence reporting
 
 ---
 
-## Tier 2: Reproducibility & Containerization (Q2-Q3 2026)
+## Tier 2: Reproducibility & Containerization (Q3-Q4 2026)
 
 **Status:** In planning
 
 ### Planned Skills
 
-#### **reproducibility-capsule** (alpha)
-Capture model environment (Python/R dependencies, system libraries, git commit hash) and verify rerun reproducibility via containerized snapshots.
+#### **build-capsule** (alpha)
+**Purpose:** Capture the model execution environment (language dependencies, system libraries, and code version) and enable reproducible reruns with verification of output consistency, using either lightweight containerization or trace-based capsules (e.g., ReproZip).
 
-**Value:** Ensures that future runs of the model produce identical outputs (or identified stochasticity) even after years or environment changes.
+**Audience:** Modelers who need durable, inspectable execution environments for computational experiments; journals and funders requiring verifiable, repeatable results under controlled conditions.
 
-**Key features:**
-- `scripts/capture_env.sh`: Extract dependency tree and git metadata
-- `scripts/build_dockerfile.py`: Generate minimal Dockerfile from environment specs
-- `scripts/verify_rerun.py`: Compare outputs via checksum matrix and diff report
-- Integration with Zenodo for automated container archival
+**Value:** Packages code, dependencies, and execution context into portable capsules that enable rerunning models with consistent behavior, detecting divergence due to environment changes, and making sources of stochasticity explicit.
 
-**Audience:** Modelers requiring long-term reproducibility guarantees; journals/funders requiring reproducibility verification
+#### Interface
 
-#### **model-data-lineage** (alpha)
-Track input→process→output lineage with DVC (Data Version Control) configuration, materialization specs, and dependency DAGs.
+**Inputs:**
 
-**Value:** Audit trail showing how each output was generated, enables reproduction of specific analyses, supports downstream reuse.
+```json
+{
+  "action": "capture | inspect | replay | export | validate",
+  "cmd": "string",
+  "workdir": "path",
+  "inputs": ["paths"],
+  "outputs": ["paths"],
+  "target": "rpz | docker | apptainer",
+  "validate": "boolean",
+  "constraints": {
+    "offline": true,
+    "validate": true
+  }
+}
+```
 
-**Key features:**
-- `scripts/dvc_init_model.sh`: Setup DVC for S3, local, or Google Cloud storage
-- `scripts/lineage_to_mermaid.py`: Generate DAG visualization for documentation
-- Support for DVC.yaml pipeline definitions and Airflow integration
-- W3C PROV-compatible metadata export
+**Outputs:**
 
-**Audience:** Data-intensive modelers; researchers requiring audit trails for regulatory or publication compliance
+```
+/capsule/
+  Dockerfile | *.def
+  experiment.rpz (optional)
+  manifest.json
+```
 
----
+#### Behavior
 
-## Tier 3: Analysis & Validation (Q3-Q4 2026)
+* Defaults to **containerization**
+* Offers **trace capture (ReproZip)** when available 
+* Produces a runnable artifact for the input command
+
+#### Decision Rules
+
+* Use **container** when environment is reasonably structured
+* Use **trace** when dependencies are unknown or container fails
+* Prompt for external software or data dependencies
+
+#### Capabilities
+
+##### Containerize
+
+* Generate lightweight Dockerfile or Apptainer definition
+* Copy project files into container
+* Set entrypoint to input command
+* Attempt dependency installation (best-effort)
+
+##### Trace
+
+* Capture execution with ReproZip
+* Bundle environment and files into `.rpz`
+* Optionally derive container from trace
+
+##### Validate (optional)
+
+* Run original and packaged versions
+* Compare exit codes and outputs
+
+
+#### Manifest
+Possible alignment with micro RO-Crate / PROV / BDBag / etc
+
+```json
+{
+  "command": "...",
+  "workdir": "...",
+  "action": "...",
+  "backend": "...",
+  "target": "...",
+  "inputs": [{"path": "...", "hash": "..."}],
+  "outputs": [{"path": "...", "hash": "..."}],
+  "artifacts": ["..."],
+  "uncertainty": {
+    "level": "medium",
+    "sources": [{"type": "dependency | data | execution | environment | external", "detail": "..."}],
+  }
+}
+```
+
+#### Constraints
+
+* Container builds may miss implicit dependencies
+* Trace requires Linux and may not capture all behavior
+* External services and network effects are not reproducible
+* Hardware and OS differences may affect replay
+* Determinism is not guaranteed
+
+Prefer **containers for portability**, use **tracing to recover hidden dependencies**.
+
+#### Implementation notes
+
+**Reference tooling:**
+- https://github.com/stencila/dockta
+
+* auto-detect entrypoint from:
+  * shell history (if available)
+  * Makefile / scripts
+* suggest:
+  * isolate run directory
+  * minimize external state
+* warn on:
+  * large data (> threshold)
+  * remote services (not captured by ReproZip; common limitation)
+
+(These are inherent to ReproZip’s tracing model; alternatives like containers or Nix differ in guarantees.)
+
+#### Possible extension hooks
+
+* integrate with:
+  * Snakemake / Nextflow (workflow-level reproducibility)
+  * Nix/Guix (stronger reproducibility, different model; optional path)
+* add provenance export (RO-Crate or similar; optional, uncertain standard choice)
+
+Treat ReproZip as a **low-friction onboarding layer**: capture first, then progressively harden into containers or declarative environments for durability.
+
+- Integration with reproducibility artifact archival workflows
+
+## Analysis & Validation (est: Q2-Q3 2027)
 
 **Status:** In planning
 
 ### Planned Skills
 
 #### **parameter-sweep-analysis** (alpha)
-Design parameter sweeps using One-At-a-Time (OAT), 2-level factorial, or Latin Hypercube sampling; compute sensitivity indices (Sobol, Morris); generate interactive dashboards.
+Design parameter sweeps using Dakota toolkit workflows (for example OAT, factorial, and Latin Hypercube studies); compute sensitivity indices; generate interactive dashboards.
 
 **Value:** Automate sensitivity analysis workflow from design to visualization.
 
 **Key features:**
-- `scripts/design_sweep.py`: Generate sweep configurations for multiple DOE strategies
-- `scripts/analyze_sensitivity.py`: Compute Sobol, Morris, and variance-based indices
+- `scripts/generate_dakota_input.py`: Generate Dakota input files for DOE and sensitivity studies
+- `scripts/run_dakota.sh`: Execute Dakota studies and collect run artifacts
+- `scripts/parse_dakota_results.py`: Extract and normalize sensitivity outputs for downstream analysis
 - `scripts/plot_heatmap.R`: Interactive Plotly HTML dashboards from results
 - Standardized JSON output format for downstream analysis
 
@@ -94,13 +201,13 @@ Convert Jupyter/Quarto notebooks into containerized, version-controlled, reprodu
 - `scripts/nb_to_script.py`: Jupytext conversion to .py with markdown cells
 - `scripts/exec_script.sh`: Ordered cell execution with error capture and logging
 - `scripts/validate_rerun.py`: Determinism check against output snapshots
-- Integration with reproducibility-capsule for containerization
+- Integration with build-capsule for containerization
 
 **Audience:** Researchers transitioning from exploratory analysis to reproducible workflows; computational journalism
 
 ---
 
-## Tier 4: Advanced Integration & Domain Extensions (Q4 2026+)
+## Tier 4: Advanced Integration & Domain Extensions (Q4 2027+)
 
 **Status:** Conceptual
 
@@ -161,4 +268,4 @@ We welcome feedback on the roadmap! Please:
 2. Share use cases or pain points your research encounters
 3. Contribute implementations (see CONTRIBUTING.md)
 
-This roadmap is a living document and will be updated quarterly. Last updated: April 14, 2026.
+This roadmap is a living document and will be updated quarterly. Last updated: April 28, 2026.
