@@ -4,46 +4,140 @@
   "evals": [
     {
       "id": 1,
+      "type": "core",
       "prompt": "I have a Python simulation model and want to run a 100-combination parameter sweep on OSPool. Generate an HTCondor submit file.",
       "should_trigger": true,
-      "expected_output": "HTCondor submit file, parameter sweep specification (CSV), and validation checklist",
-      "success_criteria": [
-        "Submit file includes valid HTCondor directives (universe, executable, arguments)",
-        "Parameter sweep covers all 100 combinations",
-        "Output includes dry-run validation result"
-      ]
+      "expected_output": "HTCondor submit file + parameter sweep spec"
     },
     {
       "id": 2,
+      "type": "core",
       "prompt": "Submit a job to my local cluster",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; OSPool/HTCondor scaffolder is specific to distributed HTC, not local cluster jobs"
+      "expected_output": "Does not activate"
     },
     {
       "id": 3,
+      "type": "core",
       "prompt": "I'm running a large sensitivity analysis with 50 agents × 10 patches × 5 random seeds on OSG. Generate HTCondor configuration.",
       "should_trigger": true,
-      "expected_output": "HTCondor submit file with job parameters, DAG file for job coordination (if applicable)",
-      "success_criteria": [
-        "Total jobs calculated correctly: 50 × 10 × 5 = 2,500 jobs",
-        "Output includes checkpoint/restart guidance for long simulations"
-      ]
+      "expected_output": "HTCondor submit + job expansion logic"
     },
     {
       "id": 4,
+      "type": "core",
       "prompt": "My model has large input files (100 MB each). Set up HTCondor with proper file staging.",
       "should_trigger": true,
-      "expected_output": "Submit file with input/output staging directives; guidance on data cache or HTTP access",
-      "success_criteria": [
-        "Output warns about file size and suggests HTTP staging or OSPool data cache",
-        "Input/output paths use relative references, not absolute paths"
-      ]
+      "expected_output": "Submit file with staging + data access strategy"
     },
     {
       "id": 5,
+      "type": "core",
       "prompt": "Generate a Slurm batch script for my HPC cluster",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; hpc is responsible for Slurm. This skill handles OSPool/HTCondor only."
+      "expected_output": "Does not activate"
+    },
+    {
+      "id": 6,
+      "type": "core",
+      "prompt": "How can I run thousands of independent simulations efficiently across distributed resources?",
+      "should_trigger": true,
+      "expected_output": "HTCondor-based high-throughput strategy",
+      "notes": "implicit trigger"
+    },
+    {
+      "id": 7,
+      "type": "core",
+      "prompt": "Fix my HTCondor submit file that is failing to transfer input files",
+      "should_trigger": true,
+      "expected_output": "Debugged submit file with corrected transfer directives",
+      "notes": "refinement/debug"
+    },
+    {
+      "id": 8,
+      "type": "core",
+      "prompt": "Validate whether my HTCondor workflow is configured correctly",
+      "should_trigger": true,
+      "expected_output": "Validation report with configuration issues and fixes",
+      "notes": "validation-only"
+    },
+    {
+      "id": 9,
+      "type": "core",
+      "prompt": "Run my simulation script locally with bash",
+      "should_trigger": false,
+      "expected_output": "Does not activate"
+    },
+    {
+      "id": 10,
+      "type": "core",
+      "prompt": "Optimize my Slurm job for faster execution",
+      "should_trigger": false,
+      "expected_output": "Does not activate; HPC domain"
+    },
+    {
+      "id": 101,
+      "type": "adversarial",
+      "prompt": "Explain what HTCondor is",
+      "should_trigger": false,
+      "expected_output": "Informational only",
+      "failure_mode": "keyword trap"
+    },
+    {
+      "id": 102,
+      "type": "adversarial",
+      "prompt": "Run my simulation on OSG",
+      "should_trigger": true,
+      "expected_output": "Clarifies workflow and produces HTCondor solution",
+      "failure_mode": "vague but correct domain"
+    },
+    {
+      "id": 103,
+      "type": "adversarial",
+      "prompt": "Generate a PBS job script for my distributed simulation",
+      "should_trigger": false,
+      "expected_output": "Does not activate",
+      "failure_mode": "scheduler confusion"
+    },
+    {
+      "id": 104,
+      "type": "adversarial",
+      "prompt": "I need to run 20,000 independent jobs with different parameters",
+      "should_trigger": true,
+      "expected_output": "HTCondor parameter sweep or DAG strategy",
+      "failure_mode": "implicit HTC scaling case"
+    },
+    {
+      "id": 105,
+      "type": "adversarial",
+      "prompt": "Fix formatting issues in my HTCondor submit file",
+      "should_trigger": false,
+      "expected_output": "Does not activate; superficial edit",
+      "failure_mode": "over-trigger on keyword"
+    },
+    {
+      "id": 106,
+      "type": "adversarial",
+      "prompt": "Run my simulation on a Kubernetes cluster",
+      "should_trigger": false,
+      "expected_output": "Does not activate",
+      "failure_mode": "infrastructure confusion"
+    },
+    {
+      "id": 107,
+      "type": "adversarial",
+      "prompt": "Prepare my simulation for publication and also generate HTCondor jobs",
+      "should_trigger": true,
+      "expected_output": "Handles HTCondor part only; does not overreach into FAIR",
+      "failure_mode": "cross-skill boundary"
+    },
+    {
+      "id": 108,
+      "type": "adversarial",
+      "prompt": "My jobs keep getting evicted on OSPool. How should I handle this?",
+      "should_trigger": true,
+      "expected_output": "Checkpointing/restart strategy and job robustness guidance",
+      "failure_mode": "non-generation operational issue"
     }
   ]
 }

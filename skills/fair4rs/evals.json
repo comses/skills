@@ -4,68 +4,154 @@
   "evals": [
     {
       "id": 1,
+      "type": "core",
       "prompt": "I'm preparing my Python ABM for publication on Zenodo. What metadata and files do I need?",
       "should_trigger": true,
-      "expected_output": "FAIR4RS publication checklist, codemeta.json artifact, CITATION.cff generated from codemeta.json, DMP and SMP guidance, metadata requirements, Zenodo deposit workflow"
+      "expected_output": "FAIR4RS checklist, codemeta.json, CITATION.cff, and deposit guidance"
     },
     {
       "id": 2,
+      "type": "core",
       "prompt": "Create a timeline for my project",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; not related to model publication"
+      "expected_output": "Skill does not activate"
     },
     {
       "id": 3,
+      "type": "core",
       "prompt": "I have a model on GitHub and I want to make it citable. Generate CITATION.cff.",
       "should_trigger": true,
-      "expected_output": "codemeta.json plus CITATION.cff content in RFC 8949 format with author, license, repository URL",
-      "success_criteria": [
-        "codemeta.json includes @context, @type, name, version, codeRepository, license, and author metadata",
-        "CITATION.cff includes cff-version, title, authors, license, repository-code",
-        "CITATION.cff values are consistent with codemeta.json fields",
-        "Output renders correctly on GitHub as a cite button"
-      ]
+      "expected_output": "codemeta.json plus CITATION.cff"
     },
     {
       "id": 4,
+      "type": "core",
       "prompt": "Prepare both a data management plan and a software management plan for my published model",
       "should_trigger": true,
-      "expected_output": "DMP plus EVERSE-aligned SMP addressing lifecycle governance, QA, releases, maintenance, and archival",
-      "success_criteria": [
-        "DMP covers all FAIR4RS pillars (Findability, Accessibility, Interoperability, Reusability)",
-        "DMP includes specific Zenodo/OSF/institutional repository recommendations",
-        "SMP includes software lifecycle coverage (collaboration/licensing, design/implementation, testing/QA, deployment, versioning/releases)",
-        "SMP is framed as a living document with roles, maintenance expectations, and contingency planning"
-      ]
+      "expected_output": "DMP + SMP aligned with FAIR4RS"
     },
     {
       "id": 5,
+      "type": "core",
       "prompt": "Write a README for my code",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; README generation is a generic writing task"
+      "expected_output": "Skill does not activate"
     },
     {
       "id": 6,
+      "type": "core",
       "prompt": "Use EVERSE guidance to draft a software management plan for my reusable research software package.",
       "should_trigger": true,
-      "expected_output": "Software Management Plan structured with lifecycle sections and software-type-aware priorities",
-      "success_criteria": [
-        "SMP includes explicit scope and software type classification",
-        "SMP defines stakeholder roles and governance responsibilities",
-        "SMP includes CI/testing/code review and release/deprecation practices",
-        "SMP includes discoverability and preservation actions (e.g., Zenodo, Software Heritage)"
-      ]
+      "expected_output": "Structured SMP"
     },
     {
       "id": 7,
+      "type": "core",
       "prompt": "Create a codemeta.json for my model repository and then derive a matching CITATION.cff.",
       "should_trigger": true,
-      "expected_output": "A valid codemeta.json artifact and a synchronized CITATION.cff derived from it",
-      "success_criteria": [
-        "codemeta.json uses CodeMeta JSON-LD context and SoftwareSourceCode type",
-        "codemeta.json includes core project metadata and at least one author",
-        "CITATION.cff can be traced back to codemeta.json values without conflicts"
-      ]
+      "expected_output": "Consistent codemeta.json + CITATION.cff"
+    },
+    {
+      "id": 8,
+      "type": "core",
+      "prompt": "How do I make my research software reusable and properly archived for long-term access?",
+      "should_trigger": true,
+      "expected_output": "FAIR4RS-aligned guidance (archival, metadata, licensing)",
+      "notes": "implicit trigger without FAIR keyword"
+    },
+    {
+      "id": 9,
+      "type": "core",
+      "prompt": "Improve my existing CITATION.cff to meet best practices and align with my repository metadata",
+      "should_trigger": true,
+      "expected_output": "Refined CITATION.cff with consistency checks",
+      "notes": "refinement task"
+    },
+    {
+      "id": 10,
+      "type": "core",
+      "prompt": "Validate whether my repository metadata meets FAIR principles",
+      "should_trigger": true,
+      "expected_output": "FAIR compliance assessment with gaps identified",
+      "notes": "validation-only task"
+    },
+    {
+      "id": 11,
+      "type": "core",
+      "prompt": "Package my code for PyPI distribution",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; packaging ≠ FAIR publication"
+    },
+    {
+      "id": 12,
+      "type": "core",
+      "prompt": "Write documentation for my scientific software",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate; generic docs"
+    },
+    {
+      "id": 101,
+      "type": "adversarial",
+      "prompt": "Explain what FAIR principles are",
+      "should_trigger": false,
+      "expected_output": "Informational only",
+      "failure_mode": "keyword trap"
+    },
+    {
+      "id": 102,
+      "type": "adversarial",
+      "prompt": "Make my project FAIR",
+      "should_trigger": true,
+      "expected_output": "Clarifies scope and applies FAIR4RS workflow",
+      "failure_mode": "too vague → should still trigger"
+    },
+    {
+      "id": 103,
+      "type": "adversarial",
+      "prompt": "Generate metadata for my dataset",
+      "should_trigger": false,
+      "expected_output": "Does not trigger; data ≠ software",
+      "failure_mode": "confuses FAIR data vs FAIR software"
+    },
+    {
+      "id": 104,
+      "type": "adversarial",
+      "prompt": "I need my code to be cited properly and archived with a DOI",
+      "should_trigger": true,
+      "expected_output": "Triggers FAIR4RS workflow",
+      "failure_mode": "implicit trigger"
+    },
+    {
+      "id": 105,
+      "type": "adversarial",
+      "prompt": "Fix formatting issues in my CITATION.cff",
+      "should_trigger": false,
+      "expected_output": "Does not trigger; editing only",
+      "failure_mode": "over-trigger on keyword"
+    },
+    {
+      "id": 106,
+      "type": "adversarial",
+      "prompt": "Write an ODD protocol description for my model and prepare it for publication",
+      "should_trigger": false,
+      "expected_output": "Should defer to ODD skill first",
+      "failure_mode": "cross-skill conflict"
+    },
+    {
+      "id": 107,
+      "type": "adversarial",
+      "prompt": "Summarize my repository for a blog post",
+      "should_trigger": false,
+      "expected_output": "Does not trigger",
+      "failure_mode": "wrong intent"
+    },
+    {
+      "id": 108,
+      "type": "adversarial",
+      "prompt": "Ensure my software release is reproducible, citable, and archived with proper metadata",
+      "should_trigger": true,
+      "expected_output": "Triggers FAIR4RS workflow",
+      "failure_mode": "implicit multi-goal phrasing"
     }
   ]
 }

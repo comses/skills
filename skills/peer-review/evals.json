@@ -4,74 +4,161 @@
   "evals": [
     {
       "id": 1,
+      "type": "core",
       "prompt": "Peer review my computational model repository for CoMSES readiness and give a final decision.",
       "should_trigger": true,
-      "expected_output": "Structured report that evaluates ease of execution, documentation thoroughness, and code quality as required criteria, then returns a binary pass/fail recommendation",
-      "success_criteria": [
-        "Output includes all three CoMSES criteria with explicit ratings",
-        "Final recommendation is binary (Pass or Fail)",
-        "Report includes a required criteria status summary showing 3/3 required"
-      ]
+      "expected_output": "Structured report with binary pass/fail"
     },
     {
       "id": 2,
+      "type": "core",
       "prompt": "Can you review the scientific novelty of my model and decide if the theory is correct?",
-      "should_trigger": true,
-      "expected_output": "Skill activates but explicitly scopes review to software and documentation quality, noting scientific merit is out of scope"
+      "should_trigger": false,
+      "expected_output": "Scopes review to software/documentation; excludes scientific validity"
     },
     {
       "id": 3,
+      "type": "core",
       "prompt": "Review this model package. Tests are missing and CI is not configured, but it runs and has strong docs and clean code.",
       "should_trigger": true,
-      "expected_output": "Report flags tests and CI as major nonblocking issues and still applies binary pass/fail from the three CoMSES required criteria",
-      "success_criteria": [
-        "Tests and CI are categorized as Major findings",
-        "Missing tests/CI alone does not automatically force Fail",
-        "Binary decision is based on required CoMSES criteria"
-      ]
+      "expected_output": "Flags tests/CI as major but not required criteria blockers"
     },
     {
       "id": 4,
+      "type": "core",
       "prompt": "Assess my model documentation. I use a framework equivalent to ODD, not ODD itself.",
       "should_trigger": true,
-      "expected_output": "Documentation is evaluated for equivalent coverage rather than failing solely for non-ODD format",
-      "success_criteria": [
-        "Report checks purpose, entities/components, processes, assumptions, parameters, initialization, inputs/outputs, and stochasticity where relevant",
-        "Equivalent framework is accepted when coverage is sufficient"
-      ]
+      "expected_output": "Evaluates coverage equivalence, not format"
     },
     {
       "id": 5,
+      "type": "core",
       "prompt": "I have ODD docs. Use the peer-review process to assess whether the documentation passes quality checks.",
       "should_trigger": true,
-      "expected_output": "Review references ODD-oriented assessment and indicates use of the document skill for ODD completeness/checklist support",
-      "success_criteria": [
-        "Output mentions ODD structure/completeness assessment",
-        "Output indicates handoff or reference to the document skill for ODD checklist evaluation"
-      ]
+      "expected_output": "References ODD evaluation and document skill"
     },
     {
       "id": 6,
+      "type": "core",
       "prompt": "Write a Python script to parse CSV files into JSON.",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; task is generic programming and not peer review"
+      "expected_output": "Does not activate"
     },
     {
       "id": 7,
+      "type": "core",
       "prompt": "Create a conference abstract about my simulation findings.",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; task is scientific writing, not computational model peer review"
+      "expected_output": "Does not activate"
     },
     {
       "id": 8,
+      "type": "core",
       "prompt": "Run a peer-review readiness assessment and explicitly anchor your findings to the local compressed CoMSES and EVERSE rubric snapshots.",
       "should_trigger": true,
-      "expected_output": "Structured review output cites the local compressed rubric assets and uses them as evidence anchors in the report",
-      "success_criteria": [
-        "Output references assets/COMSES-REVIEWS-COMPRESSED.md for CoMSES criteria grounding",
-        "Output references assets/EVERSE-INDICATORS-COMPRESSED.md for indicator grounding",
-        "Output still applies binary required-criteria pass/fail logic for the three CoMSES criteria"
-      ]
+      "expected_output": "Review referencing rubric assets"
+    },
+    {
+      "id": 9,
+      "type": "core",
+      "prompt": "Is my computational model repository ready for publication?",
+      "should_trigger": true,
+      "expected_output": "Triggers full readiness review",
+      "notes": "implicit trigger"
+    },
+    {
+      "id": 10,
+      "type": "core",
+      "prompt": "Re-evaluate my model after I fixed documentation issues and added tests.",
+      "should_trigger": true,
+      "expected_output": "Updated review reflecting improvements",
+      "notes": "refinement / re-review"
+    },
+    {
+      "id": 11,
+      "type": "core",
+      "prompt": "Validate whether my model meets CoMSES submission criteria",
+      "should_trigger": true,
+      "expected_output": "Checklist-based validation report",
+      "notes": "validation-only"
+    },
+    {
+      "id": 12,
+      "type": "core",
+      "prompt": "Generate a FAIR metadata record for my model",
+      "should_trigger": false,
+      "expected_output": "Does not activate; FAIR skill domain"
+    },
+    {
+      "id": 13,
+      "type": "core",
+      "prompt": "Write documentation for my simulation model",
+      "should_trigger": false,
+      "expected_output": "Does not activate; document skill domain"
+    },
+    {
+      "id": 101,
+      "type": "adversarial",
+      "prompt": "Explain what peer review is",
+      "should_trigger": false,
+      "expected_output": "Informational only",
+      "failure_mode": "keyword trap"
+    },
+    {
+      "id": 102,
+      "type": "adversarial",
+      "prompt": "Check if my repository is good",
+      "should_trigger": true,
+      "expected_output": "Clarifies scope and performs structured review",
+      "failure_mode": "vague intent"
+    },
+    {
+      "id": 103,
+      "type": "adversarial",
+      "prompt": "Review my code for performance optimizations",
+      "should_trigger": false,
+      "expected_output": "Does not activate; performance tuning is out of scope",
+      "failure_mode": "scope creep"
+    },
+    {
+      "id": 104,
+      "type": "adversarial",
+      "prompt": "Evaluate my model and generate a Slurm script to run it",
+      "should_trigger": true,
+      "expected_output": "Performs review only; does not generate HPC artifacts",
+      "failure_mode": "cross-skill contamination"
+    },
+    {
+      "id": 105,
+      "type": "adversarial",
+      "prompt": "Fix grammar issues in my model documentation",
+      "should_trigger": false,
+      "expected_output": "Does not activate; editing task",
+      "failure_mode": "over-trigger on documentation"
+    },
+    {
+      "id": 106,
+      "type": "adversarial",
+      "prompt": "My repository runs but has no documentation or instructions. Is it acceptable?",
+      "should_trigger": true,
+      "expected_output": "Fails due to missing required documentation criteria",
+      "failure_mode": "required criteria enforcement"
+    },
+    {
+      "id": 107,
+      "type": "adversarial",
+      "prompt": "Assess whether my repository meets FAIR principles and CoMSES review criteria",
+      "should_trigger": true,
+      "expected_output": "Focuses on CoMSES review; may reference FAIR but does not replace FAIR skill",
+      "failure_mode": "multi-framework confusion"
+    },
+    {
+      "id": 108,
+      "type": "adversarial",
+      "prompt": "Give me a quick yes/no if my model is good enough",
+      "should_trigger": true,
+      "expected_output": "Produces full structured review before binary decision",
+      "failure_mode": "shortcut temptation"
     }
   ]
 }

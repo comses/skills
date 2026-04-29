@@ -4,48 +4,178 @@
   "evals": [
     {
       "id": 1,
+      "type": "core",
       "prompt": "I have a Python ABM with simple Agent and Environment classes. Generate an ODD+2 narrative for my model.",
       "should_trigger": true,
-      "expected_output": "ODD sections covering entities, state variables, processes, stochasticity (if any), parameters, and initialization logic",
-      "success_criteria": [
-        "Output identifies at least 2 entities (e.g., Agent, Environment)",
-        "State variables are listed with types and ranges for each entity",
-        "Output explains processes in pseudocode or plain English",
-        "ODD+2 checklist completion score reported"
-      ]
+      "expected_output": "ODD sections covering entities, state variables, processes, stochasticity (if any), parameters, and initialization logic"
     },
     {
       "id": 2,
+      "type": "core",
       "prompt": "Create a timeline for documenting my project milestones",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; falls through to other capabilities"
+      "expected_output": "Skill does not activate"
     },
     {
       "id": 3,
+      "type": "core",
       "prompt": "I'm preparing a paper on an agent-based forest fire model. I need publication-ready ODD narrative.",
       "should_trigger": true,
-      "expected_output": "Complete ODD+2 sections with validation feedback against the 23-point checklist",
-      "success_criteria": [
-        "Output includes Overview, Design Concepts, and Details sections",
-        "Validation report notes any missing ODD+2 checklist items",
-        "Markdown is properly formatted and ready to paste into a LaTeX document"
-      ]
+      "expected_output": "Complete ODD+2 structured narrative"
     },
     {
       "id": 4,
+      "type": "core",
       "prompt": "My model code has no docstrings. Can the ODD skill still help?",
       "should_trigger": true,
-      "expected_output": "Skill asks clarifying questions (entity names, state variables, process descriptions) rather than guessing",
-      "success_criteria": [
-        "Skill prompts user for entity definitions",
-        "Skill does not hallucinate model components"
-      ]
+      "expected_output": "Asks clarifying questions"
     },
     {
       "id": 5,
+      "type": "core",
       "prompt": "Generate documentation for my API endpoints",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; not related to computational model documentation"
+      "expected_output": "Skill does not activate"
+    },
+    {
+      "id": 6,
+      "type": "core",
+      "prompt": "I have a NetLogo predator-prey model. Can you structure it using the ODD protocol for a paper?",
+      "should_trigger": true,
+      "expected_output": "ODD+2 narrative adapted to NetLogo"
+    },
+    {
+      "id": 7,
+      "type": "core",
+      "prompt": "Help me formalize my simulation model description using standard ABM documentation practices",
+      "should_trigger": true,
+      "expected_output": "ODD-style structured narrative"
+    },
+    {
+      "id": 8,
+      "type": "core",
+      "prompt": "Write a README file for my GitHub repository",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate"
+    },
+    {
+      "id": 9,
+      "type": "core",
+      "prompt": "Explain what the ODD protocol is and why it's used",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate"
+    },
+    {
+      "id": 10,
+      "type": "core",
+      "prompt": "Here is my draft ODD description. Improve clarity, fix structure, and ensure it meets ODD+2 standards.",
+      "should_trigger": true,
+      "expected_output": "Refined ODD+2 narrative"
+    },
+    {
+      "id": 11,
+      "type": "core",
+      "prompt": "Validate this ODD description against the ODD+2 checklist and tell me what's missing.",
+      "should_trigger": true,
+      "expected_output": "Checklist-based validation report"
+    },
+    {
+      "id": 12,
+      "type": "core",
+      "prompt": "Document my system dynamics model using standard modeling documentation practices",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate"
+    },
+    {
+      "id": 13,
+      "type": "core",
+      "prompt": "Summarize my simulation model in plain English for a blog post",
+      "should_trigger": false,
+      "expected_output": "Skill does not activate"
+    },
+    {
+      "id": 101,
+      "type": "adversarial",
+      "prompt": "Explain the ODD protocol briefly for a presentation slide",
+      "should_trigger": false,
+      "expected_output": "Informational only"
+    },
+    {
+      "id": 102,
+      "type": "adversarial",
+      "prompt": "Document my simulation model for a paper",
+      "should_trigger": false,
+      "expected_output": "Does not trigger without ABM specificity"
+    },
+    {
+      "id": 103,
+      "type": "adversarial",
+      "prompt": "I need a structured description of agents, their behaviors, and environment interactions for publication",
+      "should_trigger": true,
+      "expected_output": "Triggers ODD structuring implicitly"
+    },
+    {
+      "id": 104,
+      "type": "adversarial",
+      "prompt": "Write documentation for my discrete-event simulation model",
+      "should_trigger": false,
+      "expected_output": "Does not trigger"
+    },
+    {
+      "id": 105,
+      "type": "adversarial",
+      "prompt": "Generate an ODD description for my model (details not provided)",
+      "should_trigger": true,
+      "expected_output": "Requests clarification, no hallucination"
+    },
+    {
+      "id": 106,
+      "type": "adversarial",
+      "prompt": "Convert my model description into a README with sections",
+      "should_trigger": false,
+      "expected_output": "Does not trigger"
+    },
+    {
+      "id": 107,
+      "type": "adversarial",
+      "prompt": "List the entities and variables in my agent-based model",
+      "should_trigger": false,
+      "expected_output": "Partial task, should not trigger"
+    },
+    {
+      "id": 108,
+      "type": "adversarial",
+      "prompt": "Fix grammar in my ODD description",
+      "should_trigger": false,
+      "expected_output": "Editing task only"
+    },
+    {
+      "id": 109,
+      "type": "adversarial",
+      "prompt": "Summarize my ABM and optionally format it using ODD if useful",
+      "should_trigger": true,
+      "expected_output": "Triggers and prefers ODD structuring"
+    },
+    {
+      "id": 110,
+      "type": "adversarial",
+      "prompt": "Help me structure a formal agent-based model description using standard protocols",
+      "should_trigger": true,
+      "expected_output": "Triggers despite missing keyword"
+    },
+    {
+      "id": 111,
+      "type": "adversarial",
+      "prompt": "Write a UML diagram description for my agent-based model",
+      "should_trigger": false,
+      "expected_output": "Different formalism"
+    },
+    {
+      "id": 112,
+      "type": "adversarial",
+      "prompt": "Generate FAIR metadata for my model repository",
+      "should_trigger": false,
+      "expected_output": "Different skill domain"
     }
   ]
 }

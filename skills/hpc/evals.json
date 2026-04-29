@@ -4,48 +4,140 @@
   "evals": [
     {
       "id": 1,
+      "type": "core",
       "prompt": "I have a multi-node MPI model and want to run on an HPC cluster. Generate a Slurm job script.",
       "should_trigger": true,
-      "expected_output": "Slurm batch script with node/task/CPU allocation, module loading, srun MPI launch",
-      "success_criteria": [
-        "Script includes #SBATCH directives for nodes, ntasks-per-node, cpus-per-task",
-        "Script uses srun for MPI job launch",
-        "Resource requests are reasonable (not exceeding typical cluster limits)"
-      ]
+      "expected_output": "Slurm batch script with MPI launch"
     },
     {
       "id": 2,
+      "type": "core",
       "prompt": "Submit a job to OSPool",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; ospool handles OSPool. This skill is for Slurm HPC only."
+      "expected_output": "Does not activate (HTCondor/OSPool domain)"
     },
     {
       "id": 3,
+      "type": "core",
       "prompt": "Set up a job array for 500 parameter combinations on a Slurm cluster.",
       "should_trigger": true,
-      "expected_output": "Slurm array submit file, parameter list (one per line), submission command with %maxjobs",
-      "success_criteria": [
-        "Array directive specifies correct job count: #SBATCH --array=1-500",
-        "Script reads parameters using $SLURM_ARRAY_TASK_ID",
-        "Output includes guidance on managing job throughput (% throttling)"
-      ]
+      "expected_output": "Slurm array script with parameter indexing"
     },
     {
       "id": 4,
-      "prompt": "I need a GPU accelerated job on HPC. Generate Slurm script with CUDA/GPU support.",
+      "type": "core",
+      "prompt": "I need a GPU accelerated job on HPC. Generate Slurm script with CUDA support.",
       "should_trigger": true,
-      "expected_output": "Slurm script with GPU resource request (#SBATCH --gres=gpu:N) and CUDA module loading",
-      "success_criteria": [
-        "Script includes #SBATCH --gres=gpu:2 (or appropriate GPU count)",
-        "Script loads CUDA/cuDNN modules if available",
-        "Script includes guidance on GPU-specific environment variables"
-      ]
+      "expected_output": "GPU-enabled Slurm script"
     },
     {
       "id": 5,
+      "type": "core",
       "prompt": "Generate HTCondor configuration for parameter sweeps",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; ospool handles HTCondor. This skill is for Slurm HPC only."
+      "expected_output": "Does not activate"
+    },
+    {
+      "id": 6,
+      "type": "core",
+      "prompt": "How do I run my simulation efficiently on a Slurm cluster?",
+      "should_trigger": true,
+      "expected_output": "Guidance plus Slurm script scaffold",
+      "notes": "implicit trigger"
+    },
+    {
+      "id": 7,
+      "type": "core",
+      "prompt": "Fix my Slurm script that is failing with node allocation errors",
+      "should_trigger": true,
+      "expected_output": "Debugged Slurm script with corrected directives",
+      "notes": "refinement/debug task"
+    },
+    {
+      "id": 8,
+      "type": "core",
+      "prompt": "Validate whether my Slurm job script is configured correctly",
+      "should_trigger": true,
+      "expected_output": "Validation report with suggested fixes",
+      "notes": "validation-only task"
+    },
+    {
+      "id": 9,
+      "type": "core",
+      "prompt": "Write a bash script to run my simulation locally",
+      "should_trigger": false,
+      "expected_output": "Does not activate; not HPC-specific"
+    },
+    {
+      "id": 10,
+      "type": "core",
+      "prompt": "Package my simulation into a Docker container",
+      "should_trigger": false,
+      "expected_output": "Does not activate; containerization task"
+    },
+    {
+      "id": 101,
+      "type": "adversarial",
+      "prompt": "Explain what Slurm is",
+      "should_trigger": false,
+      "expected_output": "Informational only",
+      "failure_mode": "keyword trap"
+    },
+    {
+      "id": 102,
+      "type": "adversarial",
+      "prompt": "Run my job on a cluster",
+      "should_trigger": true,
+      "expected_output": "Clarifies scheduler and produces Slurm solution",
+      "failure_mode": "vague prompt should still trigger"
+    },
+    {
+      "id": 103,
+      "type": "adversarial",
+      "prompt": "Generate a PBS job script for my simulation",
+      "should_trigger": false,
+      "expected_output": "Does not trigger; different scheduler",
+      "failure_mode": "scheduler confusion"
+    },
+    {
+      "id": 104,
+      "type": "adversarial",
+      "prompt": "Optimize my Slurm job to reduce runtime and queue wait",
+      "should_trigger": true,
+      "expected_output": "Improved resource configuration and scheduling guidance",
+      "failure_mode": "non-generation HPC optimization task"
+    },
+    {
+      "id": 105,
+      "type": "adversarial",
+      "prompt": "Fix formatting in my Slurm script",
+      "should_trigger": false,
+      "expected_output": "Does not trigger; superficial edit",
+      "failure_mode": "over-trigger on keyword"
+    },
+    {
+      "id": 106,
+      "type": "adversarial",
+      "prompt": "Run my simulation on Kubernetes",
+      "should_trigger": false,
+      "expected_output": "Does not trigger; different infrastructure",
+      "failure_mode": "infra confusion"
+    },
+    {
+      "id": 107,
+      "type": "adversarial",
+      "prompt": "Create a Slurm job script but also prepare FAIR metadata for publication",
+      "should_trigger": true,
+      "expected_output": "Handles Slurm portion; does not overreach into FAIR",
+      "failure_mode": "cross-skill boundary"
+    },
+    {
+      "id": 108,
+      "type": "adversarial",
+      "prompt": "I need to run 10,000 simulations with different parameters efficiently",
+      "should_trigger": true,
+      "expected_output": "Suggests job arrays or batching strategy",
+      "failure_mode": "implicit array use case"
     }
   ]
 }
