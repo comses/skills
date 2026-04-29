@@ -2,17 +2,17 @@
 
 Agent Skills for computational modelers: documentation, reproducibility, publication, and execution.
 
-This repository hosts a curated collection of [Agent Skills](https://agentskills.io) designed to help researchers and developers create, document, validate, and execute computational models effectively. Skills are reusable procedural workflows that enhance AI agents to accomplish specialized tasks.
+This repository hosts a curated collection of [Agent Skills](https://agentskills.io) designed to help researchers and developers develop and share computational models in the social and ecological sciences. Skills are reusable procedural workflows that enhance AI agents to accomplish specialized tasks.
 
 ## Quick Start
 
 ### Install Node.js LTS with nvm (WSL, macOS, Linux)
 
-`npx skills ...` requires Node.js. Use `nvm` to install and manage Node versions without `sudo`.
+`npx skills ...` requires Node.js. Use the node version manager `nvm` to install and manage Node versions without `sudo`.
 
 Security best practices:
 
-- Install only from the official `nvm-sh/nvm` repository.
+- Install only from the official [nvm-sh/nvm](https://github.com/nvm-sh/nvm/releases) repository.
 - Pin the installer to a specific release tag instead of running an unpinned command.
 - Review the installer script before executing it.
 - Avoid `sudo npm -g ...`; use user-level installs with `nvm`.
@@ -262,7 +262,3 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 ## License
 
 All skills in this repository are licensed under the [MIT License](LICENSE) unless otherwise noted in individual `SKILL.md` files.
-
----
-
-**COMSES Network** • [www.comses.net](https://www.comses.net)
