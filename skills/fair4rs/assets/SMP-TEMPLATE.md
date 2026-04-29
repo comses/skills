@@ -88,7 +88,7 @@ Document explicit quality priorities based on software type.
 ## 10. Review and Update Cadence
 
 - SMP owner:
-- Review frequency (recommended: every release or quarterly):
+- Review frequency (depends on project scope: annual, on each release, etc.):
 - Trigger events for updates (major architectural change, new funder requirements, role changes):
 - Last updated:
 

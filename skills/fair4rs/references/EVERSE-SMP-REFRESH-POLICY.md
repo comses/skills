@@ -7,12 +7,10 @@ Primary source:
 
 ## Refresh Cadence
 
-Minimum cadence:
-- Quarterly review (every 3 months)
-- Event-driven review when one of the following occurs:
-  - Material changes in EVERSE SMP guidance
-  - New institutional/funder SMP requirements
-  - Significant updates to FAIR4RS interpretation in this repository
+Event-driven review when one of the following occurs:
+- Material changes in EVERSE SMP guidance
+- New institutional/funder SMP requirements
+- Significant updates to FAIR4RS interpretation in this repository
 
 Recommended schedule fields:
 - Last reviewed:

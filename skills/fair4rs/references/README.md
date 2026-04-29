@@ -21,6 +21,5 @@ External guidance changes over time. These reference documents provide local, ve
 
 Treat these references as a living resource:
 
-- Review at least quarterly
 - Review after major EVERSE RSQKit updates
 - Record changes in pull requests with date and rationale
