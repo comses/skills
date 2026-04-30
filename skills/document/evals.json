@@ -93,89 +93,102 @@
       "should_trigger": false,
       "expected_output": "Skill does not activate"
     },
+
     {
       "id": 101,
       "type": "adversarial",
       "prompt": "Explain the ODD protocol briefly for a presentation slide",
       "should_trigger": false,
-      "expected_output": "Informational only"
+      "expected_output": "Informational only",
+      "failure_modes": ["keyword_trap", "over_trigger"]
     },
     {
       "id": 102,
       "type": "adversarial",
       "prompt": "Document my simulation model for a paper",
       "should_trigger": false,
-      "expected_output": "Does not trigger without ABM specificity"
+      "expected_output": "Does not trigger without ABM specificity",
+      "failure_modes": ["over_trigger", "wrong_skill"]
     },
     {
       "id": 103,
       "type": "adversarial",
       "prompt": "I need a structured description of agents, their behaviors, and environment interactions for publication",
       "should_trigger": true,
-      "expected_output": "Triggers ODD structuring implicitly"
+      "expected_output": "Triggers ODD structuring implicitly",
+      "failure_modes": ["under_trigger"]
     },
     {
       "id": 104,
       "type": "adversarial",
       "prompt": "Write documentation for my discrete-event simulation model",
       "should_trigger": false,
-      "expected_output": "Does not trigger"
+      "expected_output": "Does not trigger",
+      "failure_modes": ["over_trigger", "boundary_violation"]
     },
     {
       "id": 105,
       "type": "adversarial",
       "prompt": "Generate an ODD description for my model (details not provided)",
       "should_trigger": true,
-      "expected_output": "Requests clarification, no hallucination"
+      "expected_output": "Requests clarification, no hallucination",
+      "failure_modes": ["hallucination"]
     },
     {
       "id": 106,
       "type": "adversarial",
       "prompt": "Convert my model description into a README with sections",
       "should_trigger": false,
-      "expected_output": "Does not trigger"
+      "expected_output": "Does not trigger",
+      "failure_modes": ["over_trigger", "boundary_violation"]
     },
     {
       "id": 107,
       "type": "adversarial",
       "prompt": "List the entities and variables in my agent-based model",
       "should_trigger": false,
-      "expected_output": "Partial task, should not trigger"
+      "expected_output": "Partial task, should not trigger",
+      "failure_modes": ["over_trigger", "incomplete_execution"]
     },
     {
       "id": 108,
       "type": "adversarial",
       "prompt": "Fix grammar in my ODD description",
       "should_trigger": false,
-      "expected_output": "Editing task only"
+      "expected_output": "Editing task only",
+      "failure_modes": ["over_trigger", "scope_creep"]
     },
     {
       "id": 109,
       "type": "adversarial",
       "prompt": "Summarize my ABM and optionally format it using ODD if useful",
       "should_trigger": true,
-      "expected_output": "Triggers and prefers ODD structuring"
+      "expected_output": "Triggers and prefers ODD structuring",
+      "failure_modes": ["wrong_order", "incomplete_execution"]
     },
     {
       "id": 110,
       "type": "adversarial",
       "prompt": "Help me structure a formal agent-based model description using standard protocols",
       "should_trigger": true,
-      "expected_output": "Triggers despite missing keyword"
+      "expected_output": "Triggers despite missing keyword",
+      "failure_modes": ["under_trigger"]
     },
     {
       "id": 111,
       "type": "adversarial",
       "prompt": "Write a UML diagram description for my agent-based model",
       "should_trigger": false,
-      "expected_output": "Different formalism"
+      "expected_output": "Different formalism",
+      "failure_modes": ["over_trigger", "boundary_violation"]
     },
     {
       "id": 112,
       "type": "adversarial",
       "prompt": "Generate FAIR metadata for my model repository",
       "should_trigger": false,
-      "expected_output": "Different skill domain"
+      "expected_output": "Different skill domain",
+      "failure_modes": ["wrong_skill", "boundary_violation"]
     }
   ]
 }

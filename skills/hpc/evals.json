@@ -42,24 +42,21 @@
       "type": "core",
       "prompt": "How do I run my simulation efficiently on a Slurm cluster?",
       "should_trigger": true,
-      "expected_output": "Guidance plus Slurm script scaffold",
-      "notes": "implicit trigger"
+      "expected_output": "Guidance plus Slurm script scaffold"
     },
     {
       "id": 7,
       "type": "core",
       "prompt": "Fix my Slurm script that is failing with node allocation errors",
       "should_trigger": true,
-      "expected_output": "Debugged Slurm script with corrected directives",
-      "notes": "refinement/debug task"
+      "expected_output": "Debugged Slurm script with corrected directives"
     },
     {
       "id": 8,
       "type": "core",
       "prompt": "Validate whether my Slurm job script is configured correctly",
       "should_trigger": true,
-      "expected_output": "Validation report with suggested fixes",
-      "notes": "validation-only task"
+      "expected_output": "Validation report with suggested fixes"
     },
     {
       "id": 9,
@@ -75,13 +72,14 @@
       "should_trigger": false,
       "expected_output": "Does not activate; containerization task"
     },
+
     {
       "id": 101,
       "type": "adversarial",
       "prompt": "Explain what Slurm is",
       "should_trigger": false,
       "expected_output": "Informational only",
-      "failure_mode": "keyword trap"
+      "failure_modes": ["keyword_trap", "over_trigger"]
     },
     {
       "id": 102,
@@ -89,7 +87,7 @@
       "prompt": "Run my job on a cluster",
       "should_trigger": true,
       "expected_output": "Clarifies scheduler and produces Slurm solution",
-      "failure_mode": "vague prompt should still trigger"
+      "failure_modes": ["under_trigger", "no_planning"]
     },
     {
       "id": 103,
@@ -97,7 +95,7 @@
       "prompt": "Generate a PBS job script for my simulation",
       "should_trigger": false,
       "expected_output": "Does not trigger; different scheduler",
-      "failure_mode": "scheduler confusion"
+      "failure_modes": ["wrong_skill", "boundary_violation"]
     },
     {
       "id": 104,
@@ -105,7 +103,7 @@
       "prompt": "Optimize my Slurm job to reduce runtime and queue wait",
       "should_trigger": true,
       "expected_output": "Improved resource configuration and scheduling guidance",
-      "failure_mode": "non-generation HPC optimization task"
+      "failure_modes": ["under_trigger", "incomplete_execution"]
     },
     {
       "id": 105,
@@ -113,7 +111,7 @@
       "prompt": "Fix formatting in my Slurm script",
       "should_trigger": false,
       "expected_output": "Does not trigger; superficial edit",
-      "failure_mode": "over-trigger on keyword"
+      "failure_modes": ["over_trigger", "scope_creep"]
     },
     {
       "id": 106,
@@ -121,7 +119,7 @@
       "prompt": "Run my simulation on Kubernetes",
       "should_trigger": false,
       "expected_output": "Does not trigger; different infrastructure",
-      "failure_mode": "infra confusion"
+      "failure_modes": ["wrong_skill", "boundary_violation"]
     },
     {
       "id": 107,
@@ -129,7 +127,7 @@
       "prompt": "Create a Slurm job script but also prepare FAIR metadata for publication",
       "should_trigger": true,
       "expected_output": "Handles Slurm portion; does not overreach into FAIR",
-      "failure_mode": "cross-skill boundary"
+      "failure_modes": ["scope_creep", "boundary_violation"]
     },
     {
       "id": 108,
@@ -137,7 +135,7 @@
       "prompt": "I need to run 10,000 simulations with different parameters efficiently",
       "should_trigger": true,
       "expected_output": "Suggests job arrays or batching strategy",
-      "failure_mode": "implicit array use case"
+      "failure_modes": ["under_trigger", "missing_step"]
     }
   ]
 }

@@ -1,0 +1,50 @@
+# ---- config ----
+PYTHON ?= python
+SCRIPTS := scripts
+EVALS := evals
+
+CROSS_EVAL := $(EVALS)/cross-skills.json
+
+# ---- default ----
+.PHONY: all
+all: validate-evals cross
+
+# ---- schema validation ----
+.PHONY: validate-evals
+validate-evals:
+	$(PYTHON) $(SCRIPTS)/validate_evals_schema.py
+
+# ---- cross-skill evals ----
+.PHONY: cross
+cross:
+	$(PYTHON) $(SCRIPTS)/validate_cross_skills.py $(CROSS_EVAL)
+
+# ---- per-skill evals (placeholder) ----
+# assumes future runner like: run_skill_evals.py <skill>
+SKILLS := document fair4rs hpc ospool peer-review
+
+.PHONY: skills
+skills: $(SKILLS)
+
+.PHONY: $(SKILLS)
+$(SKILLS):
+	@echo "Running evals for $@"
+	$(PYTHON) $(SCRIPTS)/run_skill_evals.py $@
+
+# ---- aggregate report ----
+.PHONY: report
+report:
+	$(PYTHON) $(SCRIPTS)/aggregate_failures.py
+
+# ---- full pipeline ----
+.PHONY: full
+full: validate-evals cross report
+
+# ---- CI Pipeline ----
+.PHONY: ci
+ci:
+	@echo "=== Running CI pipeline ==="
+	$(MAKE) validate-evals
+	$(MAKE) cross
+	$(MAKE) report
+	@echo "=== CI completed ==="
