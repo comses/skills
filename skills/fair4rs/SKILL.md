@@ -1,22 +1,22 @@
 ---
 name: fair4rs
 description: |
-  Create FAIR4RS-compliant metadata, publication checklists, and citation files to ensure 
-  your computational artifacts are ready for archival and academic publication.
+  Create FAIR4RS-compliant metadata, publication checklists, and citation files
+  for computational models of social-ecological systems to prepare them for publication, sharing, and reuse.
   
   Use this skill when preparing models for Zenodo, arXiv, discipline-specific repositories, 
   or journal supplementary materials. Triggers: "prepare for publication", "create FAIR metadata", 
   "generate publication checklist", "archive my model", "submit to Zenodo", "make my code citable".
   
   Expected output: codemeta.json (canonical metadata source), CITATION.cff generated from codemeta.json,
-  data management plan, software management plan (SMP), publication checklist, and metadata JSON-LD
+  data management plan (DMP), software management plan (SMP), publication checklist, and metadata JSON-LD
   suitable for Zenodo, arXiv, or disciplinary repositories.
 license: MIT
-compatibility: Works with any model type; requires Git repository
+compatibility: Works with any model type
 metadata:
   domain: computational-modeling
   maturity: beta
-  audience: modelers, researchers
+  audience: modelers, researchers who code, research software engineers
   category: publication
 ---
 
@@ -26,10 +26,9 @@ metadata:
 
 Use this skill when:
 
+- You are planning a research project with research software and/or data needs and need software and data management plans to help organize and share your digital research objects effectively.
 - You are preparing a computational model for publication or archival (Zenodo, GitHub, institutional repository)
 - You need to generate and maintain codemeta.json metadata, and derive CITATION.cff for citation workflows
-- You need a data management plan (DMP) aligned with FAIR4RS principles
-- You need a software management plan (SMP) aligned with EVERSE guidance for software lifecycle, quality, and sustainability
 - You want to ensure your code meets journal supplementary material requirements
 - You are creating a registered report or pre-registration of a model study
 
@@ -48,200 +47,372 @@ This skill works best with:
 
 ## Step-by-Step Instructions
 
-### 1. Gather Publication Metadata
+Software and data management plans should be created as early as possible in a research project in the planning phases. If they do not exist, create them based on the following criteria.
 
-Prepare information about your model:
+### 0. Co-evolving, Evergreen Data and Software Management Plans (DMP + SMP)
 
-- **Title** (concise, ≤200 characters)
-- **Description** (2-3 sentences on what the model does)
-- **Authors** (names, ORCIDs, affiliations)
-- **License** (Apache-2.0, MIT, GPL, etc.; see https://choosearlicense.com)
-- **Publication date** (when model was first public or will be published)
-- **Repository URL** (GitHub, GitLab, or institutional repository)
-- **Version** (semantic versioning: v1.0.0)
-- **Keywords** (5-10 relevant terms: "agent-based model", "climate", etc.)
-- **Related publications** (DOI of papers describing or using the model)
-- **Funding agencies** (grant IDs if applicable)
+Do not treat DMP and SMP as sequential deliverables. Start with a joint sketch, formalize the DMP if required, and iteratively refine both as a coupled system.
 
-### 2. Generate CITATION.cff File
+Establish explicit cross-links between DMP and SMP sections (data formats ↔ code, metadata ↔ APIs, storage ↔ deployment).
 
-First, generate a `codemeta.json` metadata artifact and treat it as the single machine-readable source of truth.
+---
 
-The skill will create a `codemeta.json` file that includes at minimum:
+### Data Management Plan (DMP) — FAIR-aligned, publication-ready
 
-- `@context` (CodeMeta context URI)
-- `@type` (SoftwareSourceCode)
-- `name`, `description`, `codeRepository`, `version`, `license`
-- `author` (with ORCID where available), `keywords`
-- optional but recommended: `issueTracker`, `continuousIntegration`, `programmingLanguage`, `developmentStatus`
+A FAIR4RS-aligned DMP should define data in a way that is actionable for software design and reproducibility:
 
-Then generate `CITATION.cff` from `codemeta.json` so citation metadata stays synchronized.
+- **Data sources and generation**
+  - Inputs, outputs, intermediate data
+  - Synthetic vs external data, acquisition workflows
 
-The skill will create a `CITATION.cff` file that:
+- **Formats, structure, and scale**
+  - File formats, schemas, expected volumes
+  - Constraints that impact software design (streaming, chunking, HPC)
 
-- Enables GitHub to display a "Cite this repository" button
-- Provides BibTeX and plain-text citations
-- Includes all authors and affiliations
-- Specifies license and repository information
+- **Storage, backup, and access**
+  - Active storage vs archival storage
+  - Access control, authentication, and sharing boundaries
 
-When fields conflict, `codemeta.json` is authoritative and `CITATION.cff` should be regenerated.
+- **Metadata and provenance**
+  - Standards (e.g., schema.org, domain standards)
+  - Provenance capture strategy (automated vs manual)
 
-### 3. Create Data Management Plan
+- **Licensing and reuse**
+  - Data licenses, restrictions, derivative permissions
+  - Alignment with software licensing
 
-A FAIR4RS-aligned DMP addressing:
+- **Archival and publication**
+  - Target repositories (e.g., Zenodo, InvenioRDM, institutional)
+  - DOI strategy and version linkage to software releases
 
-- **Data sources** (what input data does the model require? where is it stored?)
-- **Storage & backup** (where will code and data live long-term? cloud? institutional archive?)
-- **Access & reuse** (who can access? are there restrictions? are derivatives allowed?)
-- **Metadata standards** (how is provenance documented? what schemas apply?)
-- **Long-term archival** (Zenodo? InvenioRDM? Institutional repository?)
+---
 
-### 4. Generate Publication Checklist
+### Software Management Plan (SMP) — FAIR4RS-aligned, actionable
 
-Review the checklist (see `references/PUBLICATION-CHECKLIST.md`):
+Maintain the SMP as a living document aligned with EVERSE RSQKit guidance and best practices for maintainable research software engineering.
 
-- [ ] Code is in a version control system with commit history
-- [ ] README.md exists with clear installation and usage instructions
-- [ ] LICENSE file is present and matches declared license
-- [ ] CITATION.cff or CITATION.bib exists for citation tracking
-- [ ] Dependencies are pinned (requirements.txt, pyproject.toml, environment.yml)
-- [ ] Tests or examples demonstrate reproducibility
-- [ ] Code follows a standard license (not closed-source for published work)
-- [ ] Repository is public (or embargo period specified)
-- [ ] Metadata includes authors, version, and publication date
-- [ ] Model documentation (ODD, equivalent, or domain-specific) exists
+- **Project context and scope**
+  - Software type (analysis, library, infrastructure)
+  - Stakeholders, roles, responsibilities
 
-### 5. Create Software Management Plan (SMP)
+- **Architecture and design**
+  - System boundaries, interfaces to data
+  - Interoperability and standards compliance
 
-Create an SMP aligned with EVERSE RSQKit guidance as a living document. The plan should include:
+- **Development practices**
+  - Version control, branching model
+  - Coding standards, documentation strategy
 
-- **General information** (project scope, software type/tier, stakeholders, responsibilities)
-- **Collaboration and licensing** (contribution workflow, code of conduct, licensing strategy, attribution)
-- **Analysis, design, and implementation** (architecture approach, coding standards, documentation strategy)
-- **Testing and quality assurance** (test strategy, CI, code review, release quality gates)
-- **Deployment and delivery** (distribution channels, packaging, execution environments, registries)
-- **Versioning and releases** (release cadence, semantic versioning, changelog, deprecation policy)
-- **Maintenance and sustainability** (resourcing, succession plans, contingency planning)
-- **Discoverability and preservation** (GitHub/GitLab integration, Zenodo/Software Heritage archival)
+- **Testing and quality assurance**
+  - Test levels (unit, integration, system)
+  - CI/CD, reproducibility checks, quality gates
 
-SMP priorities should be explicit and software-type aware:
+- **Packaging and environments**
+  - Dependency management, containers, workflows
+  - Execution environments (local, HPC, cloud)
 
-- **Exploratory analysis code:** emphasize reproducibility, transparency, provenance
-- **Reusable research software:** emphasize documentation quality, interoperability, onboarding
-- **Long-lived infrastructure:** emphasize robustness, scalability, security, long-term maintenance
+- **Release and versioning**
+  - Semantic versioning, release cadence
+  - Changelog, deprecation and compatibility policy
 
-Treat SMP guidance as evergreen:
+- **Licensing and governance**
+  - License selection aligned with data
+  - Contribution model, code of conduct, attribution
 
+- **Maintenance and sustainability**
+  - Resourcing, ownership, succession planning
+  - Risk and contingency planning
+
+- **Discoverability and preservation**
+  - Repository practices (GitHub/GitLab)
+  - Archival (Zenodo DOI, Software Heritage)
+  - Metadata for software citation (CITATION.cff, codemeta.json)
+
+---
+
+### Coupling Rules (DMP ↔ SMP)
+
+Make dependencies explicit and testable:
+
+- Data formats and schemas in DMP should be enforced or validated by software
+- Metadata and provenance requirements should be automated in pipelines where possible
+- Storage and access constraints should map to deployment and execution environments
+- Licensing choices for data and software must be compatible and documented
+- Archival strategy must link data DOIs and software releases
+
+### Coupling Assertions (machine-checkable where possible)
+
+- Every data format referenced in DMP has a corresponding reader/writer in the codebase
+- Every external dataset in DMP has a DOI or persistent URL in codemeta.json `isBasedOn`
+- Storage constraints in DMP are reflected in deployment specs in SMP
+- Data license in DMP is compatible with software license in SMP (use SPDX compatibility rules)
+
+---
+
+### Software-type-aware prioritization
+
+Adjust SMP emphasis based on software role:
+
+- **Exploratory analysis**
+  - Prioritize reproducibility, provenance capture, environment capture
+
+- **Reusable research software**
+  - Prioritize documentation, API stability, interoperability
+
+- **Long-lived infrastructure**
+  - Prioritize robustness, scalability, security, operational sustainability
+
+---
+
+### Evergreen maintenance
+
+Treat both plans as versioned artifacts:
+
+- Update alongside major software releases
+- Track changes via version control
 - Use `references/EVERSE-SMP-REFRESH-POLICY.md` to check refresh cadence and update process
 - Use `references/FAIR4RS-SMP-CROSSWALK.md` to keep publication artifacts and SMP content consistent
 
-### 6. Prepare for Deposit
+ALWAYS verify consistency between plans and published artifacts at release time
 
-The skill will provide:
+### 1. Gather Publication Metadata (SES-aware, FAIR-aligned)
 
-- Metadata JSON template for Zenodo/arXiv submission
-- Dublin Core metadata for institutional repositories
-- Suggested directory structure for supplementary materials
-- Checklist of additional materials (ODD, parameters, example outputs)
+Collect structured metadata for the computational model:
 
-## ⚠️ Gotchas
+- **Title** (concise, ≤200 characters)
+- **Description** (2–3 sentences: system modeled, processes, scale)
+- **Model type** (e.g., agent-based, system dynamics, network, hybrid)
+- **Scope and scale** (spatial, temporal, organizational levels)
+- **Authors** (names, ORCIDs, affiliations)
+- **Version** (semantic versioning, e.g., 1.0.0)
+- **License** (SPDX identifier)
+- **Repository URL**
+- **Publication date**
+- **Keywords** (include domain + method, e.g., “SES”, “ABM”, “land use”)
+- **Related works** (DOIs of papers, datasets, prior model versions)
+- **Funding sources**
 
-- **Author attribution:** Ensure all contributors are listed. ORCIDs are optional but strongly recommended for career tracking.
-- **License selection:** Permissive licenses (MIT, Apache-2.0) are strongly preferred for research code. GPL is acceptable but may limit reuse. Closed licenses are not recommended for published research.
-- **Version strings:** Use semantic versioning (v1.0.0, v1.1.2). Zenodo and GitHub use these for releases.
-- **Ephemeral URLs:** GitHub URLs may change if repositories are renamed or deleted. Consider archival options (Zenodo GitHub integration, institutional repository) for long-term stability.
-- **Citation gaps:** If your model was published in a paper, ensure the paper DOI is included in metadata; tools like Zenodo will link them automatically.
+SES-specific additions:
+- **System components** (actors, institutions, ecological units)
+- **Core processes** (feedbacks, adaptation, learning, disturbance)
+- **Data dependencies** (empirical inputs, calibration datasets)
+
+FAIR4RS intent:
+- **Findable:** rich, domain-relevant descriptors
+- **Accessible:** clear repository and access conditions
+- **Interoperable:** standard identifiers (ORCID, DOI, SPDX)
+- **Reusable:** explicit system assumptions and scope
+
+---
+
+### 2. Create Canonical Metadata (codemeta.json)
+
+Generate `codemeta.json` as the **single machine-readable source of truth**.
+
+Minimum fields:
+- `@context`, `@type` = SoftwareSourceCode
+- `name`, `description`, `codeRepository`
+- `version`, `license`
+- `author`, `keywords`
+
+Recommended SES extensions:
+- `applicationCategory`: "ComputationalModel"
+- `additionalType`: "AgentBasedModel" (or other type)
+- `temporalCoverage`, `spatialCoverage`
+- `isBasedOn` (input datasets, prior models)
+- `citation` (linked publications)
+- `softwareRequirements` (simulation frameworks, runtimes)
+
+Guidance:
+- Align dataset references with DMP (DOIs, formats)
+- Reflect execution environment from SMP (containers, workflows)
+- Prefer resolvable identifiers for all linked resources
+
+---
+
+### 3. Derive Citation Metadata (CITATION.cff)
+
+Generate `CITATION.cff` **from `codemeta.json`**.
+
+Ensure:
+- Full author list with affiliations
+- Versioned citation (matches release)
+- Repository and license included
+
+SES considerations:
+- If a canonical paper exists, include it alongside software citation
+- Ensure consistency between model name, paper title, and repository
+
+Rules:
+- Treat `codemeta.json` as authoritative
+- Regenerate on metadata changes
+- Preserve author order and attribution
+
+---
+
+### 4. Validate Model Publication Readiness
+
+Review against publication checklist (`references/PUBLICATION-CHECKLIST.md`):
+
+Core checks:
+- [ ] Version-controlled repository with history
+- [ ] README with installation, execution, and purpose
+- [ ] LICENSE file (SPDX-aligned) - if missing: prompt user for license preference, suggest based on existing dependencies and SMP and DMP
+- [ ] CITATION.cff present
+- [ ] Dependencies and environments specified
+- [ ] Tests, workflows, or scripts enable reproducibility - if missing: flag as publication risk, suggest minimum viable test strategy
+- [ ] Metadata complete (authors, version, identifiers)
+
+SES-specific checks:
+- [ ] Model description (ODD, ODD+D, or equivalent) included
+- [ ] State variables, entities, and scales documented
+- [ ] Process overview (scheduling, feedbacks) described
+- [ ] Calibration and validation approach documented
+- [ ] Example scenarios or runs provided
+- [ ] Input datasets referenced with persistent identifiers
+
+FAIR4RS signals:
+- Reproducibility → executable workflows, environments
+- Reusability → documented assumptions and processes
+- Interoperability → standard formats and schemas
+- Findability → rich, structured metadata
+
+---
+
+### 5. Prepare for Deposit and Archival
+
+Prepare SES model artifacts for deposition:
+
+Required:
+- Versioned source code
+- Model documentation (ODD or equivalent)
+- Parameter sets and configuration files
+- Example inputs and outputs
+
+Metadata outputs:
+- Zenodo / InvenioRDM JSON
+- Dublin Core (institutional repositories)
+
+Ensure:
+- DOI minted for software release
+- Input datasets linked via DOIs (DMP alignment)
+- Model version ↔ DOI ↔ publication cross-referenced
+
+SES-specific guidance:
+- Archive representative simulation outputs where feasible
+- Include scenario definitions used in publications
+- Document stochastic elements and random seeds
+
+---
+
+## Activation Logic
+
+Determine user's project stage and respond accordingly:
+
+### Planning stage
+Triggers: "start a new SES modeling project", "plan my research data", "create a software management plan"
+→ Begin with joint DMP + SMP sketch
+→ Establish data–model coupling assertions early
+→ Recommend ODD protocol structure
+
+### Active development
+Triggers: "set up my model metadata", "create codemeta"
+→ Generate codemeta.json with SES extensions
+→ Check for DMP/SMP; flag if missing, offer to create
+
+### Pre-publication
+Triggers: "prepare for publication", "submit to Zenodo", "make my code citable", "prepare for CoMSES", "generate publication checklist", "archive my model"
+→ Full pipeline: metadata → CITATION.cff → checklist → deposit preparation
+→ Validate DMP/SMP consistency with artifacts
+
+### Single artifact request
+Triggers: "create CITATION.cff", "generate codemeta", "make citable"
+→ Produce requested artifact directly
+→ Validate against existing metadata if available
+
+## ⚠️ Gotchas (SES Models)
+
+- **Hidden assumptions:** SES models embed normative, behavioral, and institutional assumptions. Document them explicitly.
+
+- **Data–model mismatch:** Ensure input data formats, units, and scales align with model expectations (spatial, temporal, organizational).
+
+- **Non-reproducible runs:** Stochastic models require fixed random seeds, documented RNG strategy, and repeatable workflows.
+
+- **Underspecified processes:** Missing scheduling, feedbacks, or adaptation rules reduces interpretability and reuse.
+
+- **Sensitivity analysis gaps:** 
+  - Failing to explore parameter space (local or global sensitivity) limits confidence in results
+  - Report which parameters drive outcomes and which are negligible
+  - Document methods used (e.g., one-at-a-time, Sobol, Morris) and parameter ranges
+
+- **Uncertainty quantification missing or unclear:**
+  - Distinguish sources: parameter uncertainty, structural uncertainty, stochastic variability, input data uncertainty
+  - Provide uncertainty propagation (ensembles, Monte Carlo, bootstrapping)
+  - Report distributions or confidence intervals, not just point estimates
+
+- **Scenario ambiguity:**
+  - Scenarios must be explicitly defined, parameterized, and versioned
+  - Avoid informal or implicit scenario descriptions
+
+- **License conflicts:** Ensure compatibility between data and software licenses.
+
+- **Incomplete linkage:** Publications, datasets, and software must be cross-referenced via persistent identifiers (DOIs).
+
+- **Archival gaps:** Failure to preserve parameter sets, seeds, and configurations prevents reproduction of published results.
+
+---
 
 ## Templates & Resources
 
-- **FAIR4RS Handbook:** See `references/FAIR4RS-HANDBOOK.md` for principles and best practices
-- **Publication Checklist:** See `references/PUBLICATION-CHECKLIST.md` for the 10-item verification list
-- **CodeMeta Template:** See `assets/codemeta.json` for a starter CodeMeta artifact (JSON-LD)
-- **CITATION.cff Template:** See `assets/CITATION-TEMPLATE.cff` for the RFC 8949 format
-- **DMP Template:** See `assets/DMP-TEMPLATE.md` for a 1-2 page data management plan
-- **SMP Template:** See `assets/SMP-TEMPLATE.md` for a software management plan aligned with EVERSE guidance
-- **SMP Refresh Policy:** See `references/EVERSE-SMP-REFRESH-POLICY.md` for periodic refresh and governance of local guidance
-- **FAIR4RS ↔ SMP Crosswalk:** See `references/FAIR4RS-SMP-CROSSWALK.md` to avoid duplication and keep outputs coherent
-- **EVERSE SMP Guidance:** See https://everse.software/RSQKit/software_management_planning for lifecycle and sustainability criteria
-- **CodeMeta User Guide:** See https://codemeta.github.io/user-guide for codemeta.json structure and validation
-- **Zenodo Guide:** See `references/ZENODO-GUIDE.md` for deposit workflow and metadata requirements
+- FAIR4RS Handbook → `references/FAIR4RS-HANDBOOK.md`
+- Publication Checklist → `references/PUBLICATION-CHECKLIST.md`
+- CodeMeta Template → `assets/codemeta.json`
+- CITATION Template → `assets/CITATION-TEMPLATE.cff`
+- DMP Template → `assets/DMP-TEMPLATE.md`
+- SMP Template → `assets/SMP-TEMPLATE.md`
+- ODD Protocol → (standard for ABMs and SES models)
+- FAIR4RS ↔ SMP Crosswalk → `references/FAIR4RS-SMP-CROSSWALK.md`
+- EVERSE SMP Guidance → https://everse.software/RSQKit/software_management_planning
+- CodeMeta Guide → https://codemeta.github.io/user-guide
+- Zenodo Guide → `references/ZENODO-GUIDE.md`
 
-## Example
+---
 
-**Input:** Python ABM repository with git history, authors, and institutional affiliation
+## Example (SES Model)
 
-**Output:**
+Input: Agent-based model of land-use change with farmer decision-making
 
-1. **codemeta.json** (canonical metadata source):
-  ```json
-  {
-    "@context": "https://w3id.org/codemeta/3.1",
-    "@type": "SoftwareSourceCode",
-    "name": "forest-fire-abm",
-    "description": "An agent-based model of forest fire dynamics.",
-    "codeRepository": "https://github.com/example/forest-fire-abm",
-    "version": "1.0.0",
-    "license": "https://spdx.org/licenses/MIT",
-    "keywords": ["agent-based model", "ecology", "wildfire"]
-  }
-  ```
+Output artifacts:
 
-2. **CITATION.cff** file generated from codemeta metadata (GitHub will display cite button):
-   ```yaml
-   cff-version: 1.2.0
-   title: "An Agent-Based Model of Forest Fire Dynamics"
-   authors:
-     - family-names: Smith
-       given-names: Alice
-       orcid: "https://orcid.org/0000-0001-2345-6789"
-       affiliation: "University of Example"
-   version: 1.0.0
-   license: MIT
-   repository-code: "https://github.com/example/forest-fire-abm"
-   ```
+1. `codemeta.json`
+   - includes spatialCoverage, temporalCoverage, dataset DOIs
 
-3. **Publication checklist** with passing marks:
-   - ✅ Code is in Git with commit history
-   - ✅ README with installation instructions
-   - ✅ MIT LICENSE
-   - ✅ CITATION.cff file
-   - ✅ Pinned dependencies (requirements.txt)
+2. `CITATION.cff`
+   - software citation + linked paper DOI
 
-4. **DMP summary:**
-   ```markdown
-   ## Data Management Plan
-   - Input: Land use raster (GeoTIFF), forest inventory (CSV)
-   - Storage: GitHub (code), Zenodo (releases)
-   - Access: Public, MIT licensed
-   - Archival: Zenodo GitHub integration (automatic on release)
-   ```
+3. Publication checklist
+   - validated with SES-specific criteria
 
-5. **SMP summary (EVERSE-aligned):**
-  ```markdown
-  ## Software Management Plan
-  - Scope: Reusable research software for ecological ABM studies
-  - Roles: PI (owner), maintainer, reviewer, release manager
-  - QA: CI on pull requests, unit tests, code review required before merge
-  - Releases: Semantic versioning with changelog and DOI-minted releases on Zenodo
-  - Sustainability: Successor maintainer policy and deprecation plan documented
-  - Preservation: Archived in Software Heritage and Zenodo
-  ```
+4. Documentation bundle
+   - ODD protocol
+   - parameter sets
+   - scenario definitions
+
+5. Archival package
+   - versioned release with DOI
+   - linked datasets and reproducible workflows
 
 ---
 
 ## Quick Reference
 
-| Task | Reference |
-|------|-----------|
-| Create codemeta.json | See `assets/codemeta.json` and CodeMeta User Guide |
-| Create CITATION.cff | See `assets/CITATION-TEMPLATE.cff` |
-| Know FAIR4RS principles | See `references/FAIR4RS-HANDBOOK.md` |
-| Create Software Management Plan | See `assets/SMP-TEMPLATE.md` and EVERSE SMP guidance |
-| Refresh SMP references | See `references/EVERSE-SMP-REFRESH-POLICY.md` |
-| Reconcile FAIR4RS and SMP outputs | See `references/FAIR4RS-SMP-CROSSWALK.md` |
-| Prepare for Zenodo | See `references/ZENODO-GUIDE.md` |
-| Check publication readiness | See `references/PUBLICATION-CHECKLIST.md` |
+| Task | Resource |
+|------|----------|
+| Create codemeta.json | `assets/codemeta.json` |
+| Generate CITATION.cff | `assets/CITATION-TEMPLATE.cff` |
+| Document model (ODD) | domain standard |
+| Create SMP | `assets/SMP-TEMPLATE.md` |
+| Crosswalk FAIR4RS | `references/FAIR4RS-SMP-CROSSWALK.md` |
+| Prepare Zenodo deposit | `references/ZENODO-GUIDE.md` |
 
 ---
-
-For community feedback or issues, see the [COMSES Skills](https://github.com/comses-network/skills) repository.
