@@ -37,17 +37,18 @@ brew install curl ca-certificates git
 Choose the latest release tag from: https://github.com/nvm-sh/nvm/releases
 
 ```bash
-export NVM_VERSION="v0.40.3"
-curl -fsSL -o /tmp/install_nvm.sh "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh"
-less /tmp/install_nvm.sh
-bash /tmp/install_nvm.sh
+export NVM_VERSION="v0.40.4" # change to latest release
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash
 ```
 
-3. Load `nvm` in your current shell
+3. Load `nvm` in your current shell or close and restart your shell
+
+The following commands should be auto-appended to your shell profile (.bashrc / .zshrc / etc) but in case they aren't, make sure they are present:
 
 ```bash
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 ```
 
 If needed, restart your terminal so your shell profile changes take effect.
