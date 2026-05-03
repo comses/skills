@@ -56,46 +56,44 @@
       "type": "core",
       "prompt": "How do I make my research software reusable and properly archived for long-term access?",
       "should_trigger": true,
-      "expected_output": "FAIR4RS-aligned guidance (archival, metadata, licensing)",
-      "notes": "implicit trigger without FAIR keyword"
+      "expected_output": "FAIR4RS-aligned guidance (archival, metadata, licensing)"
     },
     {
       "id": 9,
       "type": "core",
       "prompt": "Improve my existing CITATION.cff to meet best practices and align with my repository metadata",
       "should_trigger": true,
-      "expected_output": "Refined CITATION.cff with consistency checks",
-      "notes": "refinement task"
+      "expected_output": "Refined CITATION.cff with consistency checks"
     },
     {
       "id": 10,
       "type": "core",
       "prompt": "Validate whether my repository metadata meets FAIR principles",
       "should_trigger": true,
-      "expected_output": "FAIR compliance assessment with gaps identified",
-      "notes": "validation-only task"
+      "expected_output": "FAIR compliance assessment with gaps identified"
     },
     {
       "id": 11,
       "type": "core",
       "prompt": "Package my code for PyPI distribution",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; packaging ≠ FAIR publication"
+      "expected_output": "Skill does not activate"
     },
     {
       "id": 12,
       "type": "core",
       "prompt": "Write documentation for my scientific software",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; generic docs"
+      "expected_output": "Skill does not activate"
     },
+
     {
       "id": 101,
       "type": "adversarial",
       "prompt": "Explain what FAIR principles are",
       "should_trigger": false,
       "expected_output": "Informational only",
-      "failure_mode": "keyword trap"
+      "failure_modes": ["keyword_trap", "over_trigger"]
     },
     {
       "id": 102,
@@ -103,7 +101,7 @@
       "prompt": "Make my project FAIR",
       "should_trigger": true,
       "expected_output": "Clarifies scope and applies FAIR4RS workflow",
-      "failure_mode": "too vague → should still trigger"
+      "failure_modes": ["under_trigger", "no_planning"]
     },
     {
       "id": 103,
@@ -111,7 +109,7 @@
       "prompt": "Generate metadata for my dataset",
       "should_trigger": false,
       "expected_output": "Does not trigger; data ≠ software",
-      "failure_mode": "confuses FAIR data vs FAIR software"
+      "failure_modes": ["wrong_skill", "boundary_violation"]
     },
     {
       "id": 104,
@@ -119,7 +117,7 @@
       "prompt": "I need my code to be cited properly and archived with a DOI",
       "should_trigger": true,
       "expected_output": "Triggers FAIR4RS workflow",
-      "failure_mode": "implicit trigger"
+      "failure_modes": ["under_trigger"]
     },
     {
       "id": 105,
@@ -127,15 +125,15 @@
       "prompt": "Fix formatting issues in my CITATION.cff",
       "should_trigger": false,
       "expected_output": "Does not trigger; editing only",
-      "failure_mode": "over-trigger on keyword"
+      "failure_modes": ["over_trigger", "scope_creep"]
     },
     {
       "id": 106,
       "type": "adversarial",
       "prompt": "Write an ODD protocol description for my model and prepare it for publication",
       "should_trigger": false,
-      "expected_output": "Should defer to ODD skill first",
-      "failure_mode": "cross-skill conflict"
+      "expected_output": "Should defer to document skill first",
+      "failure_modes": ["wrong_skill", "boundary_violation"]
     },
     {
       "id": 107,
@@ -143,7 +141,7 @@
       "prompt": "Summarize my repository for a blog post",
       "should_trigger": false,
       "expected_output": "Does not trigger",
-      "failure_mode": "wrong intent"
+      "failure_modes": ["over_trigger", "scope_creep"]
     },
     {
       "id": 108,
@@ -151,7 +149,7 @@
       "prompt": "Ensure my software release is reproducible, citable, and archived with proper metadata",
       "should_trigger": true,
       "expected_output": "Triggers FAIR4RS workflow",
-      "failure_mode": "implicit multi-goal phrasing"
+      "failure_modes": ["under_trigger", "no_planning"]
     }
   ]
 }

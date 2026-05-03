@@ -1,0 +1,148 @@
+{
+  "suite": "cross-skill-orchestration",
+  "evals": [
+    {
+      "id": 201,
+      "type": "cross",
+      "skills_expected": ["document", "peer-review"],
+      "prompt": "Generate an ODD description for my ABM and then assess if it is ready for CoMSES submission.",
+      "expected_behavior": "document → peer-review",
+      "failure_modes": [
+        "missing_step",
+        "wrong_order",
+        "incomplete_execution"
+      ]
+    },
+    {
+      "id": 202,
+      "type": "cross",
+      "skills_expected": ["fair4rs", "peer-review"],
+      "prompt": "Prepare my model for publication and tell me if it passes CoMSES review.",
+      "expected_behavior": "fair4rs → peer-review",
+      "failure_modes": [
+        "missing_step",
+        "wrong_order",
+        "incomplete_execution"
+      ]
+    },
+    {
+      "id": 203,
+      "type": "cross",
+      "skills_expected": ["hpc", "ospool"],
+      "prompt": "I need to run large parameter sweeps. Should I use Slurm or OSPool, and generate the appropriate scripts?",
+      "expected_behavior": "select ONE of hpc or ospool",
+      "failure_modes": [
+        "wrong_skill",
+        "boundary_violation",
+        "no_planning"
+      ]
+    },
+    {
+      "id": 204,
+      "type": "cross",
+      "skills_expected": ["document", "fair4rs"],
+      "prompt": "Document my model using ODD and prepare it for archival with proper metadata.",
+      "expected_behavior": "document → fair4rs",
+      "failure_modes": [
+        "missing_step",
+        "wrong_order",
+        "incomplete_execution"
+      ]
+    },
+    {
+      "id": 205,
+      "type": "cross",
+      "skills_expected": ["peer-review", "hpc"],
+      "prompt": "Review my model and suggest how to run it efficiently on an HPC cluster.",
+      "expected_behavior": "peer-review → hpc",
+      "failure_modes": [
+        "missing_step",
+        "wrong_order",
+        "scope_creep"
+      ]
+    },
+    {
+      "id": 206,
+      "type": "cross",
+      "skills_expected": ["ospool", "fair4rs"],
+      "prompt": "Run my model at scale and make sure it's properly archived and citable.",
+      "expected_behavior": "ospool → fair4rs",
+      "failure_modes": [
+        "missing_step",
+        "wrong_order",
+        "incomplete_execution"
+      ]
+    },
+    {
+      "id": 207,
+      "type": "cross",
+      "skills_expected": ["document", "hpc", "peer-review"],
+      "prompt": "Create ODD documentation, run the model on HPC, and evaluate whether it's ready for submission.",
+      "expected_behavior": "document → hpc → peer-review",
+      "failure_modes": [
+        "missing_step",
+        "wrong_order",
+        "incomplete_execution"
+      ]
+    },
+    {
+      "id": 208,
+      "type": "cross",
+      "skills_expected": ["document", "fair4rs", "peer-review"],
+      "prompt": "Prepare my model for publication including documentation, metadata, and readiness assessment.",
+      "expected_behavior": "document → fair4rs → peer-review",
+      "failure_modes": [
+        "missing_step",
+        "wrong_order",
+        "no_planning"
+      ]
+    },
+    {
+      "id": 209,
+      "type": "cross",
+      "skills_expected": ["hpc", "ospool"],
+      "prompt": "I have 10,000 independent simulations. I might use Slurm or OSPool—what's better and how do I set it up?",
+      "expected_behavior": "select ONE system and justify",
+      "failure_modes": [
+        "wrong_skill",
+        "boundary_violation",
+        "no_planning"
+      ]
+    },
+    {
+      "id": 210,
+      "type": "cross",
+      "skills_expected": ["peer-review", "fair4rs"],
+      "prompt": "Does my repository meet CoMSES criteria, and if not, what FAIR improvements are needed?",
+      "expected_behavior": "peer-review → fair4rs",
+      "failure_modes": [
+        "missing_step",
+        "wrong_order",
+        "incomplete_execution"
+      ]
+    },
+    {
+      "id": 211,
+      "type": "cross-adversarial",
+      "skills_expected": ["document", "fair4rs", "hpc", "ospool", "peer-review"],
+      "prompt": "Do everything needed to make my model complete, scalable, publishable, and reviewed.",
+      "expected_behavior": "multi-stage plan + execution",
+      "failure_modes": [
+        "no_planning",
+        "missing_step",
+        "incomplete_execution"
+      ]
+    },
+    {
+      "id": 212,
+      "type": "cross-adversarial",
+      "skills_expected": [],
+      "prompt": "Explain how to run simulations and publish them in general terms",
+      "expected_behavior": "no skill activation",
+      "failure_modes": [
+        "over_trigger",
+        "redundant_actions"
+      ]
+    }
+  ]
+}

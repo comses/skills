@@ -63,24 +63,21 @@
       "type": "core",
       "prompt": "Is my computational model repository ready for publication?",
       "should_trigger": true,
-      "expected_output": "Triggers full readiness review",
-      "notes": "implicit trigger"
+      "expected_output": "Triggers full readiness review"
     },
     {
       "id": 10,
       "type": "core",
       "prompt": "Re-evaluate my model after I fixed documentation issues and added tests.",
       "should_trigger": true,
-      "expected_output": "Updated review reflecting improvements",
-      "notes": "refinement / re-review"
+      "expected_output": "Updated review reflecting improvements"
     },
     {
       "id": 11,
       "type": "core",
       "prompt": "Validate whether my model meets CoMSES submission criteria",
       "should_trigger": true,
-      "expected_output": "Checklist-based validation report",
-      "notes": "validation-only"
+      "expected_output": "Checklist-based validation report"
     },
     {
       "id": 12,
@@ -96,13 +93,14 @@
       "should_trigger": false,
       "expected_output": "Does not activate; document skill domain"
     },
+
     {
       "id": 101,
       "type": "adversarial",
       "prompt": "Explain what peer review is",
       "should_trigger": false,
       "expected_output": "Informational only",
-      "failure_mode": "keyword trap"
+      "failure_modes": ["keyword_trap", "over_trigger"]
     },
     {
       "id": 102,
@@ -110,7 +108,7 @@
       "prompt": "Check if my repository is good",
       "should_trigger": true,
       "expected_output": "Clarifies scope and performs structured review",
-      "failure_mode": "vague intent"
+      "failure_modes": ["under_trigger", "no_planning"]
     },
     {
       "id": 103,
@@ -118,7 +116,7 @@
       "prompt": "Review my code for performance optimizations",
       "should_trigger": false,
       "expected_output": "Does not activate; performance tuning is out of scope",
-      "failure_mode": "scope creep"
+      "failure_modes": ["over_trigger", "scope_creep"]
     },
     {
       "id": 104,
@@ -126,7 +124,7 @@
       "prompt": "Evaluate my model and generate a Slurm script to run it",
       "should_trigger": true,
       "expected_output": "Performs review only; does not generate HPC artifacts",
-      "failure_mode": "cross-skill contamination"
+      "failure_modes": ["scope_creep", "boundary_violation"]
     },
     {
       "id": 105,
@@ -134,7 +132,7 @@
       "prompt": "Fix grammar issues in my model documentation",
       "should_trigger": false,
       "expected_output": "Does not activate; editing task",
-      "failure_mode": "over-trigger on documentation"
+      "failure_modes": ["over_trigger", "scope_creep"]
     },
     {
       "id": 106,
@@ -142,7 +140,7 @@
       "prompt": "My repository runs but has no documentation or instructions. Is it acceptable?",
       "should_trigger": true,
       "expected_output": "Fails due to missing required documentation criteria",
-      "failure_mode": "required criteria enforcement"
+      "failure_modes": ["invalid_output", "incomplete_execution"]
     },
     {
       "id": 107,
@@ -150,7 +148,7 @@
       "prompt": "Assess whether my repository meets FAIR principles and CoMSES review criteria",
       "should_trigger": true,
       "expected_output": "Focuses on CoMSES review; may reference FAIR but does not replace FAIR skill",
-      "failure_mode": "multi-framework confusion"
+      "failure_modes": ["boundary_violation", "scope_creep"]
     },
     {
       "id": 108,
@@ -158,7 +156,7 @@
       "prompt": "Give me a quick yes/no if my model is good enough",
       "should_trigger": true,
       "expected_output": "Produces full structured review before binary decision",
-      "failure_mode": "shortcut temptation"
+      "failure_modes": ["incomplete_execution", "no_planning"]
     }
   ]
 }

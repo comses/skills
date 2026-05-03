@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "evals"
+  ],
+  "properties": {
+    "skill_name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "suite": {
+      "type": "string"
+    },
+    "evals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "prompt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "core",
+              "adversarial",
+              "cross",
+              "cross-adversarial"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 5
+          },
+          "should_trigger": {
+            "type": "boolean"
+          },
+          "expected_behavior": {
+            "type": "string"
+          },
+          "expected_output": {
+            "type": "string"
+          },
+          "success_criteria": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skills_expected": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "failure_modes": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "over_trigger",
+                "under_trigger",
+                "wrong_skill",
+                "wrong_order",
+                "scope_creep",
+                "hallucination",
+                "keyword_trap",
+                "boundary_violation",
+                "incomplete_execution",
+                "missing_step",
+                "invalid_output",
+                "no_planning",
+                "redundant_actions"
+              ]
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "adversarial",
+                    "cross-adversarial"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "failure_modes"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "core",
+                    "adversarial"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "should_trigger"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "cross",
+                    "cross-adversarial"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "skills_expected"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

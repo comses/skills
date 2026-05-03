@@ -147,7 +147,7 @@ Use cases:
 ## Repository Structure
 
 ```
-skills/
+.
 ├── .github/
 │   └── skills/
 │       └── update-skill/        (repository-local maintainer skill)
@@ -156,43 +156,66 @@ skills/
 │           │   └── REFRESH-WORKFLOW.md
 │           └── assets/
 │               └── REFRESH-PR-NOTE-TEMPLATE.md
+├── AGENTS.md                    (repository-specific agent instructions)
 ├── README.md                    (this file)
 ├── CONTRIBUTING.md              (contribution guidelines)
 ├── LICENSE                      (MIT)
 ├── .gitignore
+├── Makefile                     (validation shortcuts)
 ├── docs/                        (repository-level documentation)
+│   ├── agent-skills-creation-reference.md
 │   ├── roadmap.md
 │   └── SKILL-TEMPLATE.md        (copy/fill template for new skills)
+├── evals/                       (cross-skill evals and schema)
+├── scripts/                     (validation and reporting helpers)
 └── skills/                      (all skill folders)
     ├── document/
-    │   └── SKILL.md
+  │   ├── SKILL.md
+  │   └── evals.json
     ├── fair4rs/
-    │   └── SKILL.md
+  │   ├── SKILL.md
+  │   └── evals.json
     ├── ospool/
-    │   └── SKILL.md
+  │   ├── SKILL.md
+  │   └── evals.json
     ├── hpc/
-    │   └── SKILL.md
+  │   ├── SKILL.md
+  │   └── evals.json
     └── peer-review/
-        └── SKILL.md
+    ├── SKILL.md
+    └── evals.json
 ```
 
 ## For Skill Authors
 
 ### Adding a New Skill
 
-1. **Read** [CONTRIBUTING.md](CONTRIBUTING.md) for submission guidelines and naming conventions.
+1. **Read** [AGENTS.md](AGENTS.md), [CONTRIBUTING.md](CONTRIBUTING.md), and [docs/agent-skills-creation-reference.md](docs/agent-skills-creation-reference.md) before drafting.
 2. **Review** [Agent Skills best practices](https://agentskills.io/skill-creation/best-practices) before drafting.
-3. **Ground from real expertise**: start from real task runs, corrections, and project artifacts (not generic advice).
-4. **Scope coherently**: define one composable unit of work; avoid overly broad or ultra-narrow skills.
-5. **Design for context efficiency**: keep `SKILL.md` concise, move deep details to `references/`, and load references only when needed.
-6. **Prefer defaults over menus**: choose one default tool/approach and list alternatives only as fallbacks.
-7. **Include reusable control patterns**: gotchas, output templates, and validation loops/checklists where relevant.
-8. **Refine with real execution**: test should-trigger and should-not-trigger prompts, review execution traces, then iterate.
-9. **Copy** an existing skill folder as a starting point: `cp -r skills/hpc skills/your-skill-name`.
-10. **Fill in** the YAML frontmatter (`name`, `description`) and markdown instructions following the progressive disclosure pattern.
-11. **Include optional resources** (scripts, references, assets) as your skill grows.
-12. **Test** against should-trigger and should-not-trigger prompts before submitting a PR.
-13. **Submit** a pull request with your skill and evaluation strategy (see CONTRIBUTING.md).
+3. **Ground from real expertise**: start from real task runs, corrections, and project artifacts, not generic advice.
+4. **Scope coherently**: define one composable unit of work and keep the boundary clear.
+5. **Design for context efficiency**: keep `SKILL.md` concise, move deep detail into `references/`, and add explicit load conditions.
+6. **Prefer defaults over menus**: choose one default tool or approach and use alternatives only as fallbacks.
+7. **Create the skill folder** with `/create-skill` if your agent supports it, or scaffold manually:
+
+  ```bash
+  mkdir -p skills/your-skill-name
+  cp docs/SKILL-TEMPLATE.md skills/your-skill-name/SKILL.md
+  cp skills/document/evals.json skills/your-skill-name/evals.json
+  ```
+
+8. **Fill in** the YAML frontmatter and markdown instructions, then immediately rename `skill_name`, replace the copied prompts, and ensure `name:` matches the folder exactly.
+9. **Include optional resources** (`assets/`, `references/`, `scripts/`) as the workflow needs them.
+10. **Refine with real execution**: test should-trigger and should-not-trigger prompts, review execution traces, and iterate.
+11. **Run the repository validators** before opening a PR:
+
+  ```bash
+  python scripts/validate_individual_skills.py
+  python scripts/validate_evals_schema.py
+  python scripts/validate_cross_skills.py evals/cross-skills.json
+  ```
+
+12. **Submit** a pull request with the skill folder, its `evals.json`, and the prompts or checks you used to validate it.
 
 ### Skill Anatomy
 
@@ -223,22 +246,26 @@ Authoring guidance:
 ```yaml
 ---
 name: your-skill-name
-description: Brief description of when and why to use this skill
+description: |
+  Use this skill when...
+  Triggers: "phrase 1", "phrase 2"
+  Expected output: ...
+license: MIT
 ---
 ```
 
 **Optional fields:**
 ```yaml
-license: MIT (default) | Apache-2.0 | GPL-3.0-or-later
 compatibility: Tool/version requirements
 metadata:
   domain: computational-modeling | documentation | publication | execution
   maturity: alpha | beta | stable
-  audience: modelers | researchers | data scientists
+  audience: modelers | researchers | data-scientists
+  category: documentation | quality-assurance | execution | publication
 ---
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) for full guidance.
+See [CONTRIBUTING.md](CONTRIBUTING.md), [AGENTS.md](AGENTS.md), and [docs/VALIDATION.md](docs/VALIDATION.md) for full guidance.
 
 ## Roadmap
 
