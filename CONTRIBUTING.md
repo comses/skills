@@ -1,6 +1,6 @@
-# Contributing Skills to COMSES
+# Contributing Skills to CoMSES
 
-Thank you for contributing to this skills repository! This guide walks you through the process of creating, testing, and submitting skills for computational modelers.
+Thank you for contributing to this skills repository! This guide walks you through the process of creating, testing, and submitting skills for our community.
 
 ## Table of Contents
 
@@ -15,16 +15,15 @@ Thank you for contributing to this skills repository! This guide walks you throu
 ## Before You Start
 
 - Familiarize yourself with the [Agent Skills specification](https://agentskills.io)
-- Review existing skills in `skills/` to understand the pattern
-- Copy [docs/SKILL-TEMPLATE.md](docs/SKILL-TEMPLATE.md) as your starting point
-- Ensure your skill addresses a concrete pain point for computational modelers
-- Confirm your skill does NOT substantially overlap with existing skills
+- Read [docs/agent-skills-creation-reference.md](docs/agent-skills-creation-reference.md). This is the canonical authoring guide for this repository.
+- Review existing skills in `skills/` to check for overlap and assess fit / appropriateness
+- Use `/create-skill` if your coding agent provides it, or manually copy [docs/SKILL-TEMPLATE.md](docs/SKILL-TEMPLATE.md) into a new skill directory
 
 ## Skill Creation Workflow
 
 ### 1. Plan Your Skill
 
-Answer these questions before writing:
+Answer these questions:
 
 - **What problem does it solve?** (e.g., "Modelers struggle to document ODD+2 protocols manually")
 - **When should the coding agent use it?** (e.g., "When user has model code and needs narrative documentation")
@@ -34,13 +33,16 @@ Answer these questions before writing:
 
 ### 2. Create Your Skill Folder
 
-Run `/create-skill <name> — <one-sentence description>` in your coding agent. This scaffolds `skills/<name>/SKILL.md` from [docs/SKILL-TEMPLATE.md](docs/SKILL-TEMPLATE.md) with placeholders filled in, and generates a starter `evals.json`.
+Run `/create-skill <name> — <one-sentence description>` in your coding agent if that command is available. It should scaffold `skills/<name>/SKILL.md` from [docs/SKILL-TEMPLATE.md](docs/SKILL-TEMPLATE.md) and create a starter `skills/<name>/evals.json`.
 
 Alternatively, copy manually:
 ```bash
 mkdir -p skills/your-skill-name
 cp docs/SKILL-TEMPLATE.md skills/your-skill-name/SKILL.md
+cp skills/document/evals.json skills/your-skill-name/evals.json
 ```
+
+Then immediately rename `skill_name`, replace the copied prompts, and make sure the frontmatter `name:` matches the folder exactly.
 
 ### 3. Write SKILL.md
 
@@ -48,7 +50,7 @@ See [Frontmatter Specification](#frontmatter-specification) and [Writing Guideli
 
 ### 4. Add Optional Resources
 
-As your skill grows, add supporting files:
+As your skill grows, you might find supporting files useful:
 
 ```
 your-skill-name/
@@ -70,6 +72,14 @@ your-skill-name/
 ### 5. Test Your Skill
 
 See [Testing Your Skill](#testing-your-skill).
+
+Before opening a PR, also run the repository validators:
+
+```bash
+python scripts/validate_individual_skills.py
+python scripts/validate_evals_schema.py
+python scripts/validate_cross_skills.py evals/cross-skills.json
+```
 
 ### 6. Submit a Pull Request
 
@@ -124,21 +134,21 @@ A typical SKILL.md body includes:
 
 ## Key Inputs
 
-- Model source files (Python/R/C++)
+- Model source code files
 - Parameter descriptions or config files
 - Optional: docstrings with metadata
 
 ## Step-by-Step Instructions
 
 1. Read the model code
-2. Extract metadata using scripts/extract.py
+2. Extract metadata (scicodes/somef-core,  google/langextract)
 3. Generate narrative following references/TEMPLATE.md
 4. Validate against references/CHECKLIST.md
 
 ## ⚠️ Gotchas
 
 - **Stochastic models:** If your model uses randomness, document any fixed random seeds
-- **Large codebases:** Summarize into entity/subsystem abstractions first
+- **Large codebases:** Summarize into entity/subsystem/component abstractions first
 - **Missing documentation:** Skill will ask clarifying questions rather than guess
 
 ## Templates & Resources
@@ -173,10 +183,11 @@ A typical SKILL.md body includes:
 name: your-skill-name
 description: |
   A complete description of what this skill does.
-  
-  Use when: you have model code and need...
-  When to trigger: mention [keywords like ODD, documentation, publication]
+
+  Use this skill when you have model code and need...
+  Triggers: "odd", "documentation", "publication"
   Expected output: [specific deliverables]
+license: MIT
 ---
 ```
 
@@ -186,23 +197,25 @@ description: |
 ---
 name: your-skill-name
 description: ...
-license: MIT (default) | Apache-2.0 | Proprietary
+license: MIT | Apache-2.0 | Proprietary
 compatibility: Python 3.10+, git, Docker (optional)
 metadata:
   domain: computational-modeling | documentation | publication | execution
   maturity: alpha | beta | stable
-  audience: modelers | researchers | data scientists
+  audience: modelers | researchers | data-scientists
+  category: documentation | quality-assurance | execution | publication
 ---
 ```
 
-### Guidancefor `description`
+### Guidance for `description`
 
 The description is your **primary triggering mechanism**. Make it:
 
 - **Task-specific:** "ODD+2 narrative for agent-based models" not just "model documentation"
 - **Keyword-rich:** Include trigger phrases users would naturally type
 - **Outcome-focused:** Mention specific deliverables (e.g., "checklist", "narrative sections", "validation report")
-- **Slightly pushy:** Coding agents tend to under-trigger skills. Emphasize when to use: "Use whenever you mention ODD, ABM documentation, or model publication preparation"
+- **Use the repository-preferred trigger phrase:** Start with `Use this skill when ...` so your description aligns with the validator heuristics and the existing skills.
+- **Slightly pushy:** Coding agents tend to under-trigger skills. Emphasize when to use: "Use this skill when you mention ODD, ABM documentation, or model publication preparation"
 
 ## Testing Your Skill
 
@@ -226,37 +239,45 @@ The description is your **primary triggering mechanism**. Make it:
 
 ### Creating an Evaluation Strategy
 
-For each skill, document 3–5 concrete test cases in a file `evals/evals.json`:
+For each skill, include concrete test cases in `skills/<name>/evals.json`:
 
 ```json
 {
   "skill_name": "document",
+  "description": "Evaluation cases for ODD+2 narrative documentation skill",
   "evals": [
     {
       "id": 1,
+      "type": "core",
       "prompt": "I have a Python ABM with Agent and Environment classes. Generate an ODD narrative.",
       "should_trigger": true,
-      "expected_output": "ODD sections covering entities, state variables, and processes",
-      "files": ["evals/files/minimal_abm.py"]
+      "expected_output": "ODD sections covering entities, state variables, and processes"
     }
   ]
 }
 ```
+
+Notes:
+
+- Individual skill evals live next to the skill, for example `skills/document/evals.json`.
+- The repository schema accepts fields such as `type`, `should_trigger`, `expected_output`, `expected_behavior`, `success_criteria`, `skills_expected`, `failure_modes`, and `notes`.
+- Do not add ad hoc fields unless you also update the schema in `evals/schema/schema.json`.
 
 ## Submission Checklist
 
 Before submitting, verify:
 
 - [ ] Skill folder name matches `name:` field in frontmatter
-- [ ] Frontmatter includes `name` and `description` (and optionally `license`, `compatibility`, `metadata`)
-- [ ] Description includes triggers ("Use when you...") and expected outputs
+- [ ] Frontmatter includes `name`, `description`, and `license` (plus optional `compatibility` and `metadata`)
+- [ ] Description includes triggers (`Use this skill when ...`) and expected outputs
 - [ ] All script references use relative paths: `scripts/name.py` (not `./scripts/name.py`)
 - [ ] README/CONTRIBUTING sections are consistent with repository guidelines
+- [ ] `skills/<name>/evals.json` exists and validates against `evals/schema/schema.json`
 - [ ] Tested skill against ≥5 should-trigger and ≥3 should-not-trigger prompts
 - [ ] No hardcoded paths or user-specific settings
 - [ ] Scripts have clear usage documentation (docstrings, help text, or references/SCRIPT.md)
 - [ ] No credentials, API keys, or personal data in examples
-- [ ] License field in frontmatter (defaults to MIT if omitted)
+- [ ] License field is present in frontmatter
 
 ## Questions?
 

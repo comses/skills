@@ -50,7 +50,7 @@ Every SKILL.md **must** include valid YAML frontmatter with required and optiona
 name: kebab-case-skill-name         # (required) lowercase, hyphens, no spaces
 description: |                       # (required) complete trigger & outcome description
   Use this skill when...
-license: MIT                         # (optional, defaults to MIT)
+license: MIT                         # (required)
 ---
 ```
 
@@ -199,18 +199,19 @@ When activated, this skill produces:
 
 ## Evaluation Strategy Template
 
-Before submitting, define how your skill will be evaluated. Create a file `evals/evals.json` in your skill directory:
+Before submitting, define how your skill will be evaluated. Create a file `skills/<name>/evals.json`:
 
 ```json
 {
   "skill_name": "document",
+  "description": "Evaluation cases for ODD+2 narrative documentation skill",
   "evals": [
     {
       "id": 1,
+      "type": "core",
       "prompt": "I have a Python ABM with Agent and Environment classes. Generate an ODD+2 narrative.",
       "should_trigger": true,
       "expected_output": "ODD sections covering entities, state variables, processes, and parameters",
-      "files": ["evals/files/minimal_abm.py"],
       "success_criteria": [
         "Output includes all three entities (Agent, Environment, Scheduler)",
         "State variables are listed with types and ranges",
@@ -219,16 +220,18 @@ Before submitting, define how your skill will be evaluated. Create a file `evals
     },
     {
       "id": 2,
+      "type": "core",
       "prompt": "Create a timeline of project milestones",
       "should_trigger": false,
       "expected_output": "Skill does not activate; falls through to other skills or generic behavior"
     },
     {
       "id": 3,
+      "type": "adversarial",
       "prompt": "I have a complex Netlogo ABM with 50 agents and nested entity hierarchies. Generate ODD.",
       "should_trigger": true,
       "expected_output": "ODD with entity hierarchy clearly explained; ask for clarification on subsystem abstractions if code is unclear",
-      "files": ["evals/files/complex_netlogo.nlogo"],
+      "failure_modes": ["hallucination", "under_trigger"],
       "success_criteria": [
         "Output structures entity hierarchy (e.g., Colony > Hive > Bee)",
         "Output explains state variable interactions",
@@ -242,17 +245,23 @@ Before submitting, define how your skill will be evaluated. Create a file `evals
 ### Evaluation Template Fields
 
 - **id:** Unique test case number
+- **type:** Optional classification: `core`, `adversarial`, `cross`, or `cross-adversarial`
 - **prompt:** User query (should be realistic)
-- **should_trigger:** Boolean indicating whether the skill should activate
+- **should_trigger:** Boolean indicating whether the skill should activate (required for `core` and `adversarial`)
 - **expected_output:** Description of expected behavior/output type
-- **files:** Optional array of input file paths (relative to skill directory)
+- **expected_behavior:** Optional narrative description of expected behavior
 - **success_criteria:** Array of statements that must be true for the skill to pass
+- **skills_expected:** Required for `cross` and `cross-adversarial`
+- **failure_modes:** Required for `adversarial` and `cross-adversarial`
+- **notes:** Optional reviewer notes
+
+Note: Evals must validate against `evals/schema/schema.json`. Do not add custom fields unless the schema is updated.
 
 ### Running Evals
 
 After you've defined evals, run your skill manually against each test case:
 
-1. **Setup:** Place test input files in `evals/files/`
+1. **Setup:** Keep eval prompts in `skills/<name>/evals.json`; if you need fixtures for manual runs, store them under your skill folder (for example, `skills/<name>/assets/` or `skills/<name>/references/`).
 2. **Execute:** Invoke your skill in your coding agent (Claude Code, Claude.ai, Cursor, Cline, or other AI coding environments) with the prompt
 3. **Capture output:** Save the output (file, markdown, JSON, etc.)
 4. **Grade:** Check against success criteria
@@ -330,7 +339,7 @@ Before opening a PR, verify:
 - [ ] Description includes trigger phrases and expected outputs
 - [ ] Tested against ≥5 should-trigger and ≥3 should-not-trigger prompts
 - [ ] Output contract is clear and verifiable
-- [ ] Evals are documented in `evals/evals.json` with success criteria
+- [ ] Evals are documented in `skills/<name>/evals.json` with success criteria
 - [ ] Manual testing shows skill works as expected
 - [ ] Execution traces were reviewed for false positives, missed triggers, and wasted steps
 - [ ] No hardcoded paths, API keys, or user-specific settings
