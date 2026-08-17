@@ -391,6 +391,22 @@ Concise overview of deep uncertainty concepts and implications for decision supp
 
 ---
 
+## Lempert et al. (2024)
+
+Lempert, R.J., Lawrence, J., Kopp, R.E., Haasnoot, M., Reisinger, A., Grubb, M., & Pasqualino, R. (2024). The use of decision making under deep uncertainty in the IPCC. _Frontiers in Climate_, 6.
+[https://doi.org/10.3389/fclim.2024.1380054](https://doi.org/10.3389/fclim.2024.1380054)
+
+Recent application-focused discussion of how deep-uncertainty methods are used in IPCC assessment contexts.
+
+## Stanton & Roelich (2021)
+
+Stanton, M.C.B., & Roelich, K. (2021). Decision making under deep uncertainties: A review of the applicability of methods in practice. _Technological Forecasting and Social Change_, 171, 120939.
+[https://doi.org/10.1016/j.techfore.2021.120939](https://doi.org/10.1016/j.techfore.2021.120939)
+
+Review of method applicability in practice, emphasizing fit between decision context and DMDU approaches.
+
+---
+
 ## Kwakkel & Haasnoot (2019)
 
 Kwakkel, J.H., & Haasnoot, M. (2019). Supporting DMDU: A taxonomy of approaches and tools. In V.A.W.J. Marchau, W.E. Walker, P.J.T.M. Bloemen, & S.W. Popper (Eds.), _Decision Making under Deep Uncertainty_ (pp. 355–374). Springer.

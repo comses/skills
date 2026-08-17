@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Use this guidance when computational models support decisions under conditions where important uncertainties cannot be adequately characterized, agreed upon, or assigned defensible probabilities.
+Use this guidance when computational models support decisions under conditions where important uncertainties cannot be adequately characterized, agreed upon, or assigned defensible probabilities. In some literatures this is also called strict uncertainty, severe uncertainty, Knightian uncertainty, or wild uncertainty, though the labels are not always used identically.
 
 The objective is not to predict a single future, but to evaluate the robustness and adaptability of decisions across many plausible futures.
 
@@ -130,6 +130,11 @@ Describe how this guidance relates to the rest of the guidance library and speci
 - Lempert et al. (2003)
 - Haasnoot et al. (2013)
 - Kwakkel & Haasnoot (2019)
+
+### Current Practice
+
+- Lempert et al. (2024)
+- Stanton & Roelich (2021)
 
 ### Applied Practice
 
