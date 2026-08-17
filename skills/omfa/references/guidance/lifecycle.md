@@ -34,7 +34,7 @@ All reviewable artifacts SHOULD be placed under `artifacts/` at the project root
 - developing a conceptual representation of a system (`conceptual-modeling.md`)
 - selecting modeling paradigms or abstractions (`conceptual-modeling.md`)
 - evaluating uncertainty (`uncertainty.md` or `deep-uncertainty.md`)
-- performing methodology-specific analyses such as sensitivity analysis, calibration, or reproducibility assessment
+- performing methodology-specific analyses such as sensitivity analysis or calibration
 
 This guidance serves as the primary entry point for coordinating the modeling lifecycle. It complements rather than replaces specialized methodological guidance.
 
@@ -70,9 +70,9 @@ If defaults or expert judgement are used to compensate for missing evidence, doc
 
 ### Model Realization
 
-Select implementation approaches that faithfully represent the conceptual model rather than allowing software constraints to drive scientific design. [MUST]
+Select scientific representations that stay faithful to the conceptual model and identify when implementation concerns should be handed off to `omfb`. [MUST]
 
-Document implementation assumptions, parameter sources, and computational approximations. [MUST]
+Document implementation-relevant scientific assumptions, parameter sources, and computational approximations. [MUST]
 
 ### Evaluation
 
@@ -80,11 +80,13 @@ Treat verification, calibration, validation, uncertainty analysis, and sensitivi
 
 Justify which evaluation activities are applicable given the model purpose and available evidence. [MUST]
 
-### Communication and Stewardship
+### Communication and Decision Provenance
 
 Communicate limitations, appropriate use, assumptions, and remaining uncertainties alongside model results. [MUST]
 
-Document provenance, reproducibility, and long-term stewardship where appropriate. [SHOULD]
+Document scientific decisions, evidence, rationale, alternatives, and approvals in `decision-log.md`. [MUST]
+
+Route reproducibility assessment, packaging, environments, archival, and stewardship to `fair`. [SHOULD]
 
 ---
 
@@ -97,13 +99,13 @@ The computational modeling lifecycle is inherently iterative, not a waterfall. T
 | Problem formulation | Objectives, scope, research questions | `problem-statement.md`, `research-questions.md` |
 | Conceptual modeling | Abstractions, boundaries, stakeholder framing | `conceptual-model.md`, `stakeholder-register.md`, `assumptions.md` |
 | Data and evidence assessment | Provenance, quality, sufficiency | `assumptions.md` (data-sourcing entries) |
-| Model implementation | Faithful realization of the conceptual model | `implementation-plan.md` |
+| Implementation handoff readiness | Are scientific prerequisites ready for OMFB? | `conceptual-model.md`, `assumptions.md`, `uncertainty-register.md` |
 | Verification | Does the implementation match the conceptual model/spec? | `verification-report.md` |
 | Calibration | Parameter fitting against the model's intended purpose | `calibration-report.md` |
 | Validation and evaluation | Does the model perform adequately for its stated purpose? | `validation-report.md` |
 | Sensitivity and uncertainty analysis planning | Parameter, structural, and scenario uncertainty | `uncertainty-register.md`, `sensitivity-analysis-plan.md` |
 | Experimental analysis | Designed runs answering the research questions | `experiment-plan.md`, `results.md` |
-| Communication and stewardship | Limitations, appropriate use, provenance | `limitations.md` |
+| Communication and decision provenance | Limitations, appropriate use, scientific decisions | `limitations.md`, `decision-log.md` |
 
 **Regression is expected, not exceptional.** A substantive change discovered in a later phase SHOULD prompt the agent to flag the earlier phases it depends on for re-check — this is a flag for review, not an automatic edit. For example: a calibration result (Phase 6) that requires implausible parameter values SHOULD prompt the agent to flag the conceptual model (Phase 2) and data assessment (Phase 3) for re-examination, rather than proceeding to validation as though the conceptual model still holds. The agent should surface this regression explicitly to the user rather than silently revising upstream artifacts on their behalf.
 
@@ -145,7 +147,6 @@ Expected intermediate artifacts include:
 - `stakeholder-register.md`
 - `conceptual-model.md`
 - `assumptions.md`
-- `implementation-plan.md`
 - `verification-report.md`
 - `calibration-report.md`
 - `validation-report.md`
@@ -154,6 +155,7 @@ Expected intermediate artifacts include:
 - `experiment-plan.md`
 - `results.md`
 - `limitations.md`
+- `decision-log.md`
 
 These artifacts should evolve throughout the project and remain available for downstream specialist skills. `conceptual-model.md`, `assumptions.md`, and `uncertainty-register.md` are shared with the parent `SKILL.md` Required Deliverables list — this guidance does not introduce separate copies; it tracks the same files across lifecycle phases.
 
@@ -162,7 +164,7 @@ Store these artifacts in `artifacts/` at the project root, and keep `artifacts/R
 **Dependency edges.** These artifacts are not independent; a change to one frequently invalidates claims in another. Dependency edges are intentionally sparse. Only record dependencies that are consequential and likely to invalidate downstream reasoning. At minimum, track:
 
 - A change to `assumptions.md` MUST trigger a review of `validation-report.md` and `uncertainty-register.md` for continued consistency.
-- A change to `conceptual-model.md` MUST trigger a review of `implementation-plan.md`, `verification-report.md`, and any completed `calibration-report.md` or `validation-report.md`.
+- A change to `conceptual-model.md` MUST trigger a review of whether the project is still ready to hand off to `omfb`, plus any `verification-report.md` and completed `calibration-report.md` or `validation-report.md` that depend on the changed conceptual structure.
 - A change to data sourcing recorded under Data and Evidence Assessment MUST trigger a review of `calibration-report.md`, `uncertainty-register.md`, and `sensitivity-analysis-plan.md`.
 - A change to `calibration-report.md` MUST trigger a review of `validation-report.md`.
 
@@ -197,20 +199,22 @@ Use this guidance to coordinate the overall computational modeling lifecycle and
 - Route to `deep-uncertainty.md` IF key uncertainties cannot be meaningfully represented probabilistically due to structural uncertainty, contested assumptions, or multiple plausible futures. Note that `uncertainty.md` and `deep-uncertainty.md` are mutually exclusive entry points for a **particular uncertainty** under consideration, but multiple uncertainties of different types and characterizations can coexist within a project.
 - Route to `abm.md` IF the model represents autonomous, interacting agents and agent-based design decisions (entity definition, interaction rules, emergence) are under discussion.
 - Route to `participatory.md` IF stakeholders are intended to influence model design, framing, calibration, or interpretation.
-- Route to the `fair` skill IF reproducibility, metadata, packaging, citation, release, or archival practices are being established or assessed.
+- Route to `omfb` IF the user asks for implementation planning, architecture, module mapping, parameter schema, or verification-plan artifacts.
+- Route to the `fair` skill IF reproducibility assessment, metadata, packaging, citation, release, archival, environment, or stewardship practices are being established or assessed.
 - Route to `ethics.md` IF the model has governance, policy, or societal implications, or affects vulnerable populations.
 
 **Specialist execution skills**
 
 Specialist skills may implement:
 
-- implementation planning
 - calibration
 - sensitivity analysis
 - uncertainty analysis
 - visualization
 - model evaluation
 - peer review
+
+`omfb` implements implementation planning and related implementation artifacts.
 
 **Downstream consumer skills**
 

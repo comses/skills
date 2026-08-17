@@ -37,12 +37,16 @@
       "prompt": "I have a model on GitHub and I want to make it citable. Generate CITATION.cff.",
       "should_trigger": true,
       "behavior": [
-        "Returns codemeta.json plus CITATION.cff"
+        "Returns the requested citation artifact(s) without forcing a full FAIR Management Plan"
       ],
       "output": {
-        "description": "codemeta.json plus CITATION.cff",
-        "must_include": [],
-        "must_not_include": []
+        "description": "Targeted citation update; no new full FAIR Management Plan",
+        "must_include": [
+          "CITATION.cff"
+        ],
+        "must_not_include": [
+          "full FAIR Management Plan"
+        ]
       }
     },
     {
@@ -93,12 +97,17 @@
       "prompt": "Create a codemeta.json for my model repository and then derive a matching CITATION.cff.",
       "should_trigger": true,
       "behavior": [
-        "Returns consistent codemeta.json + CITATION.cff"
+        "Returns consistent codemeta.json + CITATION.cff without requiring a new full FAIR Management Plan"
       ],
       "output": {
-        "description": "Consistent codemeta.json + CITATION.cff",
-        "must_include": [],
-        "must_not_include": []
+        "description": "Consistent codemeta.json + CITATION.cff; no new full FAIR Management Plan",
+        "must_include": [
+          "codemeta.json",
+          "CITATION.cff"
+        ],
+        "must_not_include": [
+          "full FAIR Management Plan"
+        ]
       }
     },
     {
@@ -121,12 +130,16 @@
       "prompt": "Improve my existing CITATION.cff to meet best practices and align with my repository metadata",
       "should_trigger": true,
       "behavior": [
-        "Returns refined CITATION.cff with consistency checks"
+        "Returns refined CITATION.cff and only updates FAIR Management Plan if an existing consequential plan change is needed"
       ],
       "output": {
-        "description": "Refined CITATION.cff with consistency checks",
-        "must_include": [],
-        "must_not_include": []
+        "description": "Refined CITATION.cff; no new full FAIR Management Plan",
+        "must_include": [
+          "CITATION.cff"
+        ],
+        "must_not_include": [
+          "full FAIR Management Plan"
+        ]
       }
     },
     {
@@ -172,6 +185,46 @@
       }
     },
     {
+      "id": 13,
+      "type": "core",
+      "prompt": "Draft a maintenance plan for my research software covering support, versioning, and update cadence.",
+      "should_trigger": true,
+      "behavior": [
+        "Updates artifacts/fair/fair-management-plan.md with relevant stewardship decisions, then derives artifacts/fair/maintenance-plan.md from it using the maintenance plan template"
+      ],
+      "output": {
+        "description": "Operational maintenance plan derived from the FAIR Management Plan",
+        "must_include": [
+          "artifacts/fair/fair-management-plan.md",
+          "artifacts/fair/maintenance-plan.md",
+          "support",
+          "versioning",
+          "update cadence"
+        ],
+        "must_not_include": []
+      }
+    },
+    {
+      "id": 14,
+      "type": "core",
+      "prompt": "Capture provenance for my workflow and update the provenance manifest.",
+      "should_trigger": true,
+      "behavior": [
+        "Returns artifacts/fair/provenance-manifest.json derived from the provenance manifest template and linked to the Research Object Inventory when available"
+      ],
+      "output": {
+        "description": "FAIR-owned provenance manifest derived from template",
+        "must_include": [
+          "artifacts/fair/provenance-manifest.json",
+          "provenance",
+          "Research Object Inventory"
+        ],
+        "must_not_include": [
+          "full FAIR Management Plan"
+        ]
+      }
+    },
+    {
       "id": 101,
       "type": "adversarial",
       "prompt": "Explain what FAIR principles are",
@@ -211,18 +264,24 @@
       "id": 103,
       "type": "adversarial",
       "prompt": "Generate metadata for my dataset",
-      "should_trigger": false,
+      "should_trigger": true,
       "behavior": [
-        "Does not trigger; data-only metadata is out of scope"
+        "Triggers FAIR dataset stewardship, updates the Research Object Inventory, and derives dataset metadata without forcing a new full FAIR Management Plan"
       ],
       "output": {
-        "description": "Does not trigger; data-only metadata is out of scope",
-        "must_include": [],
-        "must_not_include": []
+        "description": "FAIR dataset stewardship with inventory-backed metadata; no new full FAIR Management Plan",
+        "must_include": [
+          "Research Object Inventory",
+          "DataCite",
+          "dataset"
+        ],
+        "must_not_include": [
+          "full FAIR Management Plan"
+        ]
       },
       "failure_modes": [
-        "wrong_skill",
-        "boundary_violation"
+        "under_trigger",
+        "no_planning"
       ]
     },
     {

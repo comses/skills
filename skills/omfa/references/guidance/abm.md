@@ -173,6 +173,8 @@ Generate or maintain, as appropriate:
 
 Use predictable, semantic kebab-case filenames under `artifacts/` at the project root. These artifacts should support downstream documentation, review, and reproducibility. If `artifacts/` is created during this work, also create `artifacts/README.md` describing artifacts as living documents created early, revised throughout the project, and gated by explicit status/review triggers.
 
+For publication-facing ABM documentation, this guidance requires a handoff gate: first ensure OMFA's canonical scientific artifacts (`artifacts/model-card.md` and `artifacts/abm-spec.md`) are current; then route ODD/ODD+2 narrative generation to `document`. OMFA does not own or maintain the ODD narrative itself.
+
 ---
 
 ## Common Failure Patterns
@@ -197,7 +199,7 @@ Watch for:
 Describe how this guidance relates to the rest of the guidance library and specialist skills.
 
 - **Primary entry point** — This guidance is complementary to `uncertainty.md` and `deep-uncertainty.md`. Use this guidance to determine whether and how an ABM should represent the system. Apply uncertainty guidance after the conceptual model has been established.
-- **Specialist execution skills** — `document` (ODD/ODD+2 generation), `document-review`, future `abm-design`, and future analysis skills for calibration, sensitivity analysis, and experimentation.
+- **Specialist execution skills** — `document` (ODD/ODD+2 narrative generation after the OMFA handoff gate), `document-review`, future `abm-design`, and future analysis skills for calibration, sensitivity analysis, and experimentation.
 - **Downstream consumer skills** — `peer-review`, `fair`, and `document`, which should communicate the modeling rationale, assumptions, abstractions, and limitations established here.
 
 ---

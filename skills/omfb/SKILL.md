@@ -36,6 +36,8 @@ Do **not** use this skill when: performing conceptual modeling, uncertainty anal
 
 OMFB consumes the reviewable scientific artifacts produced by OMFA. These artifacts are the authoritative implementation specification. These artifacts are the authoritative description of scientific intent and SHOULD be treated as the implementation specification. Implementation artifacts supplement, but never supersede, these scientific artifacts.
 
+For agent-based models (ABMs), `artifacts/abm-spec.md` is the authoritative implementation/planning artifact. If the work is ABM implementation or ABM implementation planning and that artifact is absent, pause and route to OMFA instead of inferring or reconstructing the ABM specification.
+
 ## Required Inputs
 
 OMFB uses reviewable artifacts as the authoritative implementation specification.
@@ -59,20 +61,23 @@ Load these artifacts only when they materially affect implementation decisions.
 | `artifacts/uncertainty-register.md` | When stochasticity, calibration, numerical methods, or experimental design influence implementation. |
 | `artifacts/analysis-plan.md` | When implementation must support planned experiments, outputs, or evaluation. |
 | `artifacts/stakeholder-register.md` | When implementation decisions have governance, transparency, privacy, or participation implications. |
+| `artifacts/abm-spec.md` | When the work is ABM implementation or ABM implementation planning. Treat as authoritative; if absent, pause and route to OMFA rather than inferring it. |
 
 ## Guidance Library
 
-Load only the implementation guidance required.
+Load only the implementation guidance required from `references/`.
 
 | Context | Guidance |
 |----------|----------|
-| General implementation planning | `implementation-planning.md` |
-| Architecture and modularization | `architecture.md` |
-| Verification planning           | `verification.md` |
-| Stochastic simulation           | `stochastic.md` |
-| Performance optimization        | `performance.md` |
-| Parallel execution              | `parallel.md` |
-| Language and framework idioms   | platform guidance |
+| General implementation planning | `references/implementation-planning.md` |
+| Architecture and modularization | `references/architecture.md` |
+| Verification planning           | `references/verification.md` |
+| Stochastic simulation           | `references/stochastic.md` |
+| Performance optimization        | `references/performance.md` |
+| Parallel execution              | `references/parallel.md` |
+| Language and framework idioms   | `references/platform-guidance.md` |
+
+Use `references/platform-guidance.md` to choose the platform; detailed language or framework idioms belong in the project's tooling or another applicable specialist.
 
 ## Deliverables
 
@@ -108,6 +113,6 @@ If implementation constraints require changes to scientific assumptions or conce
 ## Gotchas
 
 - **Implementation can silently redefine the conceptual model.** Watch for data structures, scheduling logic, or approximation choices that change the scientific meaning of entities or relationships. Surface these explicitly rather than letting them become implicit behavior.
-- **OMFB is not a coding tutor.** It provides architecture and traceability guidance; language-specific implementation details belong in platform-specific guidance or the user's chosen tooling.
+- **OMFB is not a coding tutor.** It provides architecture and traceability guidance; use `references/platform-guidance.md` for platform selection, and keep detailed language/framework idioms in the project's tooling or another applicable specialist.
 - **Traceability without reviewability is insufficient.** A mapping from conceptual model to code is useful only if it is kept current and reviewed when either side changes.
 - **Do not duplicate OMFA's work.** Conceptual modeling, uncertainty analysis, and evaluation methodology remain OMFA responsibilities; OMFB consumes their outputs, not replace them.

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "skill_name": "document",
-  "description": "Evaluation cases for ODD+2 narrative documentation skill",
+  "description": "Evaluation cases for narrative model documentation skill",
   "evals": [
     {
       "id": 1,
@@ -147,12 +147,12 @@
       "id": 11,
       "type": "core",
       "prompt": "Validate this ODD description against the ODD+2 checklist and tell me what's missing.",
-      "should_trigger": true,
+      "should_trigger": false,
       "behavior": [
-        "Validates ODD description against checklist"
+        "Routes to document-review"
       ],
       "output": {
-        "description": "Checklist-based validation report",
+        "description": "Routes to document-review for completeness assessment and checklist validation",
         "must_include": [],
         "must_not_include": []
       }
@@ -161,12 +161,12 @@
       "id": 12,
       "type": "core",
       "prompt": "Document my system dynamics model using standard modeling documentation practices",
-      "should_trigger": false,
+      "should_trigger": true,
       "behavior": [
-        "Does not activate"
+        "Generates structured system dynamics documentation"
       ],
       "output": {
-        "description": "Skill does not activate",
+        "description": "Structured documentation for a system dynamics model",
         "must_include": [],
         "must_not_include": []
       }
@@ -175,12 +175,12 @@
       "id": 13,
       "type": "core",
       "prompt": "Summarize my simulation model in plain English for a blog post",
-      "should_trigger": false,
+      "should_trigger": true,
       "behavior": [
-        "Does not activate"
+        "Rewrites model prose in plain English"
       ],
       "output": {
-        "description": "Skill does not activate",
+        "description": "Plain-language prose summary of the simulation model",
         "must_include": [],
         "must_not_include": []
       }
@@ -207,12 +207,12 @@
       "id": 102,
       "type": "adversarial",
       "prompt": "Document my simulation model for a paper",
-      "should_trigger": false,
+      "should_trigger": true,
       "behavior": [
-        "Does not trigger without ABM specificity"
+        "Generates narrative documentation for a simulation model"
       ],
       "output": {
-        "description": "Does not trigger without ABM specificity",
+        "description": "Narrative documentation for a simulation model",
         "must_include": [],
         "must_not_include": []
       },
@@ -242,12 +242,12 @@
       "id": 104,
       "type": "adversarial",
       "prompt": "Write documentation for my discrete-event simulation model",
-      "should_trigger": false,
+      "should_trigger": true,
       "behavior": [
-        "Does not trigger"
+        "Generates documentation for a discrete-event simulation model"
       ],
       "output": {
-        "description": "Does not trigger",
+        "description": "Documentation draft for a discrete-event simulation model",
         "must_include": [],
         "must_not_include": []
       },
@@ -313,12 +313,12 @@
       "id": 108,
       "type": "adversarial",
       "prompt": "Fix grammar in my ODD description",
-      "should_trigger": false,
+      "should_trigger": true,
       "behavior": [
-        "Editing task only"
+        "Improves prose in an existing model description"
       ],
       "output": {
-        "description": "Editing task only",
+        "description": "Grammar-improved ODD prose",
         "must_include": [],
         "must_not_include": []
       },
@@ -390,6 +390,42 @@
       ],
       "output": {
         "description": "Different skill domain",
+        "must_include": [],
+        "must_not_include": []
+      },
+      "failure_modes": [
+        "wrong_skill",
+        "boundary_violation"
+      ]
+    },
+    {
+      "id": 113,
+      "type": "adversarial",
+      "prompt": "Draft artifacts/model-card.md for my ecological model",
+      "should_trigger": false,
+      "behavior": [
+        "Routes to omfa for model-card ownership"
+      ],
+      "output": {
+        "description": "Routes to omfa for model-card ownership",
+        "must_include": [],
+        "must_not_include": []
+      },
+      "failure_modes": [
+        "wrong_skill",
+        "boundary_violation"
+      ]
+    },
+    {
+      "id": 114,
+      "type": "adversarial",
+      "prompt": "Write a scientific model specification for my differential equation model",
+      "should_trigger": false,
+      "behavior": [
+        "Routes to omfa for scientific specification ownership"
+      ],
+      "output": {
+        "description": "Routes to omfa for scientific specification ownership",
         "must_include": [],
         "must_not_include": []
       },

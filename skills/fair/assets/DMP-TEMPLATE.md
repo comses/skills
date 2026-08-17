@@ -3,7 +3,7 @@
 > This document combines two kinds of content:
 >
 > - **Derived content** (Data Summary, FAIR Data, Provenance) is disseminated from the project's FAIR Management Plan. It is **not** authored independently here — changes that affect these sections MUST first be incorporated into the FAIR Management Plan and then re-derived.
-> - **Primary content** (Data Stewardship Roles and Responsibilities, Data Dependencies, Data Security, Ethics and Legal Considerations, Review and Update Cadence) is data-management detail that is funder-, repository-, or project-specific and has no natural home in the FAIR Management Plan, which is generic across datasets, software, models, and workflows. This content is authored directly here and is this document's own source of truth.
+> - The remaining sections are formatting, compliance-mapping, or implementation placeholders for funder-, repository-, or project-specific requirements. They must not establish an independent stewardship authority; if a new stewardship requirement appears, capture it in the FAIR Management Plan first and then propagate it here.
 >
 > Derived from:
 >
@@ -58,7 +58,7 @@ Reference the corresponding entries in the FAIR Management Plan Research Object 
 
 # Data Stewardship Roles and Responsibilities
 
-Reference the corresponding entries in the FAIR Management Plan Roles and Responsibilities section for project-wide roles. Add data-specific responsibilities not already captured there:
+Reference the corresponding entries in the FAIR Management Plan Roles and Responsibilities section for project-wide roles. Use this section only to map or repeat roles already captured there, plus any funder-specific labels that must appear in this DMP:
 
 - Data steward:
 - Repository manager:
@@ -220,8 +220,8 @@ This DMP summarizes stewardship of research data. The FAIR Management Plan remai
 
 Additional project artifacts may include:
 
-- `provenance-manifest.json`
-- `license-inventory.md`
+- `artifacts/fair/provenance-manifest.json`
+- `artifacts/fair/license-inventory.md`
 - DataCite metadata
 - repository README files
 

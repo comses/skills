@@ -10,12 +10,13 @@ description: |
     - generate documentation from source code
     - write an ODD or ODD+2 narrative for an agent-based model
     - create model narratives for publication or reuse
-    - draft a model card, mathematical specification, or workflow description
+    - draft narrative workflow documentation
 
   The skill classifies the model type, selects a framework, extracts model
   structure from supplied materials, and drafts documentation. It does not
   assess or score existing documentation — use the document-review skill for
-  completeness assessment, gap analysis, or structured review output.
+  completeness assessment, gap analysis, or structured review output. For
+  model-card requests or scientific model specifications, route to omfa.
 
   Inputs may include source code, pseudocode, READMEs, publications,
   architecture descriptions, or model metadata.
@@ -56,15 +57,17 @@ When generating documentation:
 
 # When To Use / Do Not Use
 
-Use this skill to **generate or draft** documentation: new narratives, ODD/ODD+2 write-ups, model cards, mathematical specifications, workflow descriptions, or improvements to existing prose.
+Use this skill to **generate or draft** narrative documentation: new narratives, ODD/ODD+2 write-ups, structured model narratives, workflow descriptions, or improvements to existing prose.
 
 This skill is commonly invoked downstream of `omfa`, which owns lifecycle guidance and required structured artifacts; `document` owns substantive narrative generation according to the OMF rubric. When invoked this way, use the model type, lifecycle stage, and target audience `omfa` provides rather than re-deriving them independently (see Workflow step 2 below).
+
+If the request is for `artifacts/model-card.md`, a model card, or any other scientific model specification, route to `omfa` instead of drafting it here.
 
 Do not use this skill for documentation **review or assessment** — gap analysis, completeness scoring, or structured critique of existing docs belongs to the `document-review` skill, which is intended to share this skill's `references/ODD-CHECKLIST.md` and `references/ODD-METHODOLOGY.md` but does not rewrite prose.
 
 Also out of scope: model calibration, sensitivity analysis, statistical analysis, software testing, code generation, peer review, FAIR assessment, and metadata validation.
 
-Do not draft omfa's required lifecycle artifacts — artifacts/model-card.md, artifacts/abm-spec.md, or any other file directly under the artifacts/ root. These are template-driven and owned by the omfa skill even when high prose quality is requested, and even though ODD+2 (this skill's default ABM framework) covers similar ground to abm-spec.md. If a user asks for one of these artifacts by name in the context of an omfa-governed project, defer to omfa rather than drafting it directly. Model-card-style documentation for non-omfa projects (e.g. the machine learning framework row below) is unaffected.
+Do not draft omfa's required lifecycle artifacts — artifacts/model-card.md, artifacts/abm-spec.md, or any other file directly under the artifacts/ root. These are template-driven and owned by the omfa skill even when high prose quality is requested, and even though ODD+2 (this skill's default ABM framework) covers similar ground to abm-spec.md. If a user asks for one of these artifacts by name, or asks for a scientific model specification, defer to omfa rather than drafting it directly.
 
 This skill's own intermediate artifacts (see Workflow step 3 and Intermediate Artifacts below) live in artifacts/document/, a subdirectory this skill owns — distinct from omfa's files directly under artifacts/. Never write this skill's intermediate artifacts to the artifacts/ root itself.
 
@@ -92,11 +95,11 @@ Classify the model, then pick a framework. Defaults below; deviate when the mode
 |---|---|---|
 | Agent-based | ODD+2 | Autonomous agents, agent state changes over time, interactions drive behavior. Read `references/ODD-METHODOLOGY.md` before drafting. |
 | Cellular automata | ODD+2 | Use ODD+2 by default — cells are entities with state variables and an update rule, which ODD+2 already covers well. Fall back to a structured narrative only if the model has no discrete agent-like entities at all (e.g., a single global field update with no per-cell heterogeneity). |
-| System dynamics | Stock-and-flow narrative + governing equations | Document stocks, flows, feedback loops, delays. |
-| Differential equations | Mathematical specification + narrative | Document equations, parameters, initial/boundary conditions, numerical method. |
+| System dynamics | Stock-and-flow narrative | Document stocks, flows, feedback loops, delays; route formal equations/specification work to omfa. |
+| Differential equations | Narrative equation documentation | Document equations, parameters, initial/boundary conditions, numerical method at a narrative level; route formal scientific specifications to omfa. |
 | Statistical simulation | Structured methods documentation | Document assumptions, distributions, sampling procedure, estimators, outputs. |
-| Optimization | Optimization specification | Document objectives, constraints, search procedure, stopping conditions. |
-| Machine learning | Model-card style | Document training data, architecture, evaluation procedure, limitations. |
+| Optimization | Narrative optimization documentation | Document objectives, constraints, search procedure, stopping conditions; route formal specification work to omfa. |
+| Machine learning | Narrative model documentation | Document training data, architecture, evaluation procedure, limitations; route model-card requests to omfa. |
 | Hybrid | Combine the relevant frameworks above | Don't just note that it's hybrid — write one section per constituent framework (e.g., ODD+2 for the agent layer, equations for a coupled differential-equation layer), and add a short note on how the two interact (what state crosses the boundary, in which direction, at what point in the schedule). |
 | Other / uncertain | Structured narrative | State the uncertainty explicitly rather than forcing a framework that doesn't fit. |
 
@@ -171,7 +174,7 @@ Only after this extraction would the ODD draft state, for example, under *Entiti
 
 # Outputs
 
-Depending on the user's goal, generate one or more of: a documentation draft, an ODD+2 narrative, a structured model narrative, a mathematical specification, a workflow description, or an architecture overview.
+Depending on the user's goal, generate one or more of: a documentation draft, an ODD+2 narrative, a structured model narrative, a workflow description, or an architecture overview.
 
 Every output should include: the selected framework and its rationale, the documentation itself, any information that was inferred (separately flagged from what was directly observed), and a list of anything left `Unknown`. When the source materials support more than one plausible interpretation, surface the competing interpretations rather than silently picking one, and ask for clarification if the choice is consequential.
 

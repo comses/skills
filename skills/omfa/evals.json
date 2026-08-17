@@ -18,20 +18,6 @@
       }
     },
     {
-      "id": 2,
-      "type": "core",
-      "prompt": "Can you review my model for reproducibility and tell me what is missing?",
-      "should_trigger": true,
-      "behavior": [
-        "Assesses reproducibility requirements and identifies missing dependencies, provenance, workflow steps, and archive artifacts"
-      ],
-      "output": {
-        "description": "Assesses reproducibility requirements and identifies missing dependencies, provenance, workflow steps, and archive artifacts",
-        "must_include": [],
-        "must_not_include": []
-      }
-    },
-    {
       "id": 3,
       "type": "core",
       "prompt": "My ABM has uncertainty and I need to document it properly before review.",
@@ -51,10 +37,10 @@
       "prompt": "I’m preparing a computational model and journal article for publication. Provide a checklist or to-do list to follow best practices.",
       "should_trigger": true,
       "behavior": [
-        "Returns the required deliverables list including ABM-specific ODD documentation"
+        "Returns the required deliverables list including OMFA's canonical ABM artifacts and an explicit handoff to document for ODD/ODD+2 when publication-facing narrative is needed"
       ],
       "output": {
-        "description": "Returns the required deliverables list including ABM-specific ODD documentation",
+        "description": "Returns the required deliverables list including OMFA's canonical ABM artifacts and an explicit handoff to document for ODD/ODD+2 when publication-facing narrative is needed",
         "must_include": [],
         "must_not_include": []
       }
@@ -193,10 +179,10 @@
       "prompt": "Generate an ODD protocol document for my ABM.",
       "should_trigger": false,
       "behavior": [
-        "Does not trigger; formal ODD narrative generation belongs to the document skill"
+        "Does not trigger; formal ODD/ODD+2 narrative generation belongs to the document skill"
       ],
       "output": {
-        "description": "Does not trigger; formal ODD narrative generation belongs to the document skill",
+        "description": "Does not trigger; formal ODD/ODD+2 narrative generation belongs to the document skill",
         "must_include": [],
         "must_not_include": []
       },

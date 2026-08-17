@@ -1,11 +1,11 @@
 ---
 name: omfa
 description: |
-  Guide modelers in applying good modeling practice across the full computational modeling lifecycle, from problem framing through evaluation, uncertainty disclosure, governance, and maintenance.
+  Guide modelers in applying good modeling practice across the full computational modeling lifecycle, from problem framing through evaluation, uncertainty disclosure, governance, and readiness for handoff to implementation.
 
-  Use this skill when users want lifecycle guidance, quality self-assessment, required modeling deliverables, or protocol-specific checks for ABM, uncertainty, reproducibility, ethics, participatory modeling, and deep uncertainty.
+  Use this skill when users want lifecycle guidance, quality self-assessment, required modeling deliverables, or protocol-specific checks for ABM, uncertainty, ethics, participatory modeling, deep uncertainty, or immediate lifecycle triage and handoff.
 
-  Expected output: staged modeling guidance, identified deficiencies against required practices, and a concrete set of required artifacts and review checks.
+  Expected output: staged modeling guidance, identified deficiencies against required practices, handoff-readiness assessment, and a concrete set of required artifacts and review checks.
 license: MIT
 compatibility: Works with agent-based, system dynamics, statistical, simulation, and hybrid models
 metadata:
@@ -26,7 +26,7 @@ Help modelers learn, adopt, and self-assess against established good modeling pr
 Use this skill to:
 
 - structure scientific and policy-oriented modeling workflows
-- improve transparency and reproducibility
+- improve transparency and scientific decision provenance
 - document assumptions and uncertainties
 - support participatory and ethical modeling practices
 - standardize modeling deliverables
@@ -48,12 +48,14 @@ Applicable domains: research workflows, decision support, computational social s
 
 If the request requires a more specific skill, emit only the handoff and stop.
 If a prerequisite artifact is missing, request or generate that artifact and stop.
+If the request asks for implementation planning, architecture, module mapping, parameter schema, or verification-plan artifacts, route to `omfb` and stop.
 Only continue when OMFA is the authoritative skill for the current question.
 
 Primary responsibilities:
 - classify request
 - determine whether lifecycle guidance is required
 - identify current lifecycle state
+- determine whether scientific prerequisites are ready for handoff to `omfb`
 - determine applicable guidance
 - recommend specialist skills
 - synthesize results
@@ -61,7 +63,7 @@ Primary responsibilities:
 ## Skill Boundaries
 
 - For narrative documentation (model write-ups, methods narratives, publication-ready descriptions, README-style overviews) requiring sustained prose and rubric-driven fidelity to OMF standards and structure: use the `document` skill
-- For publication-readiness metadata, reproducibility, and archival: use the `fair` skill
+- For publication-readiness metadata, reproducibility assessment, packaging, archival, environments, stewardship, and FAIR management plans: use the `fair` skill
 - For peer review assessment with pass/fail criteria: use the `peer-review` skill
 - For ongoing modeling practice guidance throughout the lifecycle: use this skill
 
@@ -84,7 +86,7 @@ All modeling workflows MUST:
 4. Treat uncertainty as inherent, requiring explicit management, and disclosed transparently.
 5. Prioritize contextual validity over universal claims (models are valid for specific purposes and conditions, not universally).
 6. Justify abstraction and simplification choices.
-7. Maintain provenance and reproducibility.
+7. Maintain scientific evidence provenance and decision provenance.
 8. Document stakeholder and governance context.
 9. Use transparent and auditable workflows.
 10. Communicate limitations and appropriate use.
@@ -127,10 +129,10 @@ Use specialized guidance when applicable. Load only the guidance modules necessa
 | Uncertainty analysis                   | `references/guidance/uncertainty.md`         |
 | Agent-based modeling                   | `references/guidance/abm.md`                 |
 | Participatory modeling                 | `references/guidance/participatory.md`       |
-| Reproducibility and FAIR workflows     | `fair` skill                                 |
+| FAIR workflows and reproducibility     | `fair` skill                                 |
 | Ethics and governance review           | `references/guidance/ethics.md`              |
 | Deep uncertainty and adaptive planning | `references/guidance/deep-uncertainty.md`    |
-| Model implementation and maintenance   | `omfb` skill (WIP)                           |
+| Model implementation handoff           | `omfb` skill                                 |
 
 Guidance modules encode expert methodological reasoning by helping agents:
 
@@ -140,6 +142,10 @@ Guidance modules encode expert methodological reasoning by helping agents:
 - select appropriate methods
 - avoid common methodological failure patterns
 
+OMFA does not create competing implementation-planning artifacts; route implementation planning, architecture, module mapping, parameter schema, and verification-plan requests to `omfb`.
+
+For ABMs, OMFA owns the canonical scientific artifacts (`artifacts/model-card.md` and `artifacts/abm-spec.md`). ODD/ODD+2 narrative generation is owned by `document` and must be handed off there when a publication-facing narrative or comparable formal model description is required.
+
 ---
 
 ## Required Deliverables
@@ -147,7 +153,8 @@ Guidance modules encode expert methodological reasoning by helping agents:
 Required deliverables are reviewable scientific artifacts that externalize assumptions, decisions, evidence, and evaluation for downstream collaborators, tools, and reviewers. The following artifacts are REQUIRED unless explicitly justified otherwise:
 
 All reviewable artifacts MUST be stored under an `artifacts/` directory at the project root. Use the provided templates in `assets/` to ensure consistency and compatibility with downstream skills (e.g., `omfb`).
-All OMFA artifact filenames MUST use kebab-case. Do not create snake_case variants such as `model_card.md`, `research_questions.md`, or `provenance_manifest.json`. If an existing project contains snake_case artifact names, report them as naming drift and prefer migrating or mapping them to the canonical kebab-case names.
+All OMFA artifact filenames MUST use kebab-case. Do not create snake_case variants such as `model_card.md`, `research_questions.md`, or `decision_log.md`. If an existing project contains snake_case artifact names, report them as naming drift and prefer migrating or mapping them to the canonical kebab-case names.
+OMFA may assess whether the scientific prerequisites for implementation are ready for handoff, but it must not create or maintain implementation-planning artifacts owned by `omfb`.
 
 When `artifacts/` is first created, add `artifacts/README.md` that states:
 
@@ -156,18 +163,19 @@ When `artifacts/` is first created, add `artifacts/README.md` that states:
 - downstream use is gated by explicit status/review triggers.
 
 - `artifacts/model-card.md`: summarize model design, performance, and limitations (domain-specific)
+- `artifacts/decision-log.md`: record scientific decisions, evidence, rationale, alternatives, and approvals
 - `artifacts/conceptual-model.md`: describe model purpose, scope, and assumptions
 - `artifacts/assumptions.md`: make assumptions explicit for later review
 - `artifacts/uncertainty-register.md`: document parameter, structural, and scenario uncertainty
 - `artifacts/stakeholder-register.md`: identify affected stakeholders and participatory processes
 - `artifacts/evaluation-report.md`: summarize evaluation context, methods, and results
-- `artifacts/provenance-manifest.json`: record data, code, and workflow provenance
 - `artifacts/ethics-impact-statement.md`: document ethical considerations, representational harms, and vulnerable populations
-- `artifacts/maintenance-plan.md`: (optional) describe stewardship, versioning, and plans for long-term maintenance
 
 ABMs additionally REQUIRE:
 
 - `artifacts/abm-spec.md`
+
+If an ABM request includes publication-facing narrative documentation, the ODD/ODD+2 handoff to `document` becomes a required gate after the canonical scientific artifacts above are current.
 
 All deliverables SHOULD:
 
@@ -179,9 +187,9 @@ All deliverables SHOULD:
 
 ---
 
-## Minimum Reproducibility Requirements
+## Minimum Handoff Readiness Checks
 
-All modeling projects MUST:
+All modeling projects MUST, at minimum, confirm the conditions needed for a safe handoff to FAIR or OMFB:
 
 - use version control,
 - declare dependencies and environments,
@@ -199,8 +207,7 @@ Recommended practices:
 - containerized or pinned environments,
 - FAIR-aligned metadata.
 
-For detailed reproducibility, metadata, packaging, citation, archival, and
-research software engineering practices, route to the `fair` skill.
+For detailed reproducibility assessment, metadata, packaging, citation, archival, environments, and stewardship artifacts, route to the `fair` skill.
 
 ---
 
@@ -264,7 +271,9 @@ See:
 ## Gotchas
 
 - **Lifecycle guidance can become a substitute for artifacts.** Do not stop at advice when a user needs reviewable model materials; identify the concrete artifact that should be created or revised.
-- **Reproducibility work belongs in `fair`.** This skill should identify reproducibility deficiencies and route to `fair` for packaging, metadata, citation, release, and archival details.
+- **Implementation planning belongs in OMFB.** Do not create competing implementation plan, architecture, module mapping, parameter schema, or verification-plan artifacts; route those requests to `omfb`.
+- **ODD/ODD+2 narrative belongs in `document`.** For ABMs, keep OMFA focused on the canonical scientific artifacts and route publication-facing ODD narrative generation to `document` once the handoff gate is met.
+- **Reproducibility work belongs in `fair`.** This skill should only use reproducibility gaps as triage signals and route to `fair` for packaging, metadata, citation, release, archival, environments, and stewardship details.
 - **Participation is not automatically ethical review.** Stakeholder engagement guidance helps document who was involved and how, but unresolved harms, exclusions, misuse risks, or vulnerable populations must still be surfaced explicitly.
 - **Model-stage routing can over-trigger specialist skills.** Recommend `document`, `fair`, or `peer-review` only when the user intent reaches that specialist's boundary; otherwise provide lifecycle guidance here.
 
@@ -278,7 +287,7 @@ Projects SHOULD fail review if:
 - uncertainty is omitted,
 - workflows cannot be reproduced,
 - calibration lacks evaluation context,
-- ABMs lack ODD documentation,
+- ABMs lack the required handoff to `document` for ODD/ODD+2 narrative when publication-facing documentation is needed,
 - stakeholder processes are undocumented,
 - provenance information is missing.
 

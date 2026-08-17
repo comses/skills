@@ -1,12 +1,13 @@
 {
   "schema_version": "1.0",
   "provenance_manifest": {
-    "model_name": "<Model Name>",
+    "research_object_name": "<Research Object Name>",
     "version": "<Version>",
     "created_at": "<ISO-8601 Timestamp>",
     "inputs": [
       {
         "name": "<Dataset/Source Name>",
+        "inventory_entry": "<Research Object Inventory entry if available>",
         "uri": "<URI/Path>",
         "version": "<Version/Hash>",
         "description": "<Description of input>"
@@ -28,9 +29,9 @@
       "os": "<OS/Container Image>"
     },
     "related_artifacts": [
-      "artifacts/conceptual-model.md",
-      "artifacts/assumptions.md",
-      "artifacts/uncertainty-register.md"
+      "artifacts/fair/fair-management-plan.md",
+      "artifacts/fair/fair-assessment-report.md",
+      "artifacts/fair/license-inventory.md"
     ]
   }
 }

@@ -3,7 +3,7 @@
 > This document combines two kinds of content:
 >
 > - **Derived content** (Software Summary, FAIR Software, Provenance, Licensing) is disseminated from the project's FAIR Management Plan. It is **not** authored independently here — changes that affect these sections MUST first be incorporated into the FAIR Management Plan and then re-derived.
-> - **Primary content** (Governance and Collaboration, Design and Implementation, Testing and Quality Assurance, Sustainability and Maintenance, Software-Type-Aware Priorities, Review and Update Cadence) is software-management process detail that has no natural home in the FAIR Management Plan, which is generic across datasets, models, and workflows. This content is authored directly here and is this document's own source of truth.
+> - The remaining sections are formatting, compliance-mapping, or implementation placeholders for funder-, repository-, or project-specific requirements. They must not establish an independent stewardship authority; if a new stewardship requirement appears, capture it in the FAIR Management Plan first and then propagate it here.
 >
 > Aligned with FAIR principles, research software engineering best practices, and EVERSE RSQKit guidance (https://everse.software/RSQKit/software_management_planning).
 >
@@ -64,7 +64,7 @@ Reference the corresponding entries in the FAIR Management Plan Research Object 
 
 # Stakeholders, Roles, and Responsibilities
 
-Reference the corresponding entries in the FAIR Management Plan Roles and Responsibilities section for project-level roles. Add software-specific roles not already captured there:
+Reference the corresponding entries in the FAIR Management Plan Roles and Responsibilities section for project-level roles. Use this section only to map or repeat roles already captured there, plus any funder-specific labels that must appear in this SMP:
 
 - Maintainer(s):
 - Release manager:
@@ -209,7 +209,7 @@ Document:
 - known compatibility concerns with dependencies
 - unresolved licensing questions
 
-Reference `license-inventory.md` for detail.
+Reference `artifacts/fair/license-inventory.md` for detail.
 
 ---
 
@@ -271,8 +271,8 @@ The authoritative stewardship record remains:
 
 Additional project artifacts may include:
 
-- `provenance-manifest.json`
-- `license-inventory.md`
+- `artifacts/fair/provenance-manifest.json`
+- `artifacts/fair/license-inventory.md`
 - `codemeta.json`
 - `CITATION.cff`
 

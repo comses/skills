@@ -62,7 +62,7 @@
   "maintainer": [
     {
       "@id": "https://orcid.org/0001-1000-0001-1000",
-      "@type": "Person",
+      "@type": "Person"
     }
   ]
 }

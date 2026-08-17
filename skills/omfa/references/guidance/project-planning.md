@@ -4,7 +4,7 @@
 
 Project planning helps researchers choose an appropriate level of planning and organize work into modular, reviewable increments that remain traceable to the conceptual model and research questions. This preserves flexibility as evidence, insights, and requirements evolve without losing scientific accountability for what changed and why.
 
-Use this guidance after a reviewable conceptual model has been developed and before substantial implementation or experimentation begins. It coordinates project planning by translating conceptual models into implementation and analysis plans while preserving traceability between scientific objectives, implementation decisions, and evaluation activities.
+Use this guidance after a reviewable conceptual model has been developed and before substantial experimentation begins. It coordinates project planning by translating conceptual models into analysis plans while preserving traceability between scientific objectives, scientific decisions, and evaluation activities. Implementation planning is routed to `omfb`.
 
 This guidance helps answer the methodological question:
 
@@ -22,7 +22,7 @@ Planning coordinates scientific work by making consequential decisions explicit 
 
 **Use this guidance when:**
 
-- transitioning from conceptual modeling to implementation
+- transitioning from conceptual modeling to coordinated implementation handoff
 - initiating a new computational modeling project
 - revising project plans after significant conceptual changes
 - coordinating work among multiple researchers, coding agents, or software components
@@ -31,10 +31,10 @@ Planning coordinates scientific work by making consequential decisions explicit 
 **Do not use this guidance when:**
 
 - developing or revising the conceptual model (`conceptual-modeling.md`)
-- decomposing implementation work into software tasks (`implementation-planning.md`)
+- creating implementation planning artifacts (route to `omfb`)
 - designing experiments, evaluation, or statistical analyses (`analysis-planning.md`)
 
-This guidance coordinates project-level planning and delegates detailed planning activities to specialized planning guidance.
+This guidance coordinates project-level planning and delegates implementation planning to `omfb` and detailed analysis planning to specialized guidance.
 
 ---
 
@@ -52,7 +52,7 @@ Planning effort should be proportional to project scope, expected lifetime, coll
 
 ### Planning Strategy
 
-Separate implementation planning from scientific analysis planning. [MUST]
+Separate implementation-handoff decisions from scientific analysis planning. [MUST]
 
 Identify dependencies between implementation milestones and planned analyses. [MUST]
 
@@ -77,30 +77,17 @@ Maintain explicit links among:
 
 - research questions
 - conceptual model
-- implementation plan
 - analysis plan
 - evaluation artifacts
 
 Ensure planning decisions remain traceable to the conceptual model rather than implementation convenience. [MUST]
+Track when scientific prerequisites are ready to hand off to `omfb`. [MUST]
 
 ---
 
 ## Planning Artifacts
 
-Project planning should produce two complementary planning artifacts.
-
-### Implementation Planning
-
-Implementation planning addresses:
-
-- implementation order
-- task decomposition
-- software dependencies
-- implementation milestones
-- delegation opportunities
-- review checkpoints
-
-Use `implementation-planning.md` to develop and maintain this plan.
+Project planning should produce scientific planning artifacts.
 
 ### Analysis Planning
 
@@ -118,7 +105,7 @@ Analysis planning addresses:
 
 Use `analysis-planning.md` to develop and maintain this plan.
 
-Both plans should evolve together as the conceptual model changes.
+The project plan and analysis plan should evolve together as the conceptual model changes.
 
 ---
 
@@ -144,7 +131,6 @@ Record when planning decisions are driven by software engineering constraints ra
 Expected intermediate artifacts include:
 
 - `project-plan.md`
-- `implementation-plan.md`
 - `analysis-plan.md`
 
 Optional supporting artifacts:
@@ -182,10 +168,7 @@ This guidance complements `conceptual-modeling.md` by organizing work after the 
 
 **Specialist execution skills**
 
-Project planning delegates to:
-
-- `implementation-planning.md`
-- `analysis-planning.md`
+Project planning delegates implementation planning to `omfb` and analysis planning to `analysis-planning.md`.
 
 Additional guidance may be loaded as needed:
 
@@ -196,6 +179,7 @@ Additional guidance may be loaded as needed:
 **Downstream consumer skills**
 
 Planning artifacts are consumed by implementation assistants, evaluation workflows, reproducibility tools, peer-review support, and documentation skills throughout the computational modeling lifecycle.
+Implementation planning artifacts are owned by `omfb` and are not created here.
 
 ---
 

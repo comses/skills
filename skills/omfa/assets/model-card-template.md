@@ -121,7 +121,8 @@ Reference:
 
 - `artifacts/implementation/plan.md`
 - `artifacts/implementation/architecture.md`
-- `artifacts/provenance-manifest.json`
+- `artifacts/fair/provenance-manifest.json`
+- `fair` skill guidance for reproducibility assessment, packaging, archival, and stewardship
 
 ---
 

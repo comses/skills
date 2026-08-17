@@ -87,6 +87,48 @@
       },
       "success_criteria": ["Does not provide evaluation methodology guidance"],
       "failure_modes": ["over_trigger", "wrong_skill"]
+    },
+    {
+      "id": 7,
+      "type": "core",
+      "prompt": "I have an agent-based model implementation plan and an artifacts/abm-spec.md file. Use it to map agents, interactions, and scheduling into software modules.",
+      "should_trigger": true,
+      "behavior": ["Uses ABM implementation/planning guidance", "Treats the ABM specification as authoritative"],
+      "output": {
+        "description": "ABM implementation plan grounded in the provided specification",
+        "must_include": ["abm-spec", "agents", "interactions", "scheduling"],
+        "must_not_include": ["invented specification", "guessing"]
+      },
+      "success_criteria": ["Uses the provided ABM spec as the source of truth", "Maps ABM elements to implementation structures without redefining them"],
+      "failure_modes": ["boundary_violation", "hallucination"]
+    },
+    {
+      "id": 8,
+      "type": "adversarial",
+      "prompt": "I need to implement an agent-based model, but there is no artifacts/abm-spec.md yet. Please infer the missing ABM details and draft the plan anyway.",
+      "should_trigger": true,
+      "behavior": ["Pauses instead of inferring the ABM spec", "Routes to OMFA for the missing artifact"],
+      "output": {
+        "description": "Pause-and-route response requesting OMFA-produced ABM specification",
+        "must_include": ["pause", "OMFA", "artifacts/abm-spec.md"],
+        "must_not_include": ["inferred specification", "invented ABM details"]
+      },
+      "success_criteria": ["Does not invent or reconstruct the missing ABM specification", "Directs the user to provide or create artifacts/abm-spec.md via OMFA"],
+      "failure_modes": ["hallucination", "missing_step"]
+    },
+    {
+      "id": 9,
+      "type": "core",
+      "prompt": "I need to plan the implementation of a population-level disease model. The work is not agent-based, and I want help preserving traceability to the conceptual model.",
+      "should_trigger": true,
+      "behavior": ["Supports non-ABM implementation planning", "Does not require an ABM specification"],
+      "output": {
+        "description": "General implementation planning guidance for a non-ABM model",
+        "must_include": ["conceptual model", "traceability", "implementation plan"],
+        "must_not_include": ["artifacts/abm-spec.md", "agent-based model"]
+      },
+      "success_criteria": ["Provides implementation planning without demanding an ABM spec", "Keeps the response within OMFB scope"],
+      "failure_modes": ["scope_creep"]
     }
   ]
 }

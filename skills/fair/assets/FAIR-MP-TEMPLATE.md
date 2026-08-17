@@ -2,7 +2,9 @@
 
 > Living stewardship plan for the project's digital research objects.
 >
-> This document describes how datasets, software, computational models, workflows, documentation, and other research outputs will be managed throughout their lifecycle in accordance with the FAIR Principles.
+> This document is the sole canonical stewardship source for datasets, software, computational models, workflows, documentation, and other research outputs.
+>
+> It describes how those objects will be managed throughout their lifecycle in accordance with the FAIR Principles.
 >
 > This plan should be created early, reviewed regularly, and updated whenever significant research objects, repositories, metadata, or preservation strategies change.
 
@@ -80,6 +82,8 @@ Examples include:
 - Dublin Core
 
 Document any project-specific metadata.
+
+For computational models, FAIR records stewardship metadata and references the OMFA-owned model card at `artifacts/model-card.md`; it does not replace or canonicalize that content.
 
 ---
 
@@ -186,7 +190,7 @@ Include:
 
 Reference:
 
-- `provenance-manifest.json`
+- `artifacts/fair/provenance-manifest.json`
 
 where applicable.
 
@@ -213,7 +217,7 @@ Summarize licensing strategy.
 
 Maintain detailed licensing information separately in:
 
-`license-inventory.md`
+`artifacts/fair/license-inventory.md`
 
 Document:
 
@@ -235,6 +239,8 @@ Identify responsibility for:
 - datasets
 - preservation
 - FAIR review
+
+Typical boundary: FAIR owns stewardship metadata, reproducibility assessment, object/workflow provenance, packaging, and pointers to scientific artifacts; OMFA owns `artifacts/model-card.md` and other scientific specifications; `document` owns ODD narratives.
 
 ---
 
@@ -267,7 +273,9 @@ Reference ethics documentation where applicable.
 
 # FAIR Assessment
 
-Summarize current FAIR maturity.
+Summarize current FAIR maturity per research object and workflow.
+
+Store the backing assessment narrative at `artifacts/fair/fair-assessment-report.md`.
 
 | Principle | Status | Notes |
 |-----------|--------|-------|
@@ -297,7 +305,7 @@ The FAIR Management Plan may be disseminated as one or more specialized manageme
 - future Model Management Plan (MMP)
 - future Workflow Management Plan (WMP)
 
-These documents inherit stewardship decisions from the FAIR Management Plan while adding object-type-specific management practices.
+These documents are derived dissemination extracts of stewardship decisions already captured here. If a new requirement appears in a DMP, SMP, or future derived plan, add it to the FAIR Management Plan first and then regenerate the downstream extract.
 
 ## Related Artifacts
 
@@ -310,6 +318,9 @@ Examples include:
 - `CITATION.cff`
 - `artifacts/fair/provenance-manifest.json`
 - `artifacts/fair/license-inventory.md`
+- `artifacts/fair/fair-assessment-report.md`
 - `artifacts/model-card.md`
 - `artifacts/conceptual-model.md`
 - `artifacts/fair/metadata/`
+
+FAIR may inventory or reference `artifacts/model-card.md` and related scientific artifacts, but it does not author or replace them.
