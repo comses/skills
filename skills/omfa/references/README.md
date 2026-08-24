@@ -35,6 +35,7 @@ Each guidance document addresses a distinct methodological question and is loade
 Current guidance includes:
 
 - `lifecycle.md`
+- `project-bootstrap.md`
 - `conceptual-modeling.md`
 - `project-planning.md`
 - `implementation-planning.md`

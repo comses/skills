@@ -102,6 +102,167 @@
       }
     },
     {
+      "id": 9,
+      "type": "core",
+      "prompt": "I just initialized an empty git repository for an ABM of urban flood response. Bootstrap it so it is ready for OMF work and adopt science.toml.",
+      "should_trigger": true,
+      "behavior": [
+        "Audits the empty repository before asking any questions",
+        "Asks only the minimal interview decisions (project kind, preserve-versus-migrate filesystem profile) instead of a generic questionnaire",
+        "Proposes a minimal scaffold plan with items categorized as preserve, create, modify, migrate, defer, or unresolved and applies it only after user approval",
+        "Returns to the OMFA lifecycle with the current modeling stage and next scientific step"
+      ],
+      "output": {
+        "description": "Audits the empty repository first, runs a minimal interview, and applies the approved minimal scaffold before returning to the OMFA lifecycle",
+        "must_include": [],
+        "must_not_include": [
+          "CI workflow",
+          "SBOM",
+          "docs site",
+          "release automation"
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "type": "core",
+      "prompt": "My repo is a working Python ABM with pyproject.toml, uv, pytest, and a Makefile with a check target. I want to adopt science.toml and OMF conventions. Restructure it as needed.",
+      "should_trigger": true,
+      "behavior": [
+        "Audits the existing layout and tooling before proposing changes",
+        "Preserves the existing package manager, tests, Makefile, and layout; does not restructure the repository to match a template",
+        "Adopts science.toml as a small declarative coordination config without rewriting existing files",
+        "Treats make check as the canonical validation command and validates with established repository tooling"
+      ],
+      "output": {
+        "description": "Preserves the healthy existing tooling and layout, adopts science.toml additively, and validates with established repository tooling",
+        "must_include": [],
+        "must_not_include": [
+          "second package manager"
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": "core",
+      "prompt": "Check this repository for OMF conformance and bring it in line with the OMF filesystem profile.",
+      "should_trigger": true,
+      "behavior": [
+        "Resolves the filesystem profile reference via repository-local documented vocabulary before classifying",
+        "Classifies the repository into exactly one of CONFORMING, COMPATIBLE, DRIFT, CONFLICT, or UNRESOLVED and reports the state with its meaning",
+        "Asks the user for permission before any profile migration; does not rewrite files merely to match the profile"
+      ],
+      "output": {
+        "description": "Resolves the profile, reports explicit conformance states with meanings, and asks for migration permission before any rewrite",
+        "must_include": [],
+        "must_not_include": []
+      }
+    },
+    {
+      "id": 12,
+      "type": "core",
+      "prompt": "We have a science.toml from an earlier OMF pilot. Validate it and resolve its profile before we continue modeling work.",
+      "should_trigger": true,
+      "behavior": [
+        "Validates the science.toml structure where tooling permits as a separate check from identifier resolution",
+        "Resolves project.kind, project.filesystem, and registry or profile references separately, and distinguishes the schema version from the <profile>:v<version> filesystem contract",
+        "Reports unreachable or missing registry entries as unresolved and honours agent and user feedback about resolution outcomes"
+      ],
+      "output": {
+        "description": "Separates schema validation from identifier resolution, resolves kind and filesystem references separately, and reports unresolvable entries as unresolved",
+        "must_include": [],
+        "must_not_include": [
+          "malformed"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": "core",
+      "prompt": "Our science.toml references filesystem profile foo:v3. Update the repository so it follows that profile.",
+      "should_trigger": true,
+      "behavior": [
+        "Classifies foo:v3 as UNRESOLVED because it is syntactically valid but cannot be resolved against repository-local documentation",
+        "Does not invent foo:v3 semantics or claim the remote convention is fixed",
+        "Reports the unresolved state and asks how to proceed (a locally documented profile or deferral) before any mutation"
+      ],
+      "output": {
+        "description": "Reports the unknown profile identifier as UNRESOLVED, invents no semantics, and defers mutation until the profile is resolved or the user directs otherwise",
+        "must_include": [
+          "UNRESOLVED"
+        ],
+        "must_not_include": []
+      }
+    },
+    {
+      "id": 14,
+      "type": "core",
+      "prompt": "Bootstrap this repository in critical feedback mode: handle what you can autonomously and only stop me for the important decisions.",
+      "should_trigger": true,
+      "behavior": [
+        "Applies the CRITICAL feedback policy: handles LOW and MEDIUM risk decisions autonomously and asks on HIGH and IRREVERSIBLE",
+        "Fixes trivial drift (LOW risk) without asking",
+        "Asks the user before architecture-affecting changes or profile migration (HIGH or IRREVERSIBLE)",
+        "Does not autonomously perform destructive, publishing, licensing, or history-rewriting actions regardless of policy level"
+      ],
+      "output": {
+        "description": "Applies CRITICAL feedback policy: handles low and medium risk changes autonomously, then asks before architecture-affecting or profile migration decisions",
+        "must_include": [],
+        "must_not_include": []
+      }
+    },
+    {
+      "id": 15,
+      "type": "core",
+      "prompt": "The OMF conformance run wants to change my hand-maintained Makefile and AGENTS.md. Keep my versions.",
+      "should_trigger": true,
+      "behavior": [
+        "Classifies the affected items as CONFLICT and preserves the user-owned files",
+        "Does not overwrite the user's Makefile or AGENTS.md; surfaces the conflict with alternatives such as preserve, defer, or explicit user approval"
+      ],
+      "output": {
+        "description": "Preserves the user-owned Makefile and AGENTS.md on conflict, reports the conflict, and offers alternatives instead of overwriting",
+        "must_include": [],
+        "must_not_include": []
+      }
+    },
+    {
+      "id": 16,
+      "type": "core",
+      "prompt": "Bootstrap this repository, then design the full module architecture, module mapping, and verification plan for my ABM implementation.",
+      "should_trigger": true,
+      "behavior": [
+        "Runs the bootstrap module only far enough to establish the minimum repository substrate",
+        "Routes the implementation architecture, module mapping, and verification plan to omfb and stops",
+        "Does not create omfb-owned implementation artifacts"
+      ],
+      "output": {
+        "description": "Establishes the minimum substrate only, then routes detailed implementation architecture, module mapping, and verification planning to omfb",
+        "must_include": [
+          "omfb"
+        ],
+        "must_not_include": []
+      }
+    },
+    {
+      "id": 17,
+      "type": "core",
+      "prompt": "As part of getting this repository ready for OMF, make it reproducible, add packaging and citation metadata, and archive it for publication.",
+      "should_trigger": true,
+      "behavior": [
+        "Establishes only the minimum repository substrate within the bootstrap module",
+        "Routes reproducibility assessment, packaging, citation metadata, archival, and publication hardening to the fair skill",
+        "Does not perform FAIR, packaging, or archival work inside the bootstrap module"
+      ],
+      "output": {
+        "description": "Establishes the minimum substrate only, then routes reproducibility, packaging, citation, archival, and publication hardening to fair",
+        "must_include": [
+          "fair"
+        ],
+        "must_not_include": []
+      }
+    },
+    {
       "id": 101,
       "type": "adversarial",
       "prompt": "Is my model ready for publication?",
@@ -243,6 +404,24 @@
       "failure_modes": [
         "invalid_output",
         "missing_step"
+      ]
+    },
+    {
+      "id": 109,
+      "type": "adversarial",
+      "prompt": "Add a GitHub Actions CI workflow and a docs site to my modeling repository.",
+      "should_trigger": false,
+      "behavior": [
+        "Does not trigger; plain CI and docs-site tooling is a generic software task, not OMF bootstrap, scaffolding, or conformance intent"
+      ],
+      "output": {
+        "description": "Does not trigger; plain CI and docs-site tooling is a generic software task, not OMF bootstrap or conformance intent",
+        "must_include": [],
+        "must_not_include": []
+      },
+      "failure_modes": [
+        "over_trigger",
+        "scope_creep"
       ]
     }
   ]

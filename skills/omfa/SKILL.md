@@ -49,6 +49,7 @@ Applicable domains: research workflows, decision support, computational social s
 If the request requires a more specific skill, emit only the handoff and stop.
 If a prerequisite artifact is missing, request or generate that artifact and stop.
 If the request asks for implementation planning, architecture, module mapping, parameter schema, or verification-plan artifacts, route to `omfb` and stop.
+If the request is about initializing, bootstrapping, or scaffolding a repository, adopting `science.toml`, OMF conformance, modernizing repository infrastructure, repository readiness, or reconciling a filesystem profile, load `references/guidance/project-bootstrap.md` before generic lifecycle treatment and follow its workflow.
 Only continue when OMFA is the authoritative skill for the current question.
 
 Primary responsibilities:
@@ -122,17 +123,18 @@ The omfa skill is responsible for:
 
 Use specialized guidance when applicable. Load only the guidance modules necessary to answer the user's methodological question. Guidance modules are composable and may be combined when their scopes are complementary.
 
-| Context                                | Required Guidance                            |
-| -------------------------------------- | -------------------------------------------- |
-| Lifecycle coordination                 | `references/guidance/lifecycle.md`           |
-| Conceptual modeling                    | `references/guidance/conceptual-modeling.md` |
-| Uncertainty analysis                   | `references/guidance/uncertainty.md`         |
-| Agent-based modeling                   | `references/guidance/abm.md`                 |
-| Participatory modeling                 | `references/guidance/participatory.md`       |
-| FAIR workflows and reproducibility     | `fair` skill                                 |
-| Ethics and governance review           | `references/guidance/ethics.md`              |
-| Deep uncertainty and adaptive planning | `references/guidance/deep-uncertainty.md`    |
-| Model implementation handoff           | `omfb` skill                                 |
+| Context                                            | Required Guidance                            |
+| -------------------------------------------------- | -------------------------------------------- |
+| Lifecycle coordination                             | `references/guidance/lifecycle.md`           |
+| Repository bootstrap and OMF conformance           | `references/guidance/project-bootstrap.md`   |
+| Conceptual modeling                                | `references/guidance/conceptual-modeling.md` |
+| Uncertainty analysis                               | `references/guidance/uncertainty.md`         |
+| Agent-based modeling                               | `references/guidance/abm.md`                 |
+| Participatory modeling                             | `references/guidance/participatory.md`       |
+| FAIR workflows and reproducibility                 | `fair` skill                                 |
+| Ethics and governance review                       | `references/guidance/ethics.md`              |
+| Deep uncertainty and adaptive planning             | `references/guidance/deep-uncertainty.md`    |
+| Model implementation handoff                       | `omfb` skill                                 |
 
 Guidance modules encode expert methodological reasoning by helping agents:
 
@@ -143,6 +145,8 @@ Guidance modules encode expert methodological reasoning by helping agents:
 - avoid common methodological failure patterns
 
 OMFA does not create competing implementation-planning artifacts; route implementation planning, architecture, module mapping, parameter schema, and verification-plan requests to `omfb`.
+
+The bootstrap and OMF conformance module establishes only the minimum repository substrate; route detailed implementation architecture to `omfb` and stewardship, packaging, citation, and publication hardening to `fair`.
 
 For ABMs, OMFA owns the canonical scientific artifacts (`artifacts/model-card.md` and `artifacts/abm-spec.md`). ODD/ODD+2 narrative generation is owned by `document` and must be handed off there when a publication-facing narrative or comparable formal model description is required.
 
