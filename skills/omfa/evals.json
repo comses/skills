@@ -423,6 +423,31 @@
         "over_trigger",
         "scope_creep"
       ]
+    },
+    {
+      "id": 110,
+      "type": "adversarial",
+      "prompt": "Our FAIR review found a DOI for the archived model and an implementation test found that one assumption is false. Update the model card and assumptions file with both findings.",
+      "should_trigger": true,
+      "behavior": [
+        "Accepts the traceable DOI and provenance-link contribution for the model card",
+        "Treats the contradicted assumption as a substantive scientific revision requiring OMFA review rather than silently replacing it",
+        "Records the evidence, affected downstream artifacts, and rationale for the accepted or proposed changes"
+      ],
+      "output": {
+        "description": "Applies the permitted metadata contribution while reviewing the conflicting scientific evidence under OMFA authority",
+        "must_include": [
+          "DOI",
+          "provenance"
+        ],
+        "must_not_include": [
+          "silently overwrite"
+        ]
+      },
+      "failure_modes": [
+        "boundary_violation",
+        "missing_step"
+      ]
     }
   ]
 }

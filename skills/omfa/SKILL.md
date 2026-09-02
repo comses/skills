@@ -160,6 +160,18 @@ All reviewable artifacts MUST be stored under an `omf-artifacts/` directory at t
 All OMFA artifact filenames MUST use kebab-case. Do not create snake_case variants such as `model_card.md`, `research_questions.md`, or `decision_log.md`. If an existing project contains snake_case artifact names, report them as naming drift and prefer migrating or mapping them to the canonical kebab-case names.
 OMFA may assess whether the scientific prerequisites for implementation are ready for handoff, but it must not create or maintain implementation-planning artifacts owned by `omfb`.
 
+### Artifact contract
+
+OMFA owns the structure, scientific commitments, and conflict resolution for artifacts directly under `omf-artifacts/`. Ownership is methodological authority rather than exclusive write access:
+
+- method specialists may add traceable evidence to the relevant report or register;
+- `fair` may update persistent identifiers and provenance links in `model-card.md`;
+- contributors must not reinterpret purpose, scope, conceptual structure, assumptions, research questions, or scientific conclusions;
+- contradictions, schema changes, and substantive scientific revisions must route to OMFA;
+- OMFA may flag implementation, FAIR, or narrative artifacts as stale, but must route changes to their owning skill.
+
+When accepting a contribution, preserve its source and rationale. If the user explicitly authorizes an exception to this contract, record and report the exception.
+
 When `omf-artifacts/` is first created, add `omf-artifacts/README.md` that states:
 
 - artifacts are living documents,

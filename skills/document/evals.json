@@ -433,6 +433,31 @@
         "wrong_skill",
         "boundary_violation"
       ]
+    },
+    {
+      "id": 115,
+      "type": "adversarial",
+      "prompt": "Write the ODD narrative, but first fix omf-artifacts/conceptual-model.md because the source code contradicts its scheduling description.",
+      "should_trigger": true,
+      "behavior": [
+        "Flags and preserves the contradiction as traceable narrative input",
+        "Does not overwrite the OMFA-owned conceptual model",
+        "Routes the scientific revision to OMFA while continuing narrative work where the discrepancy can be represented honestly"
+      ],
+      "output": {
+        "description": "Narrative workflow that exposes source conflict without modifying the owner-controlled scientific artifact",
+        "must_include": [
+          "OMFA",
+          "discrepancy"
+        ],
+        "must_not_include": [
+          "updated conceptual-model.md"
+        ]
+      },
+      "failure_modes": [
+        "boundary_violation",
+        "hallucination"
+      ]
     }
   ]
 }

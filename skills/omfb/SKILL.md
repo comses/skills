@@ -34,7 +34,7 @@ Do **not** use this skill when: performing conceptual modeling, uncertainty anal
 
 ## OMFA Handoff Contract
 
-OMFB consumes the reviewable scientific artifacts produced by OMFA. These artifacts are the authoritative implementation specification. These artifacts are the authoritative description of scientific intent and SHOULD be treated as the implementation specification. Implementation artifacts supplement, but never supersede, these scientific artifacts.
+OMFB consumes the reviewable scientific artifacts produced by OMFA. They are the authoritative description of scientific intent and SHOULD be treated as the implementation specification. Implementation artifacts supplement, but never supersede, them.
 
 For agent-based models (ABMs), `omf-artifacts/abm-spec.md` is the authoritative implementation/planning artifact. If the work is ABM implementation or ABM implementation planning and that artifact is absent, pause and route to OMFA instead of inferring or reconstructing the ABM specification.
 
@@ -90,6 +90,12 @@ OMFB creates or maintains:
 | `omf-artifacts/implementation/module-mapping.md` | Mapping from conceptual model to implementation |
 | `omf-artifacts/implementation/parameter-schema.md` | Externalized parameters and configuration |
 | `omf-artifacts/implementation/verification-plan.md` | Implementation verification plan |
+
+### Artifact contract
+
+OMFB owns the structure, implementation decisions, and conflict resolution for `omf-artifacts/implementation/`. Verification, platform, and execution work may update evidence, status, and measured constraints in the applicable artifact when the source and rationale remain traceable. Contributors must not change inherited scientific intent or silently redesign the implementation architecture.
+
+Route structural implementation changes to OMFB. If implementation evidence requires changing an OMFA-owned assumption, conceptual element, or scientific claim, preserve the upstream artifact, record the finding in the applicable implementation artifact, and route the scientific revision to OMFA.
 
 ## Implementation Contract
 

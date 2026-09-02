@@ -129,6 +129,20 @@
       },
       "success_criteria": ["Provides implementation planning without demanding an ABM spec", "Keeps the response within OMFB scope"],
       "failure_modes": ["scope_creep"]
+    },
+    {
+      "id": 10,
+      "type": "adversarial",
+      "prompt": "A performance test shows the model only runs fast enough if we replace an interaction rule in omf-artifacts/conceptual-model.md. Make that scientific change and update the implementation plan.",
+      "should_trigger": true,
+      "behavior": ["Records the measured constraint in an OMFB-owned implementation artifact", "Does not modify the conceptual model", "Routes the proposed scientific revision to OMFA"],
+      "output": {
+        "description": "Traceable implementation finding with the upstream scientific change preserved for OMFA review",
+        "must_include": ["measured constraint", "OMFA", "conceptual model"],
+        "must_not_include": ["updated conceptual model"]
+      },
+      "success_criteria": ["Allows scoped implementation evidence updates", "Preserves OMFA authority over scientific intent"],
+      "failure_modes": ["boundary_violation", "scope_creep"]
     }
   ]
 }

@@ -67,9 +67,11 @@ Do not use this skill for documentation **review or assessment** — gap analysi
 
 Also out of scope: model calibration, sensitivity analysis, statistical analysis, software testing, code generation, peer review, FAIR assessment, and metadata validation.
 
-Do not draft omfa's required lifecycle artifacts — omf-artifacts/model-card.md, omf-artifacts/abm-spec.md, or any other file directly under the omf-artifacts/ root. These are template-driven and owned by the omfa skill even when high prose quality is requested, and even though ODD+2 (this skill's default ABM framework) covers similar ground to abm-spec.md. If a user asks for one of these artifacts by name, or asks for a scientific model specification, defer to omfa rather than drafting it directly.
+Do not draft omfa's required lifecycle artifacts — `omf-artifacts/model-card.md`, `omf-artifacts/abm-spec.md`, or any other file directly under the `omf-artifacts/` root. These template-driven files belong to omfa even when the request emphasizes prose quality or overlaps with ODD+2. If a user asks for one of these artifacts by name, or asks for a scientific model specification, defer to omfa rather than drafting it directly.
 
-This skill's own intermediate artifacts (see Workflow step 3 and Intermediate Artifacts below) live in omf-artifacts/document/, a subdirectory this skill owns — distinct from omfa's files directly under omf-artifacts/. Never write this skill's intermediate artifacts to the omf-artifacts/ root itself.
+This skill owns `omf-artifacts/document/` for its intermediate artifacts (see Workflow step 3 and Intermediate Artifacts below); omfa owns files directly under `omf-artifacts/`. Never write document's intermediate artifacts to that root.
+
+Document owns narrative structure, framework selection, and conflict resolution for its intermediate artifacts and document-authored narratives. OMFA artifacts provide authoritative scientific content, and reviewer corrections may be incorporated when their source remains traceable. If sources contradict an OMFA artifact, flag the discrepancy in the narrative workflow and route the scientific revision to OMFA rather than silently reconciling or overwriting it.
 
 ---
 

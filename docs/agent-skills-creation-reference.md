@@ -29,6 +29,21 @@ Every skill must define a predictable contract:
 - **Success/Failure**: Explicit criteria for a "complete" task and conditions that trigger failure.
 - **Structure**: Use structured outputs (JSON/YAML) when the result is consumed by downstream skills.
 
+### Artifact Authority
+
+Artifact ownership defines methodological authority, not exclusive write access. The owning skill defines an artifact's purpose, structure, invariants, and acceptance criteria and resolves conflicting changes. A contributing skill may modify only the fields or sections named in the artifact contract. A consuming skill may read and reference the artifact but does not modify it.
+
+Every shared artifact contract should identify:
+
+- the owning skill;
+- permitted contributors and the scope of their changes;
+- protected decisions contributors must not reinterpret;
+- the conditions that require routing a proposed change to the owner.
+
+Any skill may flag contradictory or stale content. It should not silently correct content outside its contribution scope. Explicit user direction may authorize an exceptional change, but the agent should preserve provenance and report the contract exception.
+
+Use `docs/artifact-contracts.md` as the repository-wide registry. Keep the operational subset needed by an independently installed skill in that skill's `SKILL.md`.
+
 ### Evaluation
 
 Quality is verified through comparative testing:
