@@ -456,7 +456,7 @@
       "should_trigger": true,
       "behavior": [
         "Creates the OMFA-owned conceptual model from inspected evidence",
-        "Records a material create activity with OMFA owner identity, repository revision or honest unknown, inputs, decisions, and unreviewed status",
+        "Records a material create activity with OMFA as contract authority, repository revision or honest unknown, inputs, decisions, and unreviewed status",
         "Does not store the raw prompt or hidden reasoning"
       ],
       "output": {

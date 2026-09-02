@@ -30,6 +30,8 @@ OMF skills inherit the repository release version. An exact skill identity consi
 
 Do not substitute a model or agent-runtime version for the skill revision. Record both when available because the skill supplies procedural knowledge while the model executes it.
 
+Use **owns** only for decision or artifact-contract authority: the owner defines the contract and resolves conflicts. Use **is responsible for** for workflow duties that do not confer authority over another skill's decisions or artifacts. Use **contributes** for a scoped, permitted modification. Provenance represents ownership as `contract_authority` and lists only agents that actually participated in an activity.
+
 ## Authority and composition registry
 
 | Skill | Decision authority | Primary effects | Required preservation and handoff |
@@ -38,7 +40,7 @@ Do not substitute a model or agent-runtime version for the skill revision. Recor
 | `omfb` | Implementation architecture, module mapping, parameters, verification planning, and implementation-introduced decisions. | Creates and revises `omf-artifacts/implementation/`. | Preserve OMFA scientific intent; return scientific contradictions and required conceptual changes to `omfa`. |
 | `fair` | Stewardship, metadata coherence, provenance, reproducibility assessment, preservation, packaging, and citation. | Creates and revises `omf-artifacts/fair/` and scoped metadata or provenance contributions elsewhere. | Preserve scientific claims and narrative meaning; hand substantive scientific or narrative changes to their owners. |
 | `document` | Narrative framework, structure, and faithful communication of supplied scientific content. | Creates narrative outputs and `omf-artifacts/document/` intermediates. | Preserve authoritative scientific claims; expose source conflicts and hand scientific revision to `omfa`. |
-| `peer-review` | Evidence-based assessment against review criteria. | Produces findings, scores, and recommendations under `omf-artifacts/review/` when persisted. | Do not silently remediate assessed artifacts; route fixes to the responsible skill unless the user separately authorizes remediation. |
+| `peer-review` | Evidence-based assessment against review criteria. | Produces findings, scores, and recommendations under `omf-artifacts/review/` when persisted. | Do not silently remediate assessed artifacts; route fixes to the affected artifact's contract authority unless the user separately authorizes remediation. |
 | `hpc` | Slurm execution design and HPC resource planning. | Produces Slurm scripts, resource plans, and submission guidance. | Preserve experimental intent and parameter semantics; hand model-method or stewardship changes to `omfa` or `fair`. |
 | `ospool` | HTCondor and OSPool execution design for distributed workloads. | Produces submit files, DAGs, transfer plans, and execution guidance. | Preserve experimental intent, input identity, and result lineage; hand model-method or stewardship changes to `omfa` or `fair`. |
 

@@ -42,6 +42,6 @@
     "reviews": [
       {"id": "review:conceptual-model:unreviewed:example-v1", "entity": "artifact:conceptual-model@sha256-example-v1", "status": "unreviewed", "reviewer": "unknown", "reviewed_at": null, "criteria": [], "evidence": [], "activity": null, "notes": "Review is pending."}
     ],
-    "privacy": {"raw_prompt_recorded": false, "sensitivity": "public", "redaction_reviewed": true, "notes": "Contains normalized summaries and explicit decisions only; excludes raw prompts, hidden reasoning, secrets, and unnecessary personal data."}
+    "privacy": {"raw_prompt_recorded": false, "sensitivity": "public", "redaction_reviewed": false, "notes": "Review generated summaries and decisions for secrets or unnecessary personal data before release."}
   }
 }

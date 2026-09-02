@@ -66,7 +66,7 @@ Use `docs/artifact-contracts.md` as the repository-wide registry. Keep the opera
 Treat a skill as a versioned provenance agent. For each material creation or revision under `omf-artifacts/`, record:
 
 - the artifact and activity identifiers;
-- the owning and contributing skills;
+- the artifact's contract authority and the skills that actually participated;
 - repository source, release version when available, and exact Git revision or content hash when observable;
 - input artifacts, templates, software, datasets, and methodological sources used;
 - consequential decisions and their rationale;
