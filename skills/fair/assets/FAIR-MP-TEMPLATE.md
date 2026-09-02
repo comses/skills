@@ -83,7 +83,7 @@ Examples include:
 
 Document any project-specific metadata.
 
-For computational models, FAIR records stewardship metadata and references the OMFA-owned model card at `artifacts/model-card.md`; it does not replace or canonicalize that content.
+For computational models, FAIR records stewardship metadata and references the OMFA-owned model card at `omf-artifacts/model-card.md`; it does not replace or canonicalize that content.
 
 ---
 
@@ -190,7 +190,7 @@ Include:
 
 Reference:
 
-- `artifacts/fair/provenance-manifest.json`
+- `omf-artifacts/fair/provenance-manifest.json`
 
 where applicable.
 
@@ -217,7 +217,7 @@ Summarize licensing strategy.
 
 Maintain detailed licensing information separately in:
 
-`artifacts/fair/license-inventory.md`
+`omf-artifacts/fair/license-inventory.md`
 
 Document:
 
@@ -240,7 +240,7 @@ Identify responsibility for:
 - preservation
 - FAIR review
 
-Typical boundary: FAIR owns stewardship metadata, reproducibility assessment, object/workflow provenance, packaging, and pointers to scientific artifacts; OMFA owns `artifacts/model-card.md` and other scientific specifications; `document` owns ODD narratives.
+Typical boundary: FAIR owns stewardship metadata, reproducibility assessment, object/workflow provenance, packaging, and pointers to scientific artifacts; OMFA owns `omf-artifacts/model-card.md` and other scientific specifications; `document` owns ODD narratives.
 
 ---
 
@@ -275,7 +275,7 @@ Reference ethics documentation where applicable.
 
 Summarize current FAIR maturity per research object and workflow.
 
-Store the backing assessment narrative at `artifacts/fair/fair-assessment-report.md`.
+Store the backing assessment narrative at `omf-artifacts/fair/fair-assessment-report.md`.
 
 | Principle | Status | Notes |
 |-----------|--------|-------|
@@ -316,11 +316,11 @@ Examples include:
 - `README.md`
 - `codemeta.json`
 - `CITATION.cff`
-- `artifacts/fair/provenance-manifest.json`
-- `artifacts/fair/license-inventory.md`
-- `artifacts/fair/fair-assessment-report.md`
-- `artifacts/model-card.md`
-- `artifacts/conceptual-model.md`
-- `artifacts/fair/metadata/`
+- `omf-artifacts/fair/provenance-manifest.json`
+- `omf-artifacts/fair/license-inventory.md`
+- `omf-artifacts/fair/fair-assessment-report.md`
+- `omf-artifacts/model-card.md`
+- `omf-artifacts/conceptual-model.md`
+- `omf-artifacts/fair/metadata/`
 
-FAIR may inventory or reference `artifacts/model-card.md` and related scientific artifacts, but it does not author or replace them.
+FAIR may inventory or reference `omf-artifacts/model-card.md` and related scientific artifacts, but it does not author or replace them.

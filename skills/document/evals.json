@@ -401,7 +401,7 @@
     {
       "id": 113,
       "type": "adversarial",
-      "prompt": "Draft artifacts/model-card.md for my ecological model",
+      "prompt": "Draft omf-artifacts/model-card.md for my ecological model",
       "should_trigger": false,
       "behavior": [
         "Routes to omfa for model-card ownership"

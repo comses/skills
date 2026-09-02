@@ -149,7 +149,7 @@ Reuse shared artifacts where appropriate:
 - `stakeholder-register.md`
 - `assumptions.md`
 
-Use predictable, semantic kebab-case filenames under `artifacts/` at the project root. These artifacts should support downstream review, documentation, and responsible reuse. If `artifacts/` is created during this work, also create `artifacts/README.md` describing artifacts as living documents created early, revised throughout the project, and gated by explicit status/review triggers.
+Use predictable, semantic kebab-case filenames under `omf-artifacts/` at the project root. These artifacts should support downstream review, documentation, and responsible reuse. If `omf-artifacts/` is created during this work, also create `omf-artifacts/README.md` describing artifacts as living documents created early, revised throughout the project, and gated by explicit status/review triggers.
 
 ---
 

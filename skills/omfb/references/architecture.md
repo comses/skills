@@ -17,8 +17,8 @@ Architecture exists to keep scientific intent reviewable. Every module or compon
 
 ## Traceability Requirements
 
-- Maintain a module-to-concept mapping in `artifacts/implementation/module-mapping.md`.
-- Each scientific entity in `artifacts/conceptual-model.md` should map to one or more implementation artifacts.
+- Maintain a module-to-concept mapping in `omf-artifacts/implementation/module-mapping.md`.
+- Each scientific entity in `omf-artifacts/conceptual-model.md` should map to one or more implementation artifacts.
 - Each implementation artifact should justify its existence by serving a documented scientific or operational need.
 
 ## Coupling Rules

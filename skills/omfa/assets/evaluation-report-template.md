@@ -72,7 +72,7 @@ For each activity below, answer:
 **Example:**
 - **Verification:** Confirmed constant agent count across all time-steps.
 - **Validation:** Tested against the 2015 wildfire event (hold-out); achieved IoU of 0.82.
-- **Documentation:** `artifacts/verification-report.md`, `artifacts/validation-report.md`.
+- **Documentation:** `omf-artifacts/verification-report.md`, `omf-artifacts/validation-report.md`.
 
 ---
 
@@ -103,13 +103,13 @@ For each activity below, answer:
 1. Which uncertainty analyses informed this evaluation? (e.g., sensitivity analysis, scenario exploration, calibration ambiguity assessment.)
 2. Which uncertainty sources are most relevant to the model's credibility?
 3. How were uncertainty and robustness findings integrated into the evaluation conclusions?
-4. Where are the supporting uncertainty artifacts and reports documented? (e.g., `artifacts/uncertainty-register.md`, `artifacts/sensitivity-analysis-report.md`.)
+4. Where are the supporting uncertainty artifacts and reports documented? (e.g., `omf-artifacts/uncertainty-register.md`, `omf-artifacts/sensitivity-analysis-report.md`.)
 
 **Example:**
 - **Uncertainty source:** Fuel moisture strongly affects fire area.
 - **Informing analysis:** Sensitivity analysis showed that a 10% increase in `fuel_moisture` reduces predicted fire area by 40%.
 - **Implication:** Moisture data quality is a critical credibility constraint; conclusions should be accompanied by explicit moisture assumptions.
-- **Documentation:** `artifacts/uncertainty-register.md`, `artifacts/sensitivity-analysis-report.md`.
+- **Documentation:** `omf-artifacts/uncertainty-register.md`, `omf-artifacts/sensitivity-analysis-report.md`.
 
 ---
 

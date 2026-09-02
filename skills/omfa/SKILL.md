@@ -148,7 +148,7 @@ OMFA does not create competing implementation-planning artifacts; route implemen
 
 The bootstrap and OMF conformance module establishes only the minimum repository substrate; route detailed implementation architecture to `omfb` and stewardship, packaging, citation, and publication hardening to `fair`.
 
-For ABMs, OMFA owns the canonical scientific artifacts (`artifacts/model-card.md` and `artifacts/abm-spec.md`). ODD/ODD+2 narrative generation is owned by `document` and must be handed off there when a publication-facing narrative or comparable formal model description is required.
+For ABMs, OMFA owns the canonical scientific artifacts (`omf-artifacts/model-card.md` and `omf-artifacts/abm-spec.md`). ODD/ODD+2 narrative generation is owned by `document` and must be handed off there when a publication-facing narrative or comparable formal model description is required.
 
 ---
 
@@ -156,28 +156,28 @@ For ABMs, OMFA owns the canonical scientific artifacts (`artifacts/model-card.md
 
 Required deliverables are reviewable scientific artifacts that externalize assumptions, decisions, evidence, and evaluation for downstream collaborators, tools, and reviewers. The following artifacts are REQUIRED unless explicitly justified otherwise:
 
-All reviewable artifacts MUST be stored under an `artifacts/` directory at the project root. Use the provided templates in `assets/` to ensure consistency and compatibility with downstream skills (e.g., `omfb`).
+All reviewable artifacts MUST be stored under an `omf-artifacts/` directory at the project root. Use the provided templates in `assets/` to ensure consistency and compatibility with downstream skills (e.g., `omfb`).
 All OMFA artifact filenames MUST use kebab-case. Do not create snake_case variants such as `model_card.md`, `research_questions.md`, or `decision_log.md`. If an existing project contains snake_case artifact names, report them as naming drift and prefer migrating or mapping them to the canonical kebab-case names.
 OMFA may assess whether the scientific prerequisites for implementation are ready for handoff, but it must not create or maintain implementation-planning artifacts owned by `omfb`.
 
-When `artifacts/` is first created, add `artifacts/README.md` that states:
+When `omf-artifacts/` is first created, add `omf-artifacts/README.md` that states:
 
 - artifacts are living documents,
 - artifacts are created early and revised throughout the project lifecycle,
 - downstream use is gated by explicit status/review triggers.
 
-- `artifacts/model-card.md`: summarize model design, performance, and limitations (domain-specific)
-- `artifacts/decision-log.md`: record scientific decisions, evidence, rationale, alternatives, and approvals
-- `artifacts/conceptual-model.md`: describe model purpose, scope, and assumptions
-- `artifacts/assumptions.md`: make assumptions explicit for later review
-- `artifacts/uncertainty-register.md`: document parameter, structural, and scenario uncertainty
-- `artifacts/stakeholder-register.md`: identify affected stakeholders and participatory processes
-- `artifacts/evaluation-report.md`: summarize evaluation context, methods, and results
-- `artifacts/ethics-impact-statement.md`: document ethical considerations, representational harms, and vulnerable populations
+- `omf-artifacts/model-card.md`: summarize model design, performance, and limitations (domain-specific)
+- `omf-artifacts/decision-log.md`: record scientific decisions, evidence, rationale, alternatives, and approvals
+- `omf-artifacts/conceptual-model.md`: describe model purpose, scope, and assumptions
+- `omf-artifacts/assumptions.md`: make assumptions explicit for later review
+- `omf-artifacts/uncertainty-register.md`: document parameter, structural, and scenario uncertainty
+- `omf-artifacts/stakeholder-register.md`: identify affected stakeholders and participatory processes
+- `omf-artifacts/evaluation-report.md`: summarize evaluation context, methods, and results
+- `omf-artifacts/ethics-impact-statement.md`: document ethical considerations, representational harms, and vulnerable populations
 
 ABMs additionally REQUIRE:
 
-- `artifacts/abm-spec.md`
+- `omf-artifacts/abm-spec.md`
 
 If an ABM request includes publication-facing narrative documentation, the ODD/ODD+2 handoff to `document` becomes a required gate after the canonical scientific artifacts above are current.
 

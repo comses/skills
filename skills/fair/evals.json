@@ -190,13 +190,13 @@
       "prompt": "Draft a maintenance plan for my research software covering support, versioning, and update cadence.",
       "should_trigger": true,
       "behavior": [
-        "Updates artifacts/fair/fair-management-plan.md with relevant stewardship decisions, then derives artifacts/fair/maintenance-plan.md from it using the maintenance plan template"
+        "Updates omf-artifacts/fair/fair-management-plan.md with relevant stewardship decisions, then derives omf-artifacts/fair/maintenance-plan.md from it using the maintenance plan template"
       ],
       "output": {
         "description": "Operational maintenance plan derived from the FAIR Management Plan",
         "must_include": [
-          "artifacts/fair/fair-management-plan.md",
-          "artifacts/fair/maintenance-plan.md",
+          "omf-artifacts/fair/fair-management-plan.md",
+          "omf-artifacts/fair/maintenance-plan.md",
           "support",
           "versioning",
           "update cadence"
@@ -210,12 +210,12 @@
       "prompt": "Capture provenance for my workflow and update the provenance manifest.",
       "should_trigger": true,
       "behavior": [
-        "Returns artifacts/fair/provenance-manifest.json derived from the provenance manifest template and linked to the Research Object Inventory when available"
+        "Returns omf-artifacts/fair/provenance-manifest.json derived from the provenance manifest template and linked to the Research Object Inventory when available"
       ],
       "output": {
         "description": "FAIR-owned provenance manifest derived from template",
         "must_include": [
-          "artifacts/fair/provenance-manifest.json",
+          "omf-artifacts/fair/provenance-manifest.json",
           "provenance",
           "Research Object Inventory"
         ],

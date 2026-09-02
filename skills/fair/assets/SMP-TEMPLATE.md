@@ -209,7 +209,7 @@ Document:
 - known compatibility concerns with dependencies
 - unresolved licensing questions
 
-Reference `artifacts/fair/license-inventory.md` for detail.
+Reference `omf-artifacts/fair/license-inventory.md` for detail.
 
 ---
 
@@ -267,12 +267,12 @@ Document explicit quality priorities based on the software type declared in Proj
 
 The authoritative stewardship record remains:
 
-`artifacts/fair/fair-management-plan.md`
+`omf-artifacts/fair/fair-management-plan.md`
 
 Additional project artifacts may include:
 
-- `artifacts/fair/provenance-manifest.json`
-- `artifacts/fair/license-inventory.md`
+- `omf-artifacts/fair/provenance-manifest.json`
+- `omf-artifacts/fair/license-inventory.md`
 - `codemeta.json`
 - `CITATION.cff`
 

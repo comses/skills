@@ -14,7 +14,7 @@ my-model/                             ~/
 │       ├── omfa/                     │       ├── omfa/
 │       ├── omfb/                     │       ├── omfb/
 │       └── ...                       │       └── ...
-├── artifacts/                        └── projects/
+├── omf-artifacts/                    └── projects/
 └── src/                                  └── my-model/
 ```
 

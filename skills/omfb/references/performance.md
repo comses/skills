@@ -9,7 +9,7 @@ Optimize only after measuring. Do not change scientific meaning for speed withou
 ## Steps
 
 1. **Profile before refactoring.** Identify the actual bottleneck. Common culprits: nested loops, unnecessary I/O, object churn, and inefficient data structures.
-2. **Preserve correctness.** Any approximation introduced for performance must be recorded in `artifacts/assumptions.md` or `artifacts/implementation/plan.md`.
+2. **Preserve correctness.** Any approximation introduced for performance must be recorded in `omf-artifacts/assumptions.md` or `omf-artifacts/implementation/plan.md`.
 3. **Benchmark against a baseline.** Use the simplest correct implementation as the reference. Report speedup and any numerical drift.
 4. **Set explicit targets.** Define acceptable runtime and memory budgets for representative problem sizes.
 

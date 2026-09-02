@@ -70,7 +70,7 @@ guidance. Create or update only the artifacts the evidence justifies. Where
 evidence is missing, conflicting, or uncertain, say so explicitly rather than
 inventing scientific commitments.
 
-Store artifacts under `artifacts/` using OMFA canonical filenames.
+Store artifacts under `omf-artifacts/` using OMFA canonical filenames.
 
 Report: what was created, updated, reviewed, or flagged; unresolved
 deficiencies; recommended next steps.

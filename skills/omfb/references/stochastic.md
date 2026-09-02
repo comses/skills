@@ -22,4 +22,4 @@ Use this reference when implementation involves randomness, Monte Carlo methods,
 
 ## Output
 
-Record stochastic design decisions in `artifacts/implementation/verification-plan.md` and `artifacts/implementation/plan.md`.
+Record stochastic design decisions in `omf-artifacts/implementation/verification-plan.md` and `omf-artifacts/implementation/plan.md`.

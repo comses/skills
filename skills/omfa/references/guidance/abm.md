@@ -171,9 +171,9 @@ Generate or maintain, as appropriate:
 - `agent-inventory.md`
 - `process-schedule.md`
 
-Use predictable, semantic kebab-case filenames under `artifacts/` at the project root. These artifacts should support downstream documentation, review, and reproducibility. If `artifacts/` is created during this work, also create `artifacts/README.md` describing artifacts as living documents created early, revised throughout the project, and gated by explicit status/review triggers.
+Use predictable, semantic kebab-case filenames under `omf-artifacts/` at the project root. These artifacts should support downstream documentation, review, and reproducibility. If `omf-artifacts/` is created during this work, also create `omf-artifacts/README.md` describing artifacts as living documents created early, revised throughout the project, and gated by explicit status/review triggers.
 
-For publication-facing ABM documentation, this guidance requires a handoff gate: first ensure OMFA's canonical scientific artifacts (`artifacts/model-card.md` and `artifacts/abm-spec.md`) are current; then route ODD/ODD+2 narrative generation to `document`. OMFA does not own or maintain the ODD narrative itself.
+For publication-facing ABM documentation, this guidance requires a handoff gate: first ensure OMFA's canonical scientific artifacts (`omf-artifacts/model-card.md` and `omf-artifacts/abm-spec.md`) are current; then route ODD/ODD+2 narrative generation to `document`. OMFA does not own or maintain the ODD narrative itself.
 
 ---
 

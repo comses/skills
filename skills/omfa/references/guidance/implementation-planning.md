@@ -8,11 +8,11 @@ OMFA does not own implementation planning artifacts. Use this guidance only to d
 
 For any request to create, revise, or review these artifacts, route to `omfb` and stop:
 
-- `artifacts/implementation/plan.md`
-- `artifacts/implementation/architecture.md`
-- `artifacts/implementation/module-mapping.md`
-- `artifacts/implementation/parameter-schema.md`
-- `artifacts/implementation/verification-plan.md`
+- `omf-artifacts/implementation/plan.md`
+- `omf-artifacts/implementation/architecture.md`
+- `omf-artifacts/implementation/module-mapping.md`
+- `omf-artifacts/implementation/parameter-schema.md`
+- `omf-artifacts/implementation/verification-plan.md`
 
 ## OMFA Readiness Check
 

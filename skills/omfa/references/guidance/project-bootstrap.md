@@ -41,7 +41,7 @@ Execute the steps below in this exact order: **AUDIT → RESOLVE → CLASSIFY �
 
 Audit the existing repository before asking any question. [MUST]
 
-Audit: existing `science.toml`, `AGENTS.md` or other agent instruction files, license, README, `Makefile`, manifests and lockfiles, source, tests, docs, data, analysis, containers, CI configuration, installed skills, OMFA/OMFB artifacts under `artifacts/`, `.gitignore`, and local conventions.
+Audit: existing `science.toml`, `AGENTS.md` or other agent instruction files, license, README, `Makefile`, manifests and lockfiles, source, tests, docs, data, analysis, containers, CI configuration, installed skills, OMFA/OMFB artifacts under `omf-artifacts/`, `.gitignore`, and local conventions.
 
 Infer repository state cheaply from evidence already present. [MUST] Do not rewrite an existing repository to match a template; the existing layout and tooling are the baseline, and templates apply only to empty or near-empty repositories.
 

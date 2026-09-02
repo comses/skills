@@ -31,8 +31,8 @@ The Model Card provides a concise, high-level summary of the computational model
 <Researchers, policymakers, educators, operational analysts, etc.>
 
 Reference:
-- `artifacts/problem-statement.md`
-- `artifacts/research-questions.md`
+- `omf-artifacts/problem-statement.md`
+- `omf-artifacts/research-questions.md`
 
 ---
 
@@ -51,8 +51,8 @@ Reference:
 <Summary only. Reference the full assumptions document.>
 
 Reference:
-- `artifacts/conceptual-model.md`
-- `artifacts/assumptions.md`
+- `omf-artifacts/conceptual-model.md`
+- `omf-artifacts/assumptions.md`
 
 ---
 
@@ -71,8 +71,8 @@ Reference:
 <Brief summary of the principal uncertainties affecting interpretation>
 
 Reference:
-- `artifacts/evaluation-report.md`
-- `artifacts/uncertainty-register.md`
+- `omf-artifacts/evaluation-report.md`
+- `omf-artifacts/uncertainty-register.md`
 
 ---
 
@@ -109,7 +109,7 @@ Summarize important limitations, including:
 - computational or data limitations.
 
 Reference:
-- `artifacts/limitations.md`
+- `omf-artifacts/limitations.md`
 
 ---
 
@@ -119,9 +119,9 @@ Implementation details are maintained separately.
 
 Reference:
 
-- `artifacts/implementation/plan.md`
-- `artifacts/implementation/architecture.md`
-- `artifacts/fair/provenance-manifest.json`
+- `omf-artifacts/implementation/plan.md`
+- `omf-artifacts/implementation/architecture.md`
+- `omf-artifacts/fair/provenance-manifest.json`
 - `fair` skill guidance for reproducibility assessment, packaging, archival, and stewardship
 
 ---

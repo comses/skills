@@ -29,9 +29,9 @@
       "os": "<OS/Container Image>"
     },
     "related_artifacts": [
-      "artifacts/fair/fair-management-plan.md",
-      "artifacts/fair/fair-assessment-report.md",
-      "artifacts/fair/license-inventory.md"
+      "omf-artifacts/fair/fair-management-plan.md",
+      "omf-artifacts/fair/fair-assessment-report.md",
+      "omf-artifacts/fair/license-inventory.md"
     ]
   }
 }

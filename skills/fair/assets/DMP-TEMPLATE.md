@@ -216,12 +216,12 @@ Describe:
 
 This DMP summarizes stewardship of research data. The FAIR Management Plan remains the project's canonical stewardship document. If stewardship decisions change, update the FAIR Management Plan first and then regenerate this DMP. The authoritative stewardship record remains:
 
-`artifacts/fair/fair-management-plan.md`
+`omf-artifacts/fair/fair-management-plan.md`
 
 Additional project artifacts may include:
 
-- `artifacts/fair/provenance-manifest.json`
-- `artifacts/fair/license-inventory.md`
+- `omf-artifacts/fair/provenance-manifest.json`
+- `omf-artifacts/fair/license-inventory.md`
 - DataCite metadata
 - repository README files
 

@@ -14,7 +14,7 @@ This guidance coordinates the computational modeling lifecycle and routes to mor
 
 Computational modeling progresses through the iterative refinement of explicit, reviewable artifacts. Changes to consequential analytical decisions propagate through dependent artifacts and require targeted review before subsequent conclusions can be trusted.
 
-All reviewable artifacts SHOULD be placed under `artifacts/` at the project root. When `artifacts/` is first created, add `artifacts/README.md` indicating artifacts are living documents created early, revised throughout the project, and gated by explicit status/review triggers.
+All reviewable artifacts SHOULD be placed under `omf-artifacts/` at the project root. When `omf-artifacts/` is first created, add `omf-artifacts/README.md` indicating artifacts are living documents created early, revised throughout the project, and gated by explicit status/review triggers.
 
 ---
 
@@ -159,7 +159,7 @@ Expected intermediate artifacts include:
 
 These artifacts should evolve throughout the project and remain available for downstream specialist skills. `conceptual-model.md`, `assumptions.md`, and `uncertainty-register.md` are shared with the parent `SKILL.md` Required Deliverables list — this guidance does not introduce separate copies; it tracks the same files across lifecycle phases.
 
-Store these artifacts in `artifacts/` at the project root, and keep `artifacts/README.md` current with artifact status and review-trigger conventions.
+Store these artifacts in `omf-artifacts/` at the project root, and keep `omf-artifacts/README.md` current with artifact status and review-trigger conventions.
 
 **Dependency edges.** These artifacts are not independent; a change to one frequently invalidates claims in another. Dependency edges are intentionally sparse. Only record dependencies that are consequential and likely to invalidate downstream reasoning. At minimum, track:
 

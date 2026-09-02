@@ -36,7 +36,7 @@ Do **not** use this skill when: performing conceptual modeling, uncertainty anal
 
 OMFB consumes the reviewable scientific artifacts produced by OMFA. These artifacts are the authoritative implementation specification. These artifacts are the authoritative description of scientific intent and SHOULD be treated as the implementation specification. Implementation artifacts supplement, but never supersede, these scientific artifacts.
 
-For agent-based models (ABMs), `artifacts/abm-spec.md` is the authoritative implementation/planning artifact. If the work is ABM implementation or ABM implementation planning and that artifact is absent, pause and route to OMFA instead of inferring or reconstructing the ABM specification.
+For agent-based models (ABMs), `omf-artifacts/abm-spec.md` is the authoritative implementation/planning artifact. If the work is ABM implementation or ABM implementation planning and that artifact is absent, pause and route to OMFA instead of inferring or reconstructing the ABM specification.
 
 ## Required Inputs
 
@@ -46,9 +46,9 @@ Before substantial implementation begins, the following artifacts MUST exist unl
 
 | Artifact | Status | Purpose |
 |----------|--------|---------|
-| `artifacts/conceptual-model.md` | REQUIRED | Authoritative conceptual specification. |
-| `artifacts/assumptions.md` | REQUIRED | Scientific assumptions that implementation must preserve. |
-| `artifacts/implementation/plan.md` | OPTIONAL | Existing implementation planning, if resuming work. |
+| `omf-artifacts/conceptual-model.md` | REQUIRED | Authoritative conceptual specification. |
+| `omf-artifacts/assumptions.md` | REQUIRED | Scientific assumptions that implementation must preserve. |
+| `omf-artifacts/implementation/plan.md` | OPTIONAL | Existing implementation planning, if resuming work. |
 
 ### Conditional Inputs
 
@@ -56,12 +56,12 @@ Load these artifacts only when they materially affect implementation decisions.
 
 | Artifact | When Required |
 |----------|---------------|
-| `artifacts/research-questions.md` | When implementation choices affect the questions the model is intended to answer. |
-| `artifacts/problem-statement.md` | When project scope or intended use influences implementation priorities. |
-| `artifacts/uncertainty-register.md` | When stochasticity, calibration, numerical methods, or experimental design influence implementation. |
-| `artifacts/analysis-plan.md` | When implementation must support planned experiments, outputs, or evaluation. |
-| `artifacts/stakeholder-register.md` | When implementation decisions have governance, transparency, privacy, or participation implications. |
-| `artifacts/abm-spec.md` | When the work is ABM implementation or ABM implementation planning. Treat as authoritative; if absent, pause and route to OMFA rather than inferring it. |
+| `omf-artifacts/research-questions.md` | When implementation choices affect the questions the model is intended to answer. |
+| `omf-artifacts/problem-statement.md` | When project scope or intended use influences implementation priorities. |
+| `omf-artifacts/uncertainty-register.md` | When stochasticity, calibration, numerical methods, or experimental design influence implementation. |
+| `omf-artifacts/analysis-plan.md` | When implementation must support planned experiments, outputs, or evaluation. |
+| `omf-artifacts/stakeholder-register.md` | When implementation decisions have governance, transparency, privacy, or participation implications. |
+| `omf-artifacts/abm-spec.md` | When the work is ABM implementation or ABM implementation planning. Treat as authoritative; if absent, pause and route to OMFA rather than inferring it. |
 
 ## Guidance Library
 
@@ -85,11 +85,11 @@ OMFB creates or maintains:
 
 | Artifact | Purpose |
 |----------|---------|
-| `artifacts/implementation/plan.md` | Implementation plan |
-| `artifacts/implementation/architecture.md` | Implementation architecture |
-| `artifacts/implementation/module-mapping.md` | Mapping from conceptual model to implementation |
-| `artifacts/implementation/parameter-schema.md` | Externalized parameters and configuration |
-| `artifacts/implementation/verification-plan.md` | Implementation verification plan |
+| `omf-artifacts/implementation/plan.md` | Implementation plan |
+| `omf-artifacts/implementation/architecture.md` | Implementation architecture |
+| `omf-artifacts/implementation/module-mapping.md` | Mapping from conceptual model to implementation |
+| `omf-artifacts/implementation/parameter-schema.md` | Externalized parameters and configuration |
+| `omf-artifacts/implementation/verification-plan.md` | Implementation verification plan |
 
 ## Implementation Contract
 

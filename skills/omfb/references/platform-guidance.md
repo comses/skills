@@ -31,4 +31,4 @@ When recommending a language or framework, consider:
 
 ## Output
 
-Record platform choices and rationale in `artifacts/implementation/plan.md` or `artifacts/implementation/architecture.md`.
+Record platform choices and rationale in `omf-artifacts/implementation/plan.md` or `omf-artifacts/implementation/architecture.md`.

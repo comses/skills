@@ -3,7 +3,7 @@
 This specification provides the technical detail required to implement an Agent-Based Model, supplementing the conceptual model.
 
 ## Rationale for Agent-Based Modeling
-<Brief justification for using ABM rather than aggregate or equation-based approaches. Reference `artifacts/research-questions.md` and `artifacts/conceptual-model.md`.>
+<Brief justification for using ABM rather than aggregate or equation-based approaches. Reference `omf-artifacts/research-questions.md` and `omf-artifacts/conceptual-model.md`.>
 
 ## Agent Definitions
 <Detailed specification of agent types, their state variables, and their decision logic.>
@@ -21,9 +21,9 @@ This specification provides the technical detail required to implement an Agent-
 <Specification of what is tracked, how it is aggregated, and the frequency of observation.>
 
 ## Assumptions and Limitations
-<Scientific assumptions or simplifications that shape the specification. Reference `artifacts/assumptions.md` and `artifacts/conceptual-model.md`.>
+<Scientific assumptions or simplifications that shape the specification. Reference `omf-artifacts/assumptions.md` and `omf-artifacts/conceptual-model.md`.>
 
 Reference:
 - `references/guidance/abm.md`
-- `artifacts/conceptual-model.md`
-- `artifacts/assumptions.md`
+- `omf-artifacts/conceptual-model.md`
+- `omf-artifacts/assumptions.md`

@@ -20,7 +20,7 @@ Verification checks that the code correctly implements the conceptual model. It 
 
 ## Output
 
-OMFB creates or updates `artifacts/implementation/verification-plan.md`.
+OMFB creates or updates `omf-artifacts/implementation/verification-plan.md`.
 
 ## Must / Must-Not
 

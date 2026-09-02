@@ -61,15 +61,15 @@ Use this skill to **generate or draft** narrative documentation: new narratives,
 
 This skill is commonly invoked downstream of `omfa`, which owns lifecycle guidance and required structured artifacts; `document` owns substantive narrative generation according to the OMF rubric. When invoked this way, use the model type, lifecycle stage, and target audience `omfa` provides rather than re-deriving them independently (see Workflow step 2 below).
 
-If the request is for `artifacts/model-card.md`, a model card, or any other scientific model specification, route to `omfa` instead of drafting it here.
+If the request is for `omf-artifacts/model-card.md`, a model card, or any other scientific model specification, route to `omfa` instead of drafting it here.
 
 Do not use this skill for documentation **review or assessment** — gap analysis, completeness scoring, or structured critique of existing docs belongs to the `document-review` skill, which is intended to share this skill's `references/ODD-CHECKLIST.md` and `references/ODD-METHODOLOGY.md` but does not rewrite prose.
 
 Also out of scope: model calibration, sensitivity analysis, statistical analysis, software testing, code generation, peer review, FAIR assessment, and metadata validation.
 
-Do not draft omfa's required lifecycle artifacts — artifacts/model-card.md, artifacts/abm-spec.md, or any other file directly under the artifacts/ root. These are template-driven and owned by the omfa skill even when high prose quality is requested, and even though ODD+2 (this skill's default ABM framework) covers similar ground to abm-spec.md. If a user asks for one of these artifacts by name, or asks for a scientific model specification, defer to omfa rather than drafting it directly.
+Do not draft omfa's required lifecycle artifacts — omf-artifacts/model-card.md, omf-artifacts/abm-spec.md, or any other file directly under the omf-artifacts/ root. These are template-driven and owned by the omfa skill even when high prose quality is requested, and even though ODD+2 (this skill's default ABM framework) covers similar ground to abm-spec.md. If a user asks for one of these artifacts by name, or asks for a scientific model specification, defer to omfa rather than drafting it directly.
 
-This skill's own intermediate artifacts (see Workflow step 3 and Intermediate Artifacts below) live in artifacts/document/, a subdirectory this skill owns — distinct from omfa's files directly under artifacts/. Never write this skill's intermediate artifacts to the artifacts/ root itself.
+This skill's own intermediate artifacts (see Workflow step 3 and Intermediate Artifacts below) live in omf-artifacts/document/, a subdirectory this skill owns — distinct from omfa's files directly under omf-artifacts/. Never write this skill's intermediate artifacts to the omf-artifacts/ root itself.
 
 ---
 
@@ -109,7 +109,7 @@ Classify the model, then pick a framework. Defaults below; deviate when the mode
 
 Works from any combination of: source code, pseudocode, notebooks, scripts; READMEs, manuals, publications, technical reports, architecture diagrams; parameter/experiment descriptions and repository metadata.
 
-When operating downstream of the `omfa` skill, also check for an `artifacts/` directory at the project root and treat completed files there (`conceptual-model.md`, `assumptions.md`, `uncertainty-register.md`, etc.) as authoritative source material — draw model purpose, assumptions, and uncertainty framing from these rather than re-extracting or re-inferring them from source code alone.
+When operating downstream of the `omfa` skill, also check for an `omf-artifacts/` directory at the project root and treat completed files there (`conceptual-model.md`, `assumptions.md`, `uncertainty-register.md`, etc.) as authoritative source material — draw model purpose, assumptions, and uncertainty framing from these rather than re-extracting or re-inferring them from source code alone.
 
 ---
 
@@ -117,7 +117,7 @@ When operating downstream of the `omfa` skill, also check for an `artifacts/` di
 
 1. **Identify the goal.** New documentation, or improvement of an existing draft. (For assessment instead of generation, redirect to `document-review`.)
 2. **Classify the model type** using the table above. If a model type has already been supplied by an upstream skill (e.g. `omfa`), use it directly rather than reclassifying, unless the source materials clearly contradict it — in which case flag the discrepancy rather than silently overriding it. Otherwise, if uncertain, explain alternatives, why one was selected, and identify any assumptions made rather than forcing a fit.
-3. **Select the framework** and record the rationale as an intermediate artifact in `artifacts/document/` before drafting.
+3. **Select the framework** and record the rationale as an intermediate artifact in `omf-artifacts/document/` before drafting.
 4. **Inventory the implemented structure before writing prose.** Extract entity types, state variables (per entity type), parameters/constants, spatial and temporal scales, main processes and update order, outputs, input data, and stochastic elements — directly from the source materials, not from the modeler's narrative description of them. This step exists specifically to catch the "narrative describes intended mechanisms, not implemented ones" gotcha above.
 5. **Draft in this order for ODD+2:** purpose and patterns → entities/state variables/scales → process overview and scheduling → design concepts (all eleven, explicitly, including "not applicable" where true) → initialization → input data → submodels. This mirrors the order in `references/ODD-METHODOLOGY.md` and lets a reader understand the model at a glance before hitting submodel detail. For non-ODD frameworks, draft overview-level content before algorithmic detail using the same overview-before-details principle.
 6. **Add rationale where a design choice is non-obvious** — why this scale, why this update order, why this parameterization, why an omitted process was excluded. Keep it brief; if it grows into design history, that belongs in supplementary material, not the core narrative.

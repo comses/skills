@@ -25,5 +25,5 @@ This statement documents the ethical considerations, potential harms, and govern
 
 Reference:
 - `references/guidance/ethics.md`
-- `artifacts/assumptions.md`
-- `artifacts/stakeholder-register.md`
+- `omf-artifacts/assumptions.md`
+- `omf-artifacts/stakeholder-register.md`

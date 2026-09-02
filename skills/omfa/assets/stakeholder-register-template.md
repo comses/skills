@@ -20,4 +20,4 @@ This register identifies the people, groups, and organizations affected by the m
 Reference:
 - `references/guidance/participatory.md`
 - `references/guidance/ethics.md`
-- `artifacts/decision-log.md`
+- `omf-artifacts/decision-log.md`
