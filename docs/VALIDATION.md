@@ -62,18 +62,15 @@ license: MIT # (required)
 - [ ] `description` includes at least 2 trigger phrases (e.g., "when you need...", "use when...")
 - [ ] `description` specifies expected output types (e.g., "generates checklist", "produces script")
 - [ ] Valid YAML syntax (no unescaped colons in values, proper indentation)
-- [ ] If including `metadata`, it contains valid fields: `domain`, `maturity`, `audience`
-- [ ] Metadata identifies `source`, `versioning`, `maintainer`, `review-status`, `reviewed-by`, `reviewed-at`, `review-evidence`, and `review-cadence`
+- [ ] `metadata.omf-stewardship` points to `stewardship.yaml`
+- [ ] `stewardship.yaml` validates against the repository schema and its subject digest reproduces
 - [ ] If including `compatibility`, it lists actual tool/version requirements
 - [ ] Description avoids vague generic claims and includes domain-specific trigger context
 
-### Quick Syntax Check
+### Canonical Check
 
-```bash
-# Check YAML validity (requires Python)
-python -c "import yaml; yaml.safe_load(open('skills/your-skill/SKILL.md'))"
-# If no error, YAML is valid
-```
+Run `make validate`. Use `make validate-stewardship` only when iterating on a
+stewardship record or the stewardship contract implementation.
 
 ---
 

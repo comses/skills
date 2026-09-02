@@ -1,0 +1,40 @@
+schema-version: '0.1'
+skill:
+  name: hpc
+  repository: https://github.com/openmodelingfoundation/skills
+subject-revision:
+  algorithm: sha256-manifest-v1
+  digest: sha256:974dc28cb35fb06207550697799076dfd7bf274c72df775d77125b99d9f970de
+  manifest:
+  - path: SKILL.md
+    digest: sha256:b800cdc36a1aea4752e58b232931f2d63535b76956a54100cdf01d207d7b85ee
+  include-overrides: []
+  exclusions: []
+maintenance:
+  status: maintained
+  stewards:
+  - name: Open Modeling Foundation
+    identifier: https://openmodelingfoundation.org/
+    role: maintainer
+development:
+  stability: evolving
+distribution:
+  status: current
+guidance-provenance:
+- guidance-id: g-b2c6e490
+  scope:
+    files:
+    - SKILL.md
+    sections: []
+  consequential: true
+  bases: []
+  provenance-gap: Module-level source mapping has not yet been completed.
+  limitations: []
+reviews:
+  structural:
+    claims: []
+  domain:
+    claims: []
+evaluation:
+  supported-environments: []
+  claims: []

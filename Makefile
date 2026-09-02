@@ -22,6 +22,8 @@ help:
 	@echo "  make validate-citation  Validate the repository CITATION.cff metadata"
 	@echo "  make test              Run repository tests / evals only (no lint or format)"
 	@echo "  make validate-provenance  Validate the OMF provenance schema and template"
+	@echo "  make validate-stewardship Validate skill stewardship records and subject digests"
+	@echo "  make refresh-stewardship  Refresh subject manifests after skill-content changes"
 	@echo "  make lint              Run static analysis (markdown lint on all *.md)"
 	@echo "  make format            Apply repository formatting (prettier on md/json)"
 	@echo "  make clean             Remove generated artifacts"
@@ -52,7 +54,7 @@ validate-citation:
 
 # ---- tests (no lint, no format) ----
 .PHONY: test
-test: validate-evals validate-provenance cross validate-skills
+test: validate-evals validate-provenance validate-stewardship cross validate-skills
 
 # ---- individual validation targets ----
 .PHONY: validate-skills
@@ -66,6 +68,14 @@ validate-evals:
 .PHONY: validate-provenance
 validate-provenance:
 	@$(TOOLS_RUN) $(SCRIPTS)/validate_provenance.py
+
+.PHONY: validate-stewardship
+validate-stewardship:
+	@$(TOOLS_RUN) $(SCRIPTS)/validate_stewardship.py
+
+.PHONY: refresh-stewardship
+refresh-stewardship:
+	@$(TOOLS_RUN) $(SCRIPTS)/refresh_stewardship_subjects.py
 
 .PHONY: cross
 cross:

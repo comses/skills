@@ -44,7 +44,12 @@ Every skill must expose a compact operational contract covering:
 
 Use `docs/skill-contracts.md` for the shared vocabulary. Keep the independently useful operational subset in each `SKILL.md`; do not repeat the repository-wide explanation in every skill.
 
-Frontmatter metadata must identify the canonical source, versioning policy, maintainer, review status, reviewer, review date, review evidence, and review cadence. When no methodological review is documented, use `review-status: not-recorded` and `unknown` for its reviewer, date, and evidence rather than implying a review occurred.
+Frontmatter metadata must point to the portable stewardship record with
+`omf-stewardship: stewardship.yaml`. Put mutable maintenance, stability,
+review, evaluation, and guidance-provenance state in that record rather than
+duplicating it in activation context. Follow
+`docs/skill-stewardship-contract.md` and update the subject manifest whenever
+behavior-affecting skill content changes.
 
 ### Artifact Authority
 

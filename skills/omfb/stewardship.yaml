@@ -1,0 +1,61 @@
+schema-version: '0.1'
+skill:
+  name: omfb
+  repository: https://github.com/openmodelingfoundation/skills
+subject-revision:
+  algorithm: sha256-manifest-v1
+  digest: sha256:2c73945581f699fd66423aa499850de79a976265a8861b816f34e9069b388150
+  manifest:
+  - path: SKILL.md
+    digest: sha256:bdd270f784c2fdcb890c62d6c8cf062f120a011e377c81598e26a3dcef194513
+  - path: references/architecture.md
+    digest: sha256:689801d5c3665bd70e94ce4722f3323e94c2fdd9a55cee4f2c94421146c7a52b
+  - path: references/implementation-planning.md
+    digest: sha256:65ffacf0ee0056370cafe5a198810ed8ef8f31f972a735ef12000b0859b5d4e6
+  - path: references/parallel.md
+    digest: sha256:1f6b8d77f40e6994a2b0db54ead6828ed23b0ee8991bef3cb7991c7dbc3ead18
+  - path: references/performance.md
+    digest: sha256:6359c762266a6492a1031aac262e8894cbeb07d6b8e74e6ec87cad3d250c4a6a
+  - path: references/platform-guidance.md
+    digest: sha256:5adb4e2745b95d193a0b066db332db6a39fc54fd2088ca629fd1dde25483c38d
+  - path: references/stochastic.md
+    digest: sha256:6a38afa12d237d523f0f6a9024cdd5d06d3c88ed53c722e3b692050c8311062c
+  - path: references/verification.md
+    digest: sha256:92d127e991c6c5e4b2a0d1007735eb5fa75ca13ca8a4737938e27c3db18869f9
+  include-overrides: []
+  exclusions: []
+maintenance:
+  status: maintained
+  stewards:
+  - name: Open Modeling Foundation
+    identifier: https://openmodelingfoundation.org/
+    role: maintainer
+development:
+  stability: experimental
+distribution:
+  status: current
+guidance-provenance:
+- guidance-id: g-3e59d8a4
+  scope:
+    files:
+    - SKILL.md
+    - references/architecture.md
+    - references/implementation-planning.md
+    - references/parallel.md
+    - references/performance.md
+    - references/platform-guidance.md
+    - references/stochastic.md
+    - references/verification.md
+    sections: []
+  consequential: true
+  bases: []
+  provenance-gap: Module-level source mapping has not yet been completed.
+  limitations: []
+reviews:
+  structural:
+    claims: []
+  domain:
+    claims: []
+evaluation:
+  supported-environments: []
+  claims: []

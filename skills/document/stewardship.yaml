@@ -1,0 +1,52 @@
+schema-version: '0.1'
+skill:
+  name: document
+  repository: https://github.com/openmodelingfoundation/skills
+subject-revision:
+  algorithm: sha256-manifest-v1
+  digest: sha256:531f52745f47d80706c8c022ed8afa142b199bbb00070d5c576e920caf613dc0
+  manifest:
+  - path: SKILL.md
+    digest: sha256:acbb8761cbf46a4dcc1bb97fcdffdd034d93302717ba519bc973627337b1762d
+  - path: assets/ODD-TEMPLATE.md
+    digest: sha256:8fa4c80665cf83d7e9a8e02fd30e5bfbbe6e6c57edb9fbdc9de62589d54bfc9a
+  - path: references/ODD-CHECKLIST.md
+    digest: sha256:7cc5e47272bcdca96a27f3c8aefbb9c3ad8b6a159292f0ffb25e1ad8f6d938c7
+  - path: references/ODD-METHODOLOGY.md
+    digest: sha256:80bf5cb3d4f2549113586b0181f44e28193ed47f9d7deb103fa9afb032ef92e5
+  - path: references/README.md
+    digest: sha256:cc2824b9349825ebdf26f1e687fa0d8500554b980bbd57eefc8c1fd35c351f07
+  include-overrides: []
+  exclusions: []
+maintenance:
+  status: maintained
+  stewards:
+  - name: Open Modeling Foundation
+    identifier: https://openmodelingfoundation.org/
+    role: maintainer
+development:
+  stability: experimental
+distribution:
+  status: current
+guidance-provenance:
+- guidance-id: g-4d83a1c2
+  scope:
+    files:
+    - SKILL.md
+    - assets/ODD-TEMPLATE.md
+    - references/ODD-CHECKLIST.md
+    - references/ODD-METHODOLOGY.md
+    - references/README.md
+    sections: []
+  consequential: true
+  bases: []
+  provenance-gap: Module-level source mapping has not yet been completed.
+  limitations: []
+reviews:
+  structural:
+    claims: []
+  domain:
+    claims: []
+evaluation:
+  supported-environments: []
+  claims: []

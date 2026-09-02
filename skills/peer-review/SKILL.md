@@ -15,18 +15,7 @@ description: |
 license: MIT
 compatibility: Works with Python, R, NetLogo, Julia, C/C++, and mixed-language model repositories
 metadata:
-  domain: computational-modeling
-  maturity: alpha
-  audience: modelers, reviewers, researchers
-  category: quality-assurance
-  source: https://github.com/openmodelingfoundation/skills
-  versioning: repository-release
-  maintainer: Open Modeling Foundation
-  review-status: not-recorded
-  reviewed-by: unknown
-  reviewed-at: unknown
-  review-evidence: unknown
-  review-cadence: annual-and-on-upstream-change
+  omf-stewardship: stewardship.yaml
 ---
 
 # Computational Model Peer Review Skill

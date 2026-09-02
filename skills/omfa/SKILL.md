@@ -9,18 +9,7 @@ description: |
 license: MIT
 compatibility: Works with agent-based, system dynamics, statistical, simulation, and hybrid models
 metadata:
-  domain: computational-modeling
-  maturity: beta
-  audience: anyone interested in computational modeling
-  category: methodology
-  source: https://github.com/openmodelingfoundation/skills
-  versioning: repository-release
-  maintainer: Open Modeling Foundation
-  review-status: not-recorded
-  reviewed-by: unknown
-  reviewed-at: unknown
-  review-evidence: unknown
-  review-cadence: annual-and-on-upstream-change
+  omf-stewardship: stewardship.yaml
 ---
 
 # Good Modeling Practice

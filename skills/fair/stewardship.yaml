@@ -1,0 +1,73 @@
+schema-version: '0.1'
+skill:
+  name: fair
+  repository: https://github.com/openmodelingfoundation/skills
+subject-revision:
+  algorithm: sha256-manifest-v1
+  digest: sha256:eb8842a83993fb81c54b829b42c0d7b2ee633279316914e5f026997b22e17262
+  manifest:
+  - path: SKILL.md
+    digest: sha256:2ee686bc98b259a080cbe15e20f1fe6443040abbee2c1a3d2ed216723afdad28
+  - path: assets/DMP-TEMPLATE.md
+    digest: sha256:ac1d764faf796e866453b61e0d312217f58784700cf1ee3741398cf789f804df
+  - path: assets/FAIR-MP-TEMPLATE.md
+    digest: sha256:1d9d4529c1a8656119df0ccd7902ebe59902c4465b250c22cc9e01e150abd324
+  - path: assets/SMP-TEMPLATE.md
+    digest: sha256:b5710b546f5dcb6a947327226d4db9f7ecb128cd9de7d4e58633f7b311294b73
+  - path: assets/codemeta.json
+    digest: sha256:ced3ec960ba2e3f63839a4ebc1acf606d02dce193757c38454f129c402ff07de
+  - path: assets/maintenance-plan-template.md
+    digest: sha256:77ce3e170ec9776f63f3a9dd9eb755b36fcb04044b5e82e318eb604125b25f0e
+  - path: assets/provenance-manifest-schema.json
+    digest: sha256:6385d76f4cec1fa1dbcf8a28fe9140875ba694798604b87d40a31c29e6cbe37c
+  - path: assets/provenance-manifest-template.json
+    digest: sha256:0ecd65084d16d185cae7f162cc80efee6af29c3400a038e14efe9c9251e015e9
+  - path: references/FAIR-RELEASE-REFRESH-POLICY.md
+    digest: sha256:00746e9c2111ab4c0d96d1c9ff73d099f3819c39e74368150cc834d9be9faa3e
+  - path: references/FAIR-RSE-CROSSWALK.md
+    digest: sha256:6f3375746230883ed839f0f33ccb47989fbb79c217ccb7ad2b5a07d699795a2c
+  - path: references/README.md
+    digest: sha256:18cf2994609c582e6f9ef51bf47de41d94e75d7d54a5be626271c873fd3a7696
+  - path: references/REFERENCES.md
+    digest: sha256:78a2e2266900994980acd280290693dca79f57e326a717cfa9269f04408ba1cd
+  include-overrides: []
+  exclusions: []
+maintenance:
+  status: maintained
+  stewards:
+  - name: Open Modeling Foundation
+    identifier: https://openmodelingfoundation.org/
+    role: maintainer
+development:
+  stability: evolving
+distribution:
+  status: current
+guidance-provenance:
+- guidance-id: g-60a77b1e
+  scope:
+    files:
+    - SKILL.md
+    - assets/DMP-TEMPLATE.md
+    - assets/FAIR-MP-TEMPLATE.md
+    - assets/SMP-TEMPLATE.md
+    - assets/codemeta.json
+    - assets/maintenance-plan-template.md
+    - assets/provenance-manifest-schema.json
+    - assets/provenance-manifest-template.json
+    - references/FAIR-RELEASE-REFRESH-POLICY.md
+    - references/FAIR-RSE-CROSSWALK.md
+    - references/README.md
+    - references/REFERENCES.md
+    sections: []
+  consequential: true
+  bases: []
+  provenance-gap: Module-level source mapping has not yet been completed.
+  limitations: []
+reviews:
+  structural:
+    claims: []
+  domain:
+    claims: []
+evaluation:
+  supported-environments: []
+  claims: []

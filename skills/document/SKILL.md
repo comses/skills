@@ -23,22 +23,7 @@ description: |
 license: MIT
 compatibility: Any computational modeling framework or programming language
 metadata:
-  domain: computational-modeling
-  category: documentation
-  audience:
-    - researchers
-    - modelers
-    - educators
-    - research software engineers
-  source: https://github.com/openmodelingfoundation/skills
-  versioning: repository-release
-  maintainer: Open Modeling Foundation
-  review-status: not-recorded
-  reviewed-by: unknown
-  reviewed-at: unknown
-  review-evidence: unknown
-  review-cadence: annual-and-on-upstream-change
-  maturity: alpha
+  omf-stewardship: stewardship.yaml
 ---
 
 # Document Skill

@@ -1,0 +1,109 @@
+schema-version: '0.1'
+skill:
+  name: omfa
+  repository: https://github.com/openmodelingfoundation/skills
+subject-revision:
+  algorithm: sha256-manifest-v1
+  digest: sha256:afdd4d46a1ad3c2dd824848da79c3507037e62182b98192d775fc4201f232e96
+  manifest:
+  - path: SKILL.md
+    digest: sha256:215ffd170e59ca0ebef4419d40bb0cf1e0c7941033f66814adcc9a102866e23d
+  - path: assets/GUIDANCE-TEMPLATE.md
+    digest: sha256:78f79eba12a6f764fb536d9e6fc0820e0dd4985d81a7d2256c705a17cbc276b4
+  - path: assets/abm-spec-template.md
+    digest: sha256:c8b5cddb38cd0b6b7896169108fe8e7e22ef4d6e681afd757d1b13623c719a6e
+  - path: assets/assumptions-template.md
+    digest: sha256:646ce92c492cefb62c55c5d8cb0e156ac675b2aa876d59823802d6053280de3e
+  - path: assets/conceptual-model-template.md
+    digest: sha256:4865305738f7beee14db92b0c1cdae1b8f9739040da45e8eb73474d90520a41e
+  - path: assets/ethics-impact-statement-template.md
+    digest: sha256:4d65adf1b4f687f730e7f4c8cb6f140b954d178ee596c34464e61112116cb500
+  - path: assets/evaluation-report-template.md
+    digest: sha256:d5e39f9316f0d3aba4779a3e5fdf24bb1244611679452b0a4e2ccb1477a7ac50
+  - path: assets/model-card-template.md
+    digest: sha256:831d66e4f643b7b3709bb32cfb3db1f62957899459068a05edd162ab9def0ffc
+  - path: assets/stakeholder-register-template.md
+    digest: sha256:6f42b40ca7f2c22a3cabe0843df18dc256182caf2f5379c2f32c813a7d25b401
+  - path: assets/uncertainty-register-template.md
+    digest: sha256:1cd7af9d88e389c60e9b407e46a5e66ff33ee34f608b532ed8cd74f3dfc4f79e
+  - path: references/README.md
+    digest: sha256:bcc8d6bbacd4f1ee6f3e46cc2161bfed3c223b25454152f8a79f025864da08c9
+  - path: references/REFERENCES.md
+    digest: sha256:5f5d41bbeec741b02bcca6a9288f8152be66fef09cf5f2ec02c0f51706624cf9
+  - path: references/guidance/abm.md
+    digest: sha256:9564c06127e0381f9e890547a1580642cddcc0c6bb0356bd5ae30fc6a382f231
+  - path: references/guidance/analysis-planning.md
+    digest: sha256:308e2aab22811a32832e1de18e2a036a0aaf3bea6a6501c562aa3ddbcaa1dedb
+  - path: references/guidance/conceptual-modeling.md
+    digest: sha256:12d5b06cd8098b3bd87f59da8b53661e9946cd9a45ef94344016a672d334540b
+  - path: references/guidance/deep-uncertainty.md
+    digest: sha256:6880f653aaa2c9893622cb9f8128a7f8812a6ecfa5fc687d638fde68ca674939
+  - path: references/guidance/ethics.md
+    digest: sha256:e19d55650340be58493939d4c8db3a3ad9d047110c95b29b05a8609c89a2ca0e
+  - path: references/guidance/evaluation.md
+    digest: sha256:41346e9df82084c03aa5af355c71770dab9c5db820dc4a614ba6a89e6799a742
+  - path: references/guidance/implementation-planning.md
+    digest: sha256:11323f98b8f80ea35e20b798b82f32ea6b8259de3891ab80141da10b79771e2d
+  - path: references/guidance/lifecycle.md
+    digest: sha256:52a9f74ee80570710fd205b41cadceca240f032a6881a1f46f01fa22915b9b7b
+  - path: references/guidance/participatory.md
+    digest: sha256:11a02f82a6565eddd81d6de76252cfa019d5f685d671c7095722fe88307f0fa1
+  - path: references/guidance/project-bootstrap.md
+    digest: sha256:8a61acb50e221819ccd9bfd30fee600b00a7e7b4d6c5816d49ab055e2283e43d
+  - path: references/guidance/project-planning.md
+    digest: sha256:f411f4cb66d40fd6f95f6151787f65ce5c555b06fa924ab668a4ce7749be79b3
+  - path: references/guidance/uncertainty.md
+    digest: sha256:35afadd65f4b95d604989dd74bdbdd0ffa76b372716d896fa47fe0507ba59b89
+  include-overrides: []
+  exclusions: []
+maintenance:
+  status: maintained
+  stewards:
+  - name: Open Modeling Foundation
+    identifier: https://openmodelingfoundation.org/
+    role: maintainer
+development:
+  stability: evolving
+distribution:
+  status: current
+guidance-provenance:
+- guidance-id: g-7f3a2c1d
+  scope:
+    files:
+    - SKILL.md
+    - assets/GUIDANCE-TEMPLATE.md
+    - assets/abm-spec-template.md
+    - assets/assumptions-template.md
+    - assets/conceptual-model-template.md
+    - assets/ethics-impact-statement-template.md
+    - assets/evaluation-report-template.md
+    - assets/model-card-template.md
+    - assets/stakeholder-register-template.md
+    - assets/uncertainty-register-template.md
+    - references/README.md
+    - references/REFERENCES.md
+    - references/guidance/abm.md
+    - references/guidance/analysis-planning.md
+    - references/guidance/conceptual-modeling.md
+    - references/guidance/deep-uncertainty.md
+    - references/guidance/ethics.md
+    - references/guidance/evaluation.md
+    - references/guidance/implementation-planning.md
+    - references/guidance/lifecycle.md
+    - references/guidance/participatory.md
+    - references/guidance/project-bootstrap.md
+    - references/guidance/project-planning.md
+    - references/guidance/uncertainty.md
+    sections: []
+  consequential: true
+  bases: []
+  provenance-gap: Module-level source mapping has not yet been completed.
+  limitations: []
+reviews:
+  structural:
+    claims: []
+  domain:
+    claims: []
+evaluation:
+  supported-environments: []
+  claims: []

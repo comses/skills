@@ -1,0 +1,40 @@
+schema-version: '0.1'
+skill:
+  name: ospool
+  repository: https://github.com/openmodelingfoundation/skills
+subject-revision:
+  algorithm: sha256-manifest-v1
+  digest: sha256:c2f27603b308311ac191ca2ebe9e28b9ccc6d52f3bce00e8486e32e16f7fd30a
+  manifest:
+  - path: SKILL.md
+    digest: sha256:b98ce627346aa292dfa1fc28736dd7f788c5f43be5d17dec4bb082a4f8efd5f4
+  include-overrides: []
+  exclusions: []
+maintenance:
+  status: maintained
+  stewards:
+  - name: Open Modeling Foundation
+    identifier: https://openmodelingfoundation.org/
+    role: maintainer
+development:
+  stability: evolving
+distribution:
+  status: current
+guidance-provenance:
+- guidance-id: g-a7c41e92
+  scope:
+    files:
+    - SKILL.md
+    sections: []
+  consequential: true
+  bases: []
+  provenance-gap: Module-level source mapping has not yet been completed.
+  limitations: []
+reviews:
+  structural:
+    claims: []
+  domain:
+    claims: []
+evaluation:
+  supported-environments: []
+  claims: []

@@ -1,0 +1,58 @@
+schema-version: '0.1'
+skill:
+  name: peer-review
+  repository: https://github.com/openmodelingfoundation/skills
+subject-revision:
+  algorithm: sha256-manifest-v1
+  digest: sha256:d67cca9376470a956972d03a2c4fc7f6e431ad1f0de6d612128799514a91d433
+  manifest:
+  - path: SKILL.md
+    digest: sha256:f14856728a099feb4c3b7931bd5c91366dc67f62e3de4bfc1316addf9d5f9ad2
+  - path: assets/AUTHOR-RESPONSE-CHECKLIST-TEMPLATE.md
+    digest: sha256:05e5a3e6d3f3fba9b1d6df5a1d31ca28b856dd9ee9f28674459eb40726ab5c0c
+  - path: assets/COMSES-REVIEWS-COMPRESSED.md
+    digest: sha256:002ee04800a3e612d251c92c4355cb0741708ac42b28cead4e30a8c5a0658418
+  - path: assets/EVERSE-INDICATORS-COMPRESSED.md
+    digest: sha256:bd7454937b1ba58f809c50d55437b2acef9fc42f7cdc11dd1a9103d5c4974442
+  - path: assets/PEER-REVIEW-REPORT-TEMPLATE.md
+    digest: sha256:78f80d53cef8e27cd9fac129db8f397a27141bb314394805750658c6fd62f03e
+  - path: references/PEER-REVIEW-CHECKLIST.md
+    digest: sha256:c33f98a6ebf4d65162f75a4a4a8681551b7da26be75c15c2fbeb3d7534aaa7f0
+  - path: references/README.md
+    digest: sha256:1958a38b318e8337158d063d3c464f4135c18131300f34560b80e44981b2c082
+  include-overrides: []
+  exclusions: []
+maintenance:
+  status: maintained
+  stewards:
+  - name: Open Modeling Foundation
+    identifier: https://openmodelingfoundation.org/
+    role: maintainer
+development:
+  stability: experimental
+distribution:
+  status: current
+guidance-provenance:
+- guidance-id: g-d8450f31
+  scope:
+    files:
+    - SKILL.md
+    - assets/AUTHOR-RESPONSE-CHECKLIST-TEMPLATE.md
+    - assets/COMSES-REVIEWS-COMPRESSED.md
+    - assets/EVERSE-INDICATORS-COMPRESSED.md
+    - assets/PEER-REVIEW-REPORT-TEMPLATE.md
+    - references/PEER-REVIEW-CHECKLIST.md
+    - references/README.md
+    sections: []
+  consequential: true
+  bases: []
+  provenance-gap: Module-level source mapping has not yet been completed.
+  limitations: []
+reviews:
+  structural:
+    claims: []
+  domain:
+    claims: []
+evaluation:
+  supported-environments: []
+  claims: []

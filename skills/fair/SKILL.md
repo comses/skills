@@ -24,18 +24,7 @@ description: |
 license: MIT
 compatibility: Works with any project managing research software, datasets, computational models, or workflows
 metadata:
-  domain: fair-research-objects
-  maturity: beta
-  audience: modelers, researchers who code, research software engineers, data stewards
-  category: publication
-  source: https://github.com/openmodelingfoundation/skills
-  versioning: repository-release
-  maintainer: Open Modeling Foundation
-  review-status: not-recorded
-  reviewed-by: unknown
-  reviewed-at: unknown
-  review-evidence: unknown
-  review-cadence: annual-and-on-upstream-change
+  omf-stewardship: stewardship.yaml
 ---
 
 # FAIR Research Objects Skill

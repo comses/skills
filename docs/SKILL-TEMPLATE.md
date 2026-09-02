@@ -30,18 +30,7 @@ license: MIT
 # compatibility: <e.g., "Python 3.10+, Git repository required">
 
 metadata:
-  domain: <computational-modeling | publication | execution | analysis>
-  maturity: <alpha | beta | stable>
-  audience: <modelers | researchers | data-scientists | operators>
-  category: <documentation | quality-assurance | execution | publication>
-  source: <canonical repository URL>
-  versioning: repository-release
-  maintainer: <person or organization responsible for maintenance>
-  review-status: <not-recorded | pending | reviewed>
-  reviewed-by: <reviewer identity or unknown>
-  reviewed-at: <ISO-8601 date or unknown>
-  review-evidence: <review record URI/path or unknown>
-  review-cadence: <e.g. annual-and-on-upstream-change>
+  omf-stewardship: stewardship.yaml
 
 ---
 
@@ -156,7 +145,7 @@ with something real when refining the skill.>
   □ assets/ and scripts/ referenced are actually present in the skill folder
   □ Skill contract defines activation, authority, preconditions, effects, invariants,
     outputs, handoffs, completion, failure, and provenance
-  □ metadata identifies source, versioning policy, maintainer, review status, and cadence
+  □ stewardship.yaml validates and its subject manifest includes all execution content
   □ evals.json has ≥3 should-trigger + ≥3 should-not-trigger cases
   □ No hardcoded paths, API keys, or personal settings
   □ Tested against ≥5 should-trigger prompts in a real coding agent session

@@ -1,0 +1,418 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/openmodelingfoundation/skills/schemas/skill-stewardship.schema.json",
+  "title": "OMF Skill Stewardship Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema-version",
+    "skill",
+    "subject-revision",
+    "maintenance",
+    "development",
+    "distribution",
+    "guidance-provenance",
+    "reviews",
+    "evaluation"
+  ],
+  "properties": {
+    "schema-version": { "const": "0.1" },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "repository"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nonempty" },
+        "repository": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "subject-revision": { "$ref": "#/$defs/subjectRevision" },
+    "maintenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "stewards"],
+      "properties": {
+        "status": { "enum": ["maintained", "unmaintained"] },
+        "stewards": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/attribution" }
+        }
+      }
+    },
+    "development": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stability"],
+      "properties": {
+        "stability": { "enum": ["experimental", "evolving", "stable"] }
+      }
+    },
+    "compatibility": { "$ref": "#/$defs/compatibility" },
+    "distribution": { "$ref": "#/$defs/distribution" },
+    "guidance-provenance": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/guidance" }
+    },
+    "reviews": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["structural", "domain"],
+      "properties": {
+        "structural": { "$ref": "#/$defs/reviewClaimCollection" },
+        "domain": { "$ref": "#/$defs/reviewClaimCollection" }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported-environments", "claims"],
+      "properties": {
+        "supported-environments": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/supportedEnvironment" }
+        },
+        "claims": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/evaluationClaim" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonempty": { "type": "string", "minLength": 1 },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "pathDigest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "digest"],
+      "properties": {
+        "path": { "$ref": "#/$defs/nonempty" },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "pathReason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "reason"],
+      "properties": {
+        "path": { "$ref": "#/$defs/nonempty" },
+        "reason": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "subjectRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "digest", "manifest", "include-overrides", "exclusions"],
+      "properties": {
+        "algorithm": { "const": "sha256-manifest-v1" },
+        "digest": { "$ref": "#/$defs/digest" },
+        "manifest": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/pathDigest" }
+        },
+        "include-overrides": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/pathReason" }
+        },
+        "exclusions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/pathReason" }
+        }
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "role"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nonempty" },
+        "identifier": { "$ref": "#/$defs/nonempty" },
+        "role": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["location"],
+      "properties": {
+        "location": { "$ref": "#/$defs/nonempty" },
+        "revision": { "$ref": "#/$defs/nonempty" },
+        "digest": { "$ref": "#/$defs/digest" }
+      },
+      "anyOf": [
+        { "required": ["revision"] },
+        { "required": ["digest"] },
+        {
+          "properties": {
+            "location": {
+              "type": "string",
+              "pattern": "^(urn:|https?://[^#]+/(commit|releases|blob|tree)/|https?://doi\\.org/)"
+            }
+          }
+        }
+      ]
+    },
+    "guidanceScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "sections"],
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nonempty" }
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["file", "anchor"],
+            "properties": {
+              "file": { "$ref": "#/$defs/nonempty" },
+              "anchor": { "$ref": "#/$defs/nonempty" }
+            }
+          }
+        }
+      },
+      "anyOf": [
+        { "properties": { "files": { "minItems": 1 } } },
+        { "properties": { "sections": { "minItems": 1 } } }
+      ]
+    },
+    "guidanceBasis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "evidence", "rationale"],
+      "properties": {
+        "type": {
+          "enum": ["standard", "literature", "community-practice", "expert-judgment", "incident-evidence"]
+        },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "rationale": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["guidance-id", "scope", "consequential", "bases", "limitations"],
+      "properties": {
+        "guidance-id": { "$ref": "#/$defs/nonempty" },
+        "scope": { "$ref": "#/$defs/guidanceScope" },
+        "consequential": { "type": "boolean" },
+        "bases": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/guidanceBasis" }
+        },
+        "provenance-gap": { "$ref": "#/$defs/nonempty" },
+        "limitations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nonempty" }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "bases": { "maxItems": 0 } }, "required": ["bases"] },
+          "then": { "required": ["provenance-gap"] }
+        }
+      ]
+    },
+    "reviewScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["guidance-ids", "files", "concerns"],
+      "properties": {
+        "guidance-ids": { "type": "array", "items": { "$ref": "#/$defs/nonempty" } },
+        "files": { "type": "array", "items": { "$ref": "#/$defs/nonempty" } },
+        "concerns": { "type": "array", "items": { "$ref": "#/$defs/nonempty" } }
+      },
+      "anyOf": [
+        { "properties": { "guidance-ids": { "minItems": 1 } } },
+        { "properties": { "files": { "minItems": 1 } } },
+        { "properties": { "concerns": { "minItems": 1 } } }
+      ]
+    },
+    "recordRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "value"],
+      "properties": {
+        "method": { "enum": ["git", "sha256"] },
+        "value": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "relatedClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation", "repository", "record-revision", "record-path", "claim-type", "evidence", "reason"],
+      "properties": {
+        "relation": { "enum": ["corrects", "invalidates", "supersedes"] },
+        "repository": { "$ref": "#/$defs/nonempty" },
+        "record-revision": { "$ref": "#/$defs/recordRevision" },
+        "record-path": { "$ref": "#/$defs/nonempty" },
+        "claim-type": { "enum": ["structural-review", "domain-review", "evaluation"] },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "reason": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "reviewClaimCollection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claims"],
+      "properties": {
+        "claims": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/reviewClaim" }
+        }
+      }
+    },
+    "reviewClaim": {
+      "oneOf": [
+        { "$ref": "#/$defs/reviewResultClaim" },
+        { "$ref": "#/$defs/invalidationClaim" }
+      ]
+    },
+    "reviewResultClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject-revision", "reviewed-at", "reviewers", "conflicts", "scope", "outcome", "evidence", "limitations", "related-claims"],
+      "properties": {
+        "subject-revision": { "$ref": "#/$defs/digest" },
+        "reviewed-at": { "$ref": "#/$defs/date" },
+        "review-due": { "$ref": "#/$defs/date" },
+        "reviewers": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/attribution" } },
+        "conflicts": { "type": "array", "items": { "$ref": "#/$defs/nonempty" } },
+        "scope": { "$ref": "#/$defs/reviewScope" },
+        "outcome": { "enum": ["reviewed", "changes-requested"] },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "limitations": { "type": "array", "items": { "$ref": "#/$defs/nonempty" } },
+        "related-claims": { "type": "array", "items": { "$ref": "#/$defs/relatedClaim" } }
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nonempty" },
+        "version": { "$ref": "#/$defs/nonempty" },
+        "source": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "runtime", "tools", "dependencies"],
+      "properties": {
+        "model": { "$ref": "#/$defs/component" },
+        "runtime": { "$ref": "#/$defs/component" },
+        "tools": { "type": "array", "items": { "$ref": "#/$defs/component" } },
+        "dependencies": { "type": "array", "items": { "$ref": "#/$defs/component" } }
+      }
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "rule"],
+      "properties": {
+        "name": { "$ref": "#/$defs/nonempty" },
+        "rule": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "supportedEnvironment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "runtime", "tools", "dependencies", "required-suite-revision", "acceptance-criteria"],
+      "properties": {
+        "model": { "$ref": "#/$defs/component" },
+        "runtime": { "$ref": "#/$defs/component" },
+        "tools": { "type": "array", "items": { "$ref": "#/$defs/component" } },
+        "dependencies": { "type": "array", "items": { "$ref": "#/$defs/component" } },
+        "required-suite-revision": { "$ref": "#/$defs/digest" },
+        "acceptance-criteria": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/criterion" } }
+      }
+    },
+    "invalidationClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject-revision", "recorded-at", "recorded-by", "outcome", "evidence", "related-claims"],
+      "properties": {
+        "subject-revision": { "$ref": "#/$defs/digest" },
+        "recorded-at": { "$ref": "#/$defs/date" },
+        "recorded-by": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/attribution" } },
+        "outcome": { "const": "invalidated" },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "related-claims": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/relatedClaim" } }
+      }
+    },
+    "evaluationClaim": {
+      "oneOf": [
+        { "$ref": "#/$defs/acceptedEvaluationClaim" },
+        { "$ref": "#/$defs/invalidationClaim" }
+      ]
+    },
+    "acceptedEvaluationClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject-revision", "suite-revision", "environment", "acceptance-criteria", "repetitions", "result", "accepted-at", "accepted-by", "limitations", "related-claims"],
+      "properties": {
+        "subject-revision": { "$ref": "#/$defs/digest" },
+        "suite-revision": { "$ref": "#/$defs/digest" },
+        "environment": { "$ref": "#/$defs/environment" },
+        "acceptance-criteria": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/criterion" } },
+        "repetitions": { "type": "integer", "minimum": 1 },
+        "result": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evaluated-at", "outcome", "evidence"],
+          "properties": {
+            "evaluated-at": { "$ref": "#/$defs/date" },
+            "outcome": { "enum": ["passed", "failed", "inconclusive"] },
+            "evidence": { "$ref": "#/$defs/evidence" }
+          }
+        },
+        "accepted-at": { "$ref": "#/$defs/date" },
+        "accepted-by": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/attribution" } },
+        "valid-until": { "$ref": "#/$defs/date" },
+        "limitations": { "type": "array", "items": { "$ref": "#/$defs/nonempty" } },
+        "related-claims": { "type": "array", "items": { "$ref": "#/$defs/relatedClaim" } }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement"],
+      "properties": {
+        "statement": { "$ref": "#/$defs/nonempty" },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "migration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement"],
+      "properties": {
+        "statement": { "$ref": "#/$defs/nonempty" },
+        "guide": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["current", "deprecated", "retired"] },
+        "successor": { "$ref": "#/$defs/nonempty" },
+        "rationale": { "$ref": "#/$defs/nonempty" },
+        "migration": { "$ref": "#/$defs/migration" }
+      }
+    }
+  }
+}

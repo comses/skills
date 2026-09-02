@@ -258,7 +258,7 @@ license: MIT
 ---
 ```
 
-### Required Governance Metadata and Optional Compatibility
+### Required Stewardship Pointer and Optional Compatibility
 
 ```yaml
 ---
@@ -267,20 +267,14 @@ description: ...
 license: MIT | Apache-2.0 | Proprietary
 compatibility: Python 3.10+, git, Docker (optional)
 metadata:
-  domain: computational-modeling | documentation | publication | execution
-  maturity: alpha | beta | stable
-  audience: modelers | researchers | data-scientists
-  category: documentation | quality-assurance | execution | publication
-  source: https://github.com/openmodelingfoundation/skills
-  versioning: repository-release
-  maintainer: Open Modeling Foundation
-  review-status: not-recorded | pending | reviewed
-  reviewed-by: unknown
-  reviewed-at: unknown
-  review-evidence: unknown
-  review-cadence: annual-and-on-upstream-change
+  omf-stewardship: stewardship.yaml
 ---
 ```
+
+Record maintenance, stability, distribution, review, evaluation, and guidance
+provenance in `stewardship.yaml`; do not duplicate mutable summaries in
+frontmatter. See `docs/skill-stewardship-contract.md` and validate with
+`make validate-stewardship`.
 
 ### Guidance for `description`
 

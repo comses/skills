@@ -13,18 +13,7 @@ description: |
 license: MIT
 compatibility: Requires Slurm job scheduler; HPC cluster account
 metadata:
-  domain: computational-modeling
-  maturity: beta
-  audience: modelers, researchers
-  category: execution
-  source: https://github.com/openmodelingfoundation/skills
-  versioning: repository-release
-  maintainer: Open Modeling Foundation
-  review-status: not-recorded
-  reviewed-by: unknown
-  reviewed-at: unknown
-  review-evidence: unknown
-  review-cadence: annual-and-on-upstream-change
+  omf-stewardship: stewardship.yaml
 ---
 
 # HPC Slurm Scaffolder Skill

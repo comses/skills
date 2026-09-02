@@ -25,7 +25,8 @@ RUN uv python install 3.11 && \
     uv pip install \
         --python /opt/venv/bin/python \
         cffconvert \
-        jsonschema && \
+        jsonschema \
+        pyyaml && \
     printf '%s\n' 'export PATH="/opt/venv/bin:$PATH"' > /etc/profile.d/omf-skills-venv.sh && \
     chmod +x /etc/profile.d/omf-skills-venv.sh
 
