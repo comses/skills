@@ -1,37 +1,47 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0.0",
   "provenance_manifest": {
-    "research_object_name": "<Research Object Name>",
-    "version": "<Version>",
-    "created_at": "<ISO-8601 Timestamp>",
-    "inputs": [
+    "project": {"name": "Example project", "repository": "unknown", "revision": "unknown"},
+    "entities": [
       {
-        "name": "<Dataset/Source Name>",
-        "inventory_entry": "<Research Object Inventory entry if available>",
-        "uri": "<URI/Path>",
-        "version": "<Version/Hash>",
-        "description": "<Description of input>"
+        "id": "artifact:conceptual-model@sha256-example-v1", "logical_id": "artifact:conceptual-model", "type": "artifact", "path_or_uri": "omf-artifacts/conceptual-model.md",
+        "version": "unknown", "revision": "unknown", "content_hash": "sha256:example-v1", "status": "draft", "contract_authority": "skill:omfa", "inventory_entry": "research-object:conceptual-model"
+      },
+      {
+        "id": "source:model-code@unknown", "logical_id": "source:model-code", "type": "input", "path_or_uri": "src/model.py",
+        "version": "unknown", "revision": "unknown", "content_hash": "unknown", "status": "observed", "contract_authority": "unknown", "inventory_entry": "unknown"
+      },
+      {
+        "id": "source:method-standard@2026-01-01", "logical_id": "source:method-standard", "type": "methodological-source", "path_or_uri": "https://example.org/method-standard",
+        "version": "2026-01-01", "revision": "unknown", "content_hash": "unknown", "status": "consulted", "contract_authority": "unknown", "inventory_entry": "unknown",
+        "accessed_at": "2026-01-01T00:00:00Z", "effective_date": "2026-01-01", "review_due": "2027-01-01"
       }
     ],
-    "workflow": [
+    "agents": [
+      {"id": "skill:omfa", "type": "skill", "name": "omfa", "source": "https://github.com/openmodelingfoundation/skills", "release": "unknown", "revision": "unknown", "content_hash": "unknown"},
+      {"id": "runtime:agent", "type": "runtime", "name": "unknown", "source": "unknown", "release": "unknown", "revision": "unknown", "content_hash": "unknown"}
+    ],
+    "activities": [
       {
-        "step": "<Step Name>",
-        "tool": "<Tool/Script Name>",
-        "parameters": {
-          "<param>": "<value>"
-        },
-        "output": "<Output File Path>"
+        "id": "activity:20260101T000000Z:create:conceptual-model:example-v1", "type": "create", "timestamp": "2026-01-01T00:00:00Z",
+        "summary": "Created the conceptual model from inspected project evidence.",
+        "used": ["source:model-code@unknown", "source:method-standard@2026-01-01"], "generated": ["artifact:conceptual-model@sha256-example-v1"],
+        "associated_agents": [{"agent": "skill:omfa", "role": "contributor"}, {"agent": "runtime:agent", "role": "executor"}],
+        "authorization": {"contract_authority": "skill:omfa", "mode": "authority-action", "scope": "Create an OMFA-owned root scientific artifact."},
+        "parameters": {}, "environment": {},
+        "decisions": [{"summary": "Example consequential decision", "rationale": "Supported by the inspected model source.", "evidence": ["source:model-code@unknown"], "status": "provisional"}],
+        "user_authorized_exception": null
       }
     ],
-    "environment": {
-      "python_version": "<Version>",
-      "dependencies": "<Link to requirements.txt or environment.yml>",
-      "os": "<OS/Container Image>"
-    },
-    "related_artifacts": [
-      "omf-artifacts/fair/fair-management-plan.md",
-      "omf-artifacts/fair/fair-assessment-report.md",
-      "omf-artifacts/fair/license-inventory.md"
-    ]
+    "relations": [
+      {"subject": "artifact:conceptual-model@sha256-example-v1", "predicate": "wasGeneratedBy", "object": "activity:20260101T000000Z:create:conceptual-model:example-v1"},
+      {"subject": "activity:20260101T000000Z:create:conceptual-model:example-v1", "predicate": "used", "object": "source:model-code@unknown"},
+      {"subject": "activity:20260101T000000Z:create:conceptual-model:example-v1", "predicate": "used", "object": "source:method-standard@2026-01-01"}
+    ],
+    "dependency_assertions": [],
+    "reviews": [
+      {"id": "review:conceptual-model:unreviewed:example-v1", "entity": "artifact:conceptual-model@sha256-example-v1", "status": "unreviewed", "reviewer": "unknown", "reviewed_at": null, "criteria": [], "evidence": [], "activity": null, "notes": "Review is pending."}
+    ],
+    "privacy": {"raw_prompt_recorded": false, "sensitivity": "public", "redaction_reviewed": true, "notes": "Contains normalized summaries and explicit decisions only; excludes raw prompts, hidden reasoning, secrets, and unnecessary personal data."}
   }
 }

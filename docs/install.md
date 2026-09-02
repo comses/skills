@@ -23,8 +23,9 @@ where `~` is your home directory.
 For most users of these skills, global installation is best because these skills depend on each other and it makes it
 easy to update your skills as they evolve which will be frequent.
 
-Please remember to cite the specific version of these skills you used in your research (see CITATION.cff). It is also a
-good idea to record the specific coding agents and LLM versions they used if possible in your provenance trail.
+Please remember to cite the specific repository release and revision of these skills used in your research (see
+CITATION.cff). For material changes under `omf-artifacts/`, record the producing skill revision, inputs, decisions,
+review status, and the coding agent or model version when observable in `omf-artifacts/fair/provenance-manifest.json`.
 
 ## Prerequisites
 

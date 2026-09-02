@@ -30,7 +30,15 @@ metadata:
     - modelers
     - educators
     - research software engineers
-maturity: alpha
+  source: https://github.com/openmodelingfoundation/skills
+  versioning: repository-release
+  maintainer: Open Modeling Foundation
+  review-status: not-recorded
+  reviewed-by: unknown
+  reviewed-at: unknown
+  review-evidence: unknown
+  review-cadence: annual-and-on-upstream-change
+  maturity: alpha
 ---
 
 # Document Skill
@@ -38,6 +46,19 @@ maturity: alpha
 Generate narrative documentation for computational models and research software, from source code, pseudocode, publications, or other supplied materials.
 
 The goal is accurate, reusable documentation that describes the model as implemented — not as it was intended or remembered to work.
+
+## Skill Contract
+
+- **Activation:** Narrative model or research-software documentation, including ODD/ODD+2; not documentation assessment, model cards, or scientific specifications.
+- **Authority:** Narrative framework selection, structure, and faithful communication of supplied content.
+- **Preconditions:** Inspectable source materials and a known or explicitly unknown audience, model type, and intended use.
+- **Effects:** Create narratives and `omf-artifacts/document/` intermediates; do not rewrite OMFA scientific commitments.
+- **Invariants:** Never invent model facts; distinguish observation, inference, conflict, and unknown information.
+- **Outputs:** Framework-appropriate narrative, traceability information, and intermediate documentation artifacts as needed.
+- **Handoffs:** Route scientific contradictions to `omfa` and assessment requests to the review specialist, passing sources and unresolved discrepancies.
+- **Completion:** Required narrative sections are supported, unknowns and conflicts are visible, outputs are checked, and provenance is persisted or visibly deferred.
+- **Failure:** Produce a qualified partial draft or request missing evidence rather than filling gaps with plausible content.
+- **Provenance:** Record immutable narrative revisions, consulted sources, framework decisions, actual participants, and review state.
 
 ---
 
@@ -72,6 +93,8 @@ Do not draft omfa's required lifecycle artifacts — `omf-artifacts/model-card.m
 This skill owns `omf-artifacts/document/` for its intermediate artifacts (see Workflow step 3 and Intermediate Artifacts below); omfa owns files directly under `omf-artifacts/`. Never write document's intermediate artifacts to that root.
 
 Document owns narrative structure, framework selection, and conflict resolution for its intermediate artifacts and document-authored narratives. OMFA artifacts provide authoritative scientific content, and reviewer corrections may be incorporated when their source remains traceable. If sources contradict an OMFA artifact, flag the discrepancy in the narrative workflow and route the scientific revision to OMFA rather than silently reconciling or overwriting it.
+
+For every material creation or revision under `omf-artifacts/document/` or to a document-authored narrative, append an immutable activity to `omf-artifacts/fair/provenance-manifest.json`. Give each revision a new entity ID, retain its stable logical ID, and link revisions with `wasRevisionOf`. Record document as contract authority, actual participants, source code and OMFA artifacts consulted, the selected framework and methodological references, corrections, and unresolved conflicts. Treat the manifest append as part of the recorded transaction and deduplicate only exact retries. Do not preserve raw prompts or hidden reasoning. If the schema is unavailable, return `provenance_handoff` with `activity`, `entity`, `authorization`, `agents`, `inputs`, `decisions`, `review`, `dependency_assertions`, `skill_identity`, `privacy`, and `persistence: incomplete`; route it to `fair`.
 
 ---
 

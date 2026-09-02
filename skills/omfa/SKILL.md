@@ -13,11 +13,32 @@ metadata:
   maturity: beta
   audience: anyone interested in computational modeling
   category: methodology
+  source: https://github.com/openmodelingfoundation/skills
+  versioning: repository-release
+  maintainer: Open Modeling Foundation
+  review-status: not-recorded
+  reviewed-by: unknown
+  reviewed-at: unknown
+  review-evidence: unknown
+  review-cadence: annual-and-on-upstream-change
 ---
 
 # Good Modeling Practice
 
 A modular guidance and skill framework for transparent, reviewable, computational modeling.
+
+## Skill Contract
+
+- **Activation:** Lifecycle methodology, scientific model artifacts, quality self-assessment, or scientific handoff readiness; not implementation architecture, stewardship, or narrative-only drafting.
+- **Authority:** Scientific framing, conceptual structure, assumptions, uncertainty, evaluation, ethics, and lifecycle readiness.
+- **Preconditions:** Project evidence or explicit user-supplied model intent; consequential unknowns remain explicit.
+- **Effects:** Create or revise scientific artifacts directly under `omf-artifacts/` and recommend lifecycle actions.
+- **Invariants:** Preserve evidence traceability, uncertainty, user-authorized exceptions, and specialist-owned subtrees.
+- **Outputs:** Required scientific artifacts, gap findings, review checks, and handoff-readiness decisions.
+- **Handoffs:** Route implementation to `omfb`, stewardship to `fair`, and publication narratives to `document`, passing relevant artifacts and unresolved decisions.
+- **Completion:** Required artifacts and checks exist, validation is reported, provenance is persisted or explicitly incomplete, and required handoffs are resolved or visible.
+- **Failure:** Qualify results when evidence is missing, conflicting, stale, or unverifiable; do not invent scientific claims.
+- **Provenance:** Record material OMFA-owned artifact activities and dependency staleness under the artifact contract below.
 
 ## Purpose and Scope
 
@@ -171,6 +192,8 @@ OMFA owns the structure, scientific commitments, and conflict resolution for art
 - OMFA may flag implementation, FAIR, or narrative artifacts as stale, but must route changes to their owning skill.
 
 When accepting a contribution, preserve its source and rationale. If the user explicitly authorizes an exception to this contract, record and report the exception.
+
+For every material creation or revision of an OMFA-owned root artifact or `omf-artifacts/README.md`, append an immutable activity to `omf-artifacts/fair/provenance-manifest.json`. Give each revision a new entity ID, retain its stable logical ID, and link revisions with `wasRevisionOf`. Record OMFA as contract authority, only agents that actually participated, inspected inputs and methodological sources, consequential decisions, review status, and exact repository revision or skill content hash when observable. Use a dependency assertion to mark affected downstream artifacts `potentially-stale` when an upstream scientific commitment changes. Do not record raw prompts or hidden reasoning; use a normalized activity summary and `unknown` for unavailable values. Treat the manifest append as part of that transaction, not as a recursively separate activity. On an exact retry, reuse the existing activity instead of duplicating it. If the schema is unavailable, return `provenance_handoff` with `activity`, `entity`, `authorization`, `agents`, `inputs`, `decisions`, `review`, `dependency_assertions`, `skill_identity`, `privacy`, and `persistence: incomplete`; route it to `fair`.
 
 When `omf-artifacts/` is first created, add `omf-artifacts/README.md` that states:
 

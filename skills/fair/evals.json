@@ -406,6 +406,37 @@
         "boundary_violation",
         "scope_creep"
       ]
+    },
+    {
+      "id": 110,
+      "type": "core",
+      "prompt": "Build the provenance manifest for the scientific and implementation artifacts in this repository, including the skills that produced them and their review state.",
+      "should_trigger": true,
+      "behavior": [
+        "Uses the v2 provenance manifest schema",
+        "Represents artifacts, inputs, methodological sources, skills, activities, relations, and reviews separately",
+        "Records exact revisions when observable and unknown otherwise",
+        "Keeps raw_prompt_recorded false"
+      ],
+      "output": {
+        "description": "Validated project-level lineage manifest for OMF artifacts",
+        "must_include": [
+          "omf-artifacts/fair/provenance-manifest.json",
+          "entities",
+          "activities",
+          "agents",
+          "reviews"
+        ],
+        "must_not_include": [
+          "raw prompt text",
+          "invented revision"
+        ]
+      },
+      "failure_modes": [
+        "missing_provenance",
+        "privacy_leak",
+        "hallucination"
+      ]
     }
   ]
 }

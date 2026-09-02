@@ -21,6 +21,7 @@ help:
 	@echo "  make container-validate  Run the full validation suite inside the supported container"
 	@echo "  make validate-citation  Validate the repository CITATION.cff metadata"
 	@echo "  make test              Run repository tests / evals only (no lint or format)"
+	@echo "  make validate-provenance  Validate the OMF provenance schema and template"
 	@echo "  make lint              Run static analysis (markdown lint on all *.md)"
 	@echo "  make format            Apply repository formatting (prettier on md/json)"
 	@echo "  make clean             Remove generated artifacts"
@@ -51,7 +52,7 @@ validate-citation:
 
 # ---- tests (no lint, no format) ----
 .PHONY: test
-test: validate-evals cross validate-skills
+test: validate-evals validate-provenance cross validate-skills
 
 # ---- individual validation targets ----
 .PHONY: validate-skills
@@ -61,6 +62,10 @@ validate-skills:
 .PHONY: validate-evals
 validate-evals:
 	@$(TOOLS_RUN) $(SCRIPTS)/validate_evals_schema.py
+
+.PHONY: validate-provenance
+validate-provenance:
+	@$(TOOLS_RUN) $(SCRIPTS)/validate_provenance.py
 
 .PHONY: cross
 cross:

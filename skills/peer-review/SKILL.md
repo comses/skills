@@ -19,9 +19,30 @@ metadata:
   maturity: alpha
   audience: modelers, reviewers, researchers
   category: quality-assurance
+  source: https://github.com/openmodelingfoundation/skills
+  versioning: repository-release
+  maintainer: Open Modeling Foundation
+  review-status: not-recorded
+  reviewed-by: unknown
+  reviewed-at: unknown
+  review-evidence: unknown
+  review-cadence: annual-and-on-upstream-change
 ---
 
 # Computational Model Peer Review Skill
+
+## Skill Contract
+
+- **Activation:** Computational-model submission, release, repository, reproducibility, or research-software readiness review; not scientific novelty adjudication or silent remediation.
+- **Authority:** Review criteria, evidence assessment, scoring, finding severity, and readiness recommendation.
+- **Preconditions:** An identifiable review target, declared review scope, available evidence, and explicit handling of inaccessible essentials.
+- **Effects:** Produce findings and reports under `omf-artifacts/review/` when persisted; do not modify assessed artifacts unless remediation is separately authorized.
+- **Invariants:** Preserve observed evidence, distinguish not-assessable from failure, and apply the published scoring rule consistently.
+- **Outputs:** Binary recommendation, criterion-level ratings, evidence, prioritized findings, and remediation routes.
+- **Handoffs:** Route fixes to the affected artifact owner, passing the criterion, evidence, severity, and expected verification; continue independent review where possible.
+- **Completion:** Every in-scope criterion has a rating or explicit not-assessable basis and the final recommendation follows the scoring rule.
+- **Failure:** Issue a constrained review when evidence is missing and never infer a pass from absence of evidence.
+- **Provenance:** Record persisted review reports and review assertions as immutable activities without rewriting earlier findings or dispositions.
 
 ## When to Use This Skill
 

@@ -17,9 +17,30 @@ metadata:
   maturity: alpha
   audience: model developers
   category: implementation
+  source: https://github.com/openmodelingfoundation/skills
+  versioning: repository-release
+  maintainer: Open Modeling Foundation
+  review-status: not-recorded
+  reviewed-by: unknown
+  reviewed-at: unknown
+  review-evidence: unknown
+  review-cadence: annual-and-on-upstream-change
 ---
 
 # Model Implementation Guidance
+
+## Skill Contract
+
+- **Activation:** Computational-model implementation planning or review; not conceptual modeling, lifecycle assessment, or language-specific coding.
+- **Authority:** Implementation architecture, module mapping, parameter representation, verification planning, and implementation-introduced decisions.
+- **Preconditions:** Authoritative scientific intent, preferably current OMFA artifacts, plus available platform and repository constraints.
+- **Effects:** Create or revise `omf-artifacts/implementation/` and implementation recommendations; do not rewrite root scientific artifacts.
+- **Invariants:** Preserve scientific intent and trace every implementation choice to evidence or an explicit implementation assumption.
+- **Outputs:** Implementation plan, component map, parameter schema, verification plan, risk register, and handoff findings as applicable.
+- **Handoffs:** Return scientific contradictions to `omfa`; route stewardship or execution-platform work to `fair`, `hpc`, or `ospool` with affected evidence.
+- **Completion:** Required implementation artifacts are internally consistent, checked against scientific inputs, validated, and provenance-complete or visibly deferred.
+- **Failure:** Stop affected work on missing or contradictory scientific prerequisites while continuing independent analysis when safe.
+- **Provenance:** Record immutable implementation revisions, actual participants, authorization, and dependency assertions.
 
 ## When to Use This Skill
 
@@ -96,6 +117,8 @@ OMFB creates or maintains:
 OMFB owns the structure, implementation decisions, and conflict resolution for `omf-artifacts/implementation/`. Verification, platform, and execution work may update evidence, status, and measured constraints in the applicable artifact when the source and rationale remain traceable. Contributors must not change inherited scientific intent or silently redesign the implementation architecture.
 
 Route structural implementation changes to OMFB. If implementation evidence requires changing an OMFA-owned assumption, conceptual element, or scientific claim, preserve the upstream artifact, record the finding in the applicable implementation artifact, and route the scientific revision to OMFA.
+
+For every material creation or revision under `omf-artifacts/implementation/`, append an immutable activity to `omf-artifacts/fair/provenance-manifest.json`. Give each revision a new entity ID, retain its stable logical ID, and link revisions with `wasRevisionOf`. Record OMFB as contract authority, actual participants, inspected OMFA artifacts and code revisions as inputs, consequential implementation decisions, and explicit dependency assertions for upstream artifacts made potentially stale. Treat the manifest append as part of the recorded transaction and deduplicate only exact retries. Do not record raw prompts or hidden reasoning. If the schema is unavailable, return `provenance_handoff` with `activity`, `entity`, `authorization`, `agents`, `inputs`, `decisions`, `review`, `dependency_assertions`, `skill_identity`, `privacy`, and `persistence: incomplete`; route it to `fair`.
 
 ## Implementation Contract
 

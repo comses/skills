@@ -63,6 +63,7 @@ license: MIT # (required)
 - [ ] `description` specifies expected output types (e.g., "generates checklist", "produces script")
 - [ ] Valid YAML syntax (no unescaped colons in values, proper indentation)
 - [ ] If including `metadata`, it contains valid fields: `domain`, `maturity`, `audience`
+- [ ] Metadata identifies `source`, `versioning`, `maintainer`, `review-status`, `reviewed-by`, `reviewed-at`, `review-evidence`, and `review-cadence`
 - [ ] If including `compatibility`, it lists actual tool/version requirements
 - [ ] Description avoids vague generic claims and includes domain-specific trigger context
 
@@ -200,6 +201,8 @@ When activated, this skill produces:
 - [ ] Verify error handling is clear (if something goes wrong, can user fix it?)
 - [ ] Verify the skill provides a clear default tool/path (not an equal-choice menu)
 - [ ] Verify deep detail is moved to `references/` or `assets/` with explicit load/use conditions
+- [ ] Verify material artifact changes record the producing skill, inputs, activity, decisions, and review status without preserving raw prompts
+- [ ] Verify handoffs name their target, reason, evidence, stop/continue behavior, and expected return
 
 ---
 
@@ -217,7 +220,12 @@ Before submitting, define how your skill will be evaluated. Create a file `skill
       "type": "core",
       "prompt": "I have a Python ABM with Agent and Environment classes. Generate an ODD+2 narrative.",
       "should_trigger": true,
-      "expected_output": "ODD sections covering entities, state variables, processes, and parameters",
+      "behavior": ["select the ODD+2 framework", "inspect supplied evidence"],
+      "output": {
+        "description": "ODD sections covering entities, state variables, processes, and parameters",
+        "must_include": ["entities", "state variables", "processes"],
+        "must_not_include": ["invented model behavior"]
+      },
       "success_criteria": [
         "Output includes all three entities (Agent, Environment, Scheduler)",
         "State variables are listed with types and ranges",
@@ -229,14 +237,24 @@ Before submitting, define how your skill will be evaluated. Create a file `skill
       "type": "core",
       "prompt": "Create a timeline of project milestones",
       "should_trigger": false,
-      "expected_output": "Skill does not activate; falls through to other skills or generic behavior"
+      "behavior": ["no skill activation"],
+      "output": {
+        "description": "Skill does not activate",
+        "must_include": [],
+        "must_not_include": []
+      }
     },
     {
       "id": 3,
       "type": "adversarial",
       "prompt": "I have a complex Netlogo ABM with 50 agents and nested entity hierarchies. Generate ODD.",
       "should_trigger": true,
-      "expected_output": "ODD with entity hierarchy clearly explained; ask for clarification on subsystem abstractions if code is unclear",
+      "behavior": ["inspect entity hierarchy", "ask when abstractions are ambiguous"],
+      "output": {
+        "description": "ODD with entity hierarchy explained",
+        "must_include": ["entity hierarchy"],
+        "must_not_include": ["invented subsystem abstractions"]
+      },
       "failure_modes": ["hallucination", "under_trigger"],
       "success_criteria": [
         "Output structures entity hierarchy (e.g., Colony > Hive > Bee)",
@@ -254,8 +272,8 @@ Before submitting, define how your skill will be evaluated. Create a file `skill
 - **type:** Optional classification: `core`, `adversarial`, `cross`, or `cross-adversarial`
 - **prompt:** User query (should be realistic)
 - **should_trigger:** Boolean indicating whether the skill should activate (required for `core` and `adversarial`)
-- **expected_output:** Description of expected behavior/output type
-- **expected_behavior:** Optional narrative description of expected behavior
+- **behavior:** Observable process-level assertions
+- **output:** Response-level `description`, `must_include`, and `must_not_include` assertions
 - **success_criteria:** Array of statements that must be true for the skill to pass
 - **skills_expected:** Required for `cross` and `cross-adversarial`
 - **failure_modes:** Required for `adversarial` and `cross-adversarial`
@@ -264,6 +282,8 @@ Before submitting, define how your skill will be evaluated. Create a file `skill
 Note: Evals must validate against `evals/schema/schema.json`. Do not add custom fields unless the schema is updated.
 
 ### Running Evals
+
+The current automated suite validates eval structure and runs a deterministic cross-skill routing smoke test. It does not execute skills or establish behavioral contract conformance. Before claiming a contract works, run the skill with and without its instructions against fixture repositories and grade the resulting trace, filesystem diff, authority boundaries, provenance, privacy, and failure behavior.
 
 After you've defined evals, run your skill manually against each test case:
 

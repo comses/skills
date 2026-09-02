@@ -3,6 +3,7 @@
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path("skills")
@@ -79,6 +80,23 @@ def parse_description(frontmatter):
     return m.group(1).strip() if m else None
 
 
+def parse_metadata(frontmatter):
+    """Parse scalar keys directly nested under metadata without accepting misplaced fields."""
+    lines = frontmatter.splitlines()
+    try:
+        start = next(i for i, line in enumerate(lines) if line == "metadata:") + 1
+    except StopIteration:
+        return None
+    metadata = {}
+    for line in lines[start:]:
+        if line and not line.startswith((" ", "\t")):
+            break
+        match = re.match(r"^  ([a-z][a-z0-9-]*):\s*(.*?)\s*$", line)
+        if match and match.group(2):
+            metadata[match.group(1)] = match.group(2)
+    return metadata
+
+
 def check_skill(skill_dir, report):
     skill = skill_dir.name
     skill_md = skill_dir / "SKILL.md"
@@ -144,6 +162,74 @@ def check_skill(skill_dir, report):
             "Missing license field",
             "Add license: MIT (or alternative)",
         )
+
+    # identity and governance metadata
+    governance_fields = {
+        "source": "Add the canonical skill repository URL",
+        "versioning": "Declare repository-release or another documented versioning policy",
+        "maintainer": "Name the person or organization responsible for maintenance",
+        "review-status": "Declare not-recorded, pending, or reviewed",
+        "reviewed-by": "Name the reviewer or use unknown",
+        "reviewed-at": "Record an ISO-8601 date or use unknown",
+        "review-evidence": "Link the review record or use unknown",
+        "review-cadence": "Declare a time- or event-based review cadence",
+    }
+    metadata = parse_metadata(frontmatter)
+    if metadata is None:
+        report.error(skill, "governance", "metadata must be a YAML mapping")
+        metadata = {}
+    governance = {}
+    for field, hint in governance_fields.items():
+        value = metadata.get(field)
+        governance[field] = value
+        if value is None or str(value).strip() == "":
+            report.error(skill, "governance", f"Missing metadata field '{field}'", hint)
+
+    if governance.get("review-status") not in {None, "not-recorded", "pending", "reviewed"}:
+        report.error(
+            skill,
+            "governance",
+            f"Invalid review-status '{governance['review-status']}'",
+            "Use not-recorded, pending, or reviewed",
+        )
+    elif governance.get("review-status") == "not-recorded":
+        report.warn(
+            skill,
+            "governance",
+            "Methodological review has not been recorded",
+            "Record domain reviewer evidence before promoting maturity or publishing a stable release",
+        )
+        for field in ("reviewed-by", "reviewed-at", "review-evidence"):
+            if governance.get(field) != "unknown":
+                report.error(
+                    skill,
+                    "governance",
+                    f"'{field}' must be unknown when review-status is not-recorded",
+                )
+    elif governance.get("review-status") == "reviewed":
+        for field in ("reviewed-by", "reviewed-at", "review-evidence"):
+            if governance.get(field) in {None, "unknown"}:
+                report.error(skill, "governance", f"Reviewed skill needs concrete '{field}'")
+        reviewed_at = governance.get("reviewed-at")
+        if reviewed_at not in {None, "unknown"}:
+            try:
+                date.fromisoformat(str(reviewed_at))
+            except ValueError:
+                report.error(skill, "governance", "reviewed-at must be an ISO-8601 date")
+
+    source = str(governance.get("source", ""))
+    if source and not re.match(r"^https://[^\s]+$", source):
+        report.error(skill, "governance", "source must be a canonical HTTPS URL")
+
+    required_contract_fields = (
+        "Activation", "Authority", "Preconditions", "Effects", "Invariants",
+        "Outputs", "Handoffs", "Completion", "Failure", "Provenance",
+    )
+    if "## Skill Contract" not in text:
+        report.error(skill, "contract", "Missing '## Skill Contract' section")
+    for field in required_contract_fields:
+        if not re.search(rf"^- \*\*{field}:\*\*\s+\S", text, re.MULTILINE):
+            report.error(skill, "contract", f"Missing or empty contract field '{field}'")
 
     # size
     lines = text.count("\n") + 1

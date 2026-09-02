@@ -58,6 +58,12 @@ Used for: the RO-Crate specification for packaging research objects and their me
 URL: https://everse.software/RSQKit/software_management_planning
 Used for: the RSE-process content (governance, testing, sustainability) in `assets/SMP-TEMPLATE.md`; a living guidance resource rather than a single citable paper.
 
+## Agent Skill Stewardship
+
+**The GW Open Source Program Office (2026).** Skills are infrastructure, and a new open-source artifact class.
+URL: <https://ospo.gwu.edu/skills-are-infrastructure-and-new-open-source-artifact-class>
+Used for: treating skills as versioned, licensed, maintained, reviewed, and testable open-source artifacts; recording skill derivation and guarding against stale procedural knowledge.
+
 ## Maintenance
 
 Review this file under the same triggers as `references/README.md`'s Maintenance Expectations. When adding a new source, verify the DOI directly (search, don't rely on memory) before recording it here — a wrong DOI in a bibliography is worse than a missing one.

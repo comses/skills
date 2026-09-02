@@ -258,7 +258,7 @@ license: MIT
 ---
 ```
 
-### Optional Fields
+### Required Governance Metadata and Optional Compatibility
 
 ```yaml
 ---
@@ -271,6 +271,14 @@ metadata:
   maturity: alpha | beta | stable
   audience: modelers | researchers | data-scientists
   category: documentation | quality-assurance | execution | publication
+  source: https://github.com/openmodelingfoundation/skills
+  versioning: repository-release
+  maintainer: Open Modeling Foundation
+  review-status: not-recorded | pending | reviewed
+  reviewed-by: unknown
+  reviewed-at: unknown
+  review-evidence: unknown
+  review-cadence: annual-and-on-upstream-change
 ---
 ```
 
@@ -320,7 +328,12 @@ For each skill, include concrete test cases in `skills/<name>/evals.json`:
       "type": "core",
       "prompt": "I have a Python ABM with Agent and Environment classes. Generate an ODD narrative.",
       "should_trigger": true,
-      "expected_output": "ODD sections covering entities, state variables, and processes"
+      "behavior": ["select the ODD framework", "inspect supplied evidence"],
+      "output": {
+        "description": "ODD sections covering entities, state variables, and processes",
+        "must_include": ["entities", "processes"],
+        "must_not_include": ["invented model behavior"]
+      }
     }
   ]
 }
@@ -329,7 +342,7 @@ For each skill, include concrete test cases in `skills/<name>/evals.json`:
 Notes:
 
 - Individual skill evals live next to the skill, for example `skills/document/evals.json`.
-- The repository schema accepts fields such as `type`, `should_trigger`, `expected_output`, `expected_behavior`, `success_criteria`, `skills_expected`, `failure_modes`, and `notes`.
+- The repository schema accepts fields such as `type`, `should_trigger`, `behavior`, `output`, `success_criteria`, `skills_expected`, `failure_modes`, and `notes`.
 - Do not add ad hoc fields unless you also update the schema in `evals/schema/schema.json`.
 
 ## Submission Checklist
@@ -338,7 +351,9 @@ Before submitting, verify:
 
 - [ ] Confirmed the capability warrants a new skill (vs. guidance, a tool, or an extension) per [When to Create a New Skill](#when-to-create-a-new-skill)
 - [ ] Skill folder name matches `name:` field in frontmatter
-- [ ] Frontmatter includes `name`, `description`, and `license` (plus optional `compatibility` and `metadata`)
+- [ ] Skill contract defines decision authority, preconditions, effects, invariants, handoffs, completion, failure behavior, and provenance obligations
+- [ ] Skill metadata identifies its source, versioning policy, maintainer, review status, reviewer, review date, review evidence, and review cadence
+- [ ] Frontmatter includes `name`, `description`, `license`, and required governance `metadata` (plus optional `compatibility`)
 - [ ] Description includes triggers (`Use this skill when ...`) and expected outputs
 - [ ] All script references use relative paths: `scripts/name.py` (not `./scripts/name.py`)
 - [ ] README/CONTRIBUTING sections are consistent with repository guidelines
