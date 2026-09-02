@@ -17,9 +17,30 @@ metadata:
   maturity: beta
   audience: modelers, researchers
   category: execution
+  source: https://github.com/openmodelingfoundation/skills
+  versioning: repository-release
+  maintainer: Open Modeling Foundation
+  review-status: not-recorded
+  reviewed-by: unknown
+  reviewed-at: unknown
+  review-evidence: unknown
+  review-cadence: annual-and-on-upstream-change
 ---
 
 # HPC Slurm Scaffolder Skill
+
+## Skill Contract
+
+- **Activation:** Slurm, multi-node, accelerator, high-memory, or HPC batch execution needs; not distributed HTCondor/OSPool work.
+- **Authority:** Slurm execution design, resource requests, job arrays, staging, dependencies, and scheduler validation.
+- **Preconditions:** Runnable workload, cluster constraints or explicitly provisional assumptions, input/output paths, and required credentials held by the user.
+- **Effects:** Generate Slurm scripts and resource plans; submit or mutate cluster state only when explicitly requested and authorized.
+- **Invariants:** Preserve experiment parameters, input identity, output separation, and scheduler portability; never invent site policy.
+- **Outputs:** Batch scripts, array configuration, resource rationale, staging plan, and validation checklist.
+- **Handoffs:** Route scientific-design changes to `omfa`, implementation changes to `omfb`, and stewardship or lineage changes to `fair` with job and data evidence.
+- **Completion:** Generated files pass available static or dry-run checks and unresolved site-specific values are visible.
+- **Failure:** Produce a non-submitting scaffold and identify missing cluster facts when safe execution cannot be established.
+- **Provenance:** When contributing execution evidence under `omf-artifacts/implementation/`, record immutable entities, actual participants, authorization, inputs, parameters, environment, and outputs.
 
 ## When to Use This Skill
 

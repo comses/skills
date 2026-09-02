@@ -17,9 +17,30 @@ metadata:
   maturity: beta
   audience: modelers, researchers
   category: execution
+  source: https://github.com/openmodelingfoundation/skills
+  versioning: repository-release
+  maintainer: Open Modeling Foundation
+  review-status: not-recorded
+  reviewed-by: unknown
+  reviewed-at: unknown
+  review-evidence: unknown
+  review-cadence: annual-and-on-upstream-change
 ---
 
 # OSPool HTCondor Scaffolder Skill
+
+## Skill Contract
+
+- **Activation:** HTCondor, OSPool, OSG, distributed ensembles, or high-throughput parameter sweeps; not Slurm-specific HPC work.
+- **Authority:** HTCondor submit design, DAG dependencies, file transfer, resource requests, checkpointing, and distributed dry runs.
+- **Preconditions:** Runnable workload, enumerable tasks, transferable inputs and outputs, and required credentials held by the user.
+- **Effects:** Generate submit files, DAGs, wrappers, and transfer plans; submit externally only when explicitly requested and authorized.
+- **Invariants:** Preserve experiment parameters and input identity, isolate per-job outputs, and avoid unsupported shared-state assumptions.
+- **Outputs:** Submit files, DAG or parameter configuration, wrapper scripts, transfer plan, and validation checklist.
+- **Handoffs:** Route scientific-design changes to `omfa`, implementation changes to `omfb`, and stewardship or lineage changes to `fair` with job and data evidence.
+- **Completion:** Generated files pass available syntax or dry-run checks and unresolved pool-specific values are visible.
+- **Failure:** Produce a non-submitting scaffold and identify missing portability or transfer facts when safe execution cannot be established.
+- **Provenance:** When contributing execution evidence under `omf-artifacts/implementation/`, record immutable entities, actual participants, authorization, inputs, parameters, environment, and outputs.
 
 ## When to Use This Skill
 

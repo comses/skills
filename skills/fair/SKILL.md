@@ -28,6 +28,14 @@ metadata:
   maturity: beta
   audience: modelers, researchers who code, research software engineers, data stewards
   category: publication
+  source: https://github.com/openmodelingfoundation/skills
+  versioning: repository-release
+  maintainer: Open Modeling Foundation
+  review-status: not-recorded
+  reviewed-by: unknown
+  reviewed-at: unknown
+  review-evidence: unknown
+  review-cadence: annual-and-on-upstream-change
 ---
 
 # FAIR Research Objects Skill
@@ -36,9 +44,22 @@ This skill applies the FAIR principles across research software, computational m
 
 The FAIR Management Plan is the project's sole canonical stewardship document and source of truth. DMP and SMP outputs are dissemination extracts derived from it, not independent stewardship authorities. If a requirement first appears in a DMP or SMP, record it in the FAIR Management Plan first, then re-derive the downstream extract.
 
+## Skill Contract
+
+- **Activation:** Stewardship, FAIR assessment, metadata, provenance, reproducibility, packaging, citation, preservation, or management planning; not scientific model authorship.
+- **Authority:** Stewardship decisions, metadata coherence, provenance schema, reproducibility assessment, preservation, packaging, and citation.
+- **Preconditions:** Identifiable research objects and available project evidence; publishing or depositing additionally requires explicit user authority and external access.
+- **Effects:** Create or revise `omf-artifacts/fair/`, scoped metadata/provenance links elsewhere, and authorized packaging or deposit outputs.
+- **Invariants:** Preserve scientific claims, distinguish research objects, retain lineage, and avoid secrets, raw prompts, hidden reasoning, and unnecessary personal data.
+- **Outputs:** FAIR Management Plan and task-appropriate metadata, assessments, provenance, packaging, citation, or preservation artifacts.
+- **Handoffs:** Route scientific changes to `omfa`, implementation changes to `omfb`, and narrative changes to `document`, passing conflicts and evidence.
+- **Completion:** Required stewardship outputs are coherent, validated, linked to their objects, and qualified where identifiers or evidence remain unavailable.
+- **Failure:** Use `unknown`, record blocked external actions, and never imply publication, archival, or verification that did not occur.
+- **Provenance:** Maintain the canonical manifest and validate immutable entities, activities, authorization, reviews, privacy, and stale dependencies.
+
 ## Responsibility
 
-This skill is responsible for lifecycle stewardship of digital research objects — findability, accessibility, interoperability, reusability, reproducibility assessment, and provenance across whatever mix of software, data, models, and workflows a project has. It is deliberately one of four orthogonal responsibilities: `omfa` is responsible for scientific reasoning and scientific specifications, this skill is responsible for stewardship metadata, reproducibility assessment, object/workflow provenance, and packaging, `document` is responsible for narrative communication and ODD narratives, and `peer-review` is responsible for human assessment. Keep that boundary intact when extending any of the four.
+FAIR owns stewardship metadata, reproducibility assessment, object/workflow provenance, and packaging. It does not own scientific specifications (`omfa`), narrative communication (`document`), or human assessment (`peer-review`). Keep these authorities separate when extending any skill.
 
 Data or authority governance questions about populations whose data or knowledge a model draws on, including collective benefit, authority to control, accountability for use, or affected-population consent and legitimacy, are modeling ethics concerns. Route those to `omfa`'s `references/guidance/ethics.md`; do not treat them as resolved by FAIR packaging, metadata, or archival stewardship alone.
 
@@ -217,6 +238,7 @@ Load additional material only when needed:
 - `assets/SMP-TEMPLATE.md` when disseminating a funder-facing SMP from the FAIR Management Plan
 - `assets/maintenance-plan-template.md` when drafting or refreshing an operational maintenance plan from the FAIR Management Plan
 - `assets/provenance-manifest-template.json` when capturing object or workflow provenance
+- `assets/provenance-manifest-schema.json` when creating or validating an artifact provenance manifest
 
 ## Practical Outputs
 
@@ -234,14 +256,27 @@ A DMP or SMP, when required by a funder, is a secondary dissemination artifact d
 
 A maintenance plan request is a management-planning exception: first create or update `omf-artifacts/fair/fair-management-plan.md` with the relevant stewardship decisions, then derive `omf-artifacts/fair/maintenance-plan.md` from it. The maintenance plan is a secondary operational artifact and must not introduce conflicting stewardship decisions.
 
-The provenance manifest is a FAIR-owned object/workflow provenance artifact; keep it aligned with the Research Object Inventory when that inventory exists.
+The provenance manifest is the FAIR-owned canonical lineage record for material artifact and research-object activities under `omf-artifacts/`; keep entity `inventory_entry` values aligned with the Research Object Inventory when it exists. Use `assets/provenance-manifest-template.json` and validate its structure and semantics against `assets/provenance-manifest-schema.json`. Manifest maintenance is part of the transaction it records and is exempt from a second activity record, preventing recursive self-provenance.
+
+A material change alters an artifact's claims, decisions, evidence, status, dependencies, contributor roles, or relationships. Formatting-only edits do not require a new activity. For each material change:
+
+- create an immutable entity for each material revision, retain a stable `logical_id`, and link revisions with `wasRevisionOf`;
+- append an immutable create, revise, derive, transform, execute, validate, review, migrate, package, publish, or archive activity; deduplicate only exact retries with the same activity ID;
+- record contract authority in the entity and authorization record, and record only actual contributors, executors, reviewers, and authorizers as activity participants;
+- identify the skill source, repository release when available, and exact Git revision or skill content hash when observable;
+- record inputs, templates, methodological sources, and consequential decisions;
+- relate revisions and derived artifacts to their predecessors; represent current, potentially stale, invalidated, and resolved dependencies with explicit dependency assertions;
+- use `unknown` for unavailable values rather than inventing them;
+- keep `raw_prompt_recorded` false, declare sensitivity and redaction review, and exclude hidden reasoning, secrets, and unnecessary personal data.
+
+Other skills may append conforming provenance evidence for artifacts they create or revise. FAIR resolves schema conflicts and performs project-level coherence review; it does not claim authorship of another skill's activity. Accept a deferred `provenance_handoff` containing `activity`, `entity`, `authorization`, `agents`, `inputs`, `decisions`, `review`, `dependency_assertions`, `skill_identity`, `privacy`, and `persistence`; validate it, assign collision-resistant IDs, and append without rewriting prior history.
 
 Depending on the task, generate or update one or more of the following under `omf-artifacts/fair/`:
 
 - `fair-management-plan.md`: **REQUIRED** for project-level stewardship, FAIR assessments, management-planning, releases/archival milestones, or any work that changes cross-object stewardship decisions. For narrow self-contained tasks, update an existing plan if one exists and the change is consequential; otherwise omit a full new plan.
 - FAIR metadata records appropriate to the research objects (e.g. `codemeta.json`, `CITATION.cff`, DataCite metadata, RO-Crate metadata)
 - `fair-assessment-report.md`: generate for project-level FAIR assessments or stewardship reviews; not required for narrow metadata, citation, or packaging tasks. Assess FAIR status per research object and workflow, not per project; a single project routinely has FAIR software alongside non-FAIR datasets and draft workflows, and each needs its own status. Reflect the current status of each object in a status column on the Research Object Inventory table, and use this file for the backing detail (what's missing, what's planned) behind each status. Update both together.
-- `omf-artifacts/fair/provenance-manifest.json`: generate or update from `assets/provenance-manifest-template.json` when capturing object or workflow provenance; link provenance records to Research Object Inventory entries when that inventory exists
+- `omf-artifacts/fair/provenance-manifest.json`: generate or update from the v2 template for material artifact, object, or workflow activities; link entities to Research Object Inventory entries when that inventory exists
 - `omf-artifacts/fair/license-inventory.md`
 - `omf-artifacts/fair/maintenance-plan.md`: generate for sustained maintenance, versioning, support, update triggers, or operational governance; first create or update `omf-artifacts/fair/fair-management-plan.md`, then derive this plan from it using `assets/maintenance-plan-template.md`
 - `stewardship-checklist.md` — a general readiness checklist for whatever milestone applies (release, archival deposit, or ongoing curation); rename to `release-checklist.md` only for projects where a software release is specifically the milestone in question

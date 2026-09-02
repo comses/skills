@@ -30,10 +30,18 @@ license: MIT
 # compatibility: <e.g., "Python 3.10+, Git repository required">
 
 metadata:
-domain: <computational-modeling | publication | execution | analysis>
-maturity: <alpha | beta | stable>
-audience: <modelers | researchers | data-scientists | operators>
-category: <documentation | quality-assurance | execution | publication>
+  domain: <computational-modeling | publication | execution | analysis>
+  maturity: <alpha | beta | stable>
+  audience: <modelers | researchers | data-scientists | operators>
+  category: <documentation | quality-assurance | execution | publication>
+  source: <canonical repository URL>
+  versioning: repository-release
+  maintainer: <person or organization responsible for maintenance>
+  review-status: <not-recorded | pending | reviewed>
+  reviewed-by: <reviewer identity or unknown>
+  reviewed-at: <ISO-8601 date or unknown>
+  review-evidence: <review record URI/path or unknown>
+  review-cadence: <e.g. annual-and-on-upstream-change>
 
 ---
 
@@ -48,6 +56,19 @@ Use this skill when:
 - <Concrete scenario 3>
 
 Do **not** use this skill when: <brief anti-use note if the boundary is non-obvious>.
+
+## Skill Contract
+
+- **Activation:** <user intent that activates the skill and adjacent intent that does not>
+- **Authority:** <decisions this skill may make or revise>
+- **Preconditions:** <required inputs, decisions, permissions, or capabilities>
+- **Effects:** <what this skill may create, modify, execute, publish, or recommend>
+- **Invariants:** <commitments this skill must preserve>
+- **Outputs:** <deliverables and applicable artifact contracts>
+- **Handoffs:** <target, reason, evidence passed, and stop/continue behavior>
+- **Completion:** <conditions required before reporting success>
+- **Failure:** <behavior for missing, conflicting, stale, or unverifiable information>
+- **Provenance:** <material activities and outputs that require lineage records>
 
 ## Key Inputs
 
@@ -133,6 +154,9 @@ with something real when refining the skill.>
   □ references/ files have explicit load conditions (not just "see references/")
   □ Gotchas section has ≥1 entry from real execution
   □ assets/ and scripts/ referenced are actually present in the skill folder
+  □ Skill contract defines activation, authority, preconditions, effects, invariants,
+    outputs, handoffs, completion, failure, and provenance
+  □ metadata identifies source, versioning policy, maintainer, review status, and cadence
   □ evals.json has ≥3 should-trigger + ≥3 should-not-trigger cases
   □ No hardcoded paths, API keys, or personal settings
   □ Tested against ≥5 should-trigger prompts in a real coding agent session

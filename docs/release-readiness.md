@@ -136,6 +136,8 @@ Before release, the repository MUST provide:
 - repository metadata
 - installation workflow
 - validation workflow
+- skill source, versioning policy, maintainer, review status, and review cadence metadata
+- a validated schema and template for tracing material `omf-artifacts` changes to producing skills, inputs, decisions, and reviews
 
 The repository SHOULD provide:
 

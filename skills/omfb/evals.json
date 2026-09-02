@@ -143,6 +143,20 @@
       },
       "success_criteria": ["Allows scoped implementation evidence updates", "Preserves OMFA authority over scientific intent"],
       "failure_modes": ["boundary_violation", "scope_creep"]
+    },
+    {
+      "id": 11,
+      "type": "core",
+      "prompt": "Revise the implementation architecture from the current conceptual model and record what changed, which revisions were used, and who had authority for each artifact.",
+      "should_trigger": true,
+      "behavior": ["Revises only the OMFB-owned architecture", "Records the conceptual model and code revisions as inputs", "Records OMFB as contract authority and marks unresolved identity fields unknown rather than inventing them"],
+      "output": {
+        "description": "Implementation architecture revision with authority-aware provenance",
+        "must_include": ["omf-artifacts/implementation/architecture.md", "provenance", "skill:omfb"],
+        "must_not_include": ["updated conceptual model"]
+      },
+      "success_criteria": ["Records a revise activity linked to upstream scientific artifacts", "Preserves upstream scientific authority"],
+      "failure_modes": ["missing_provenance", "boundary_violation"]
     }
   ]
 }

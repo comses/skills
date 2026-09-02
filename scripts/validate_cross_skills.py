@@ -7,12 +7,14 @@ from pathlib import Path
 OUTPUT_FILE = "results_cross.json"
 
 
-# ---- mock agent (replace later with real trace) ----
+# ---- deterministic routing smoke test (not an agent-behavior evaluator) ----
 def mock_agent_run(prompt):
     invoked = []
 
     p = prompt.lower()
 
+    if "conceptual model" in p or "model card" in p or "scientific specification" in p:
+        invoked.append("omfa")
     if "odd" in p or "documentation" in p or ("complete" in p and "publishable" in p):
         invoked.append("document")
     if (
@@ -28,6 +30,7 @@ def mock_agent_run(prompt):
         or "portable" in p
         or "doi" in p
         or "package" in p
+        or "provenance" in p
     ) and "general terms" not in p:
         invoked.append("fair")
     if "large parameter sweeps" in p:
@@ -73,6 +76,13 @@ def evaluate_case(e):
 
         if extra:
             failures.append("boundary_violation")
+
+        if (
+            e.get("sequence_required", False)
+            and set(expected) == set(invoked)
+            and expected != invoked
+        ):
+            failures.append("wrong_order")
 
     else:
         # should not trigger any skills

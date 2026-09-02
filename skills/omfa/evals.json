@@ -448,6 +448,32 @@
         "boundary_violation",
         "missing_step"
       ]
+    },
+    {
+      "id": 111,
+      "type": "core",
+      "prompt": "Create omf-artifacts/conceptual-model.md from this repository and leave a reproducible provenance trail for the result.",
+      "should_trigger": true,
+      "behavior": [
+        "Creates the OMFA-owned conceptual model from inspected evidence",
+        "Records a material create activity with OMFA as contract authority, repository revision or honest unknown, inputs, decisions, and unreviewed status",
+        "Does not store the raw prompt or hidden reasoning"
+      ],
+      "output": {
+        "description": "Conceptual model with a conforming artifact provenance activity",
+        "must_include": [
+          "omf-artifacts/conceptual-model.md",
+          "omf-artifacts/fair/provenance-manifest.json",
+          "skill:omfa"
+        ],
+        "must_not_include": [
+          "raw prompt text"
+        ]
+      },
+      "failure_modes": [
+        "missing_provenance",
+        "privacy_leak"
+      ]
     }
   ]
 }

@@ -458,6 +458,32 @@
         "boundary_violation",
         "hallucination"
       ]
+    },
+    {
+      "id": 116,
+      "type": "core",
+      "prompt": "Generate the ODD narrative from the source code and existing OMFA artifacts, and record which framework guidance and source revisions shaped it.",
+      "should_trigger": true,
+      "behavior": [
+        "Generates the document-owned narrative",
+        "Records source code, OMFA artifacts, framework references, and document skill identity in a provenance activity",
+        "Records unresolved source conflicts without preserving the raw prompt"
+      ],
+      "output": {
+        "description": "ODD narrative with source- and skill-aware provenance",
+        "must_include": [
+          "ODD",
+          "provenance-manifest.json",
+          "skill:document"
+        ],
+        "must_not_include": [
+          "raw prompt text"
+        ]
+      },
+      "failure_modes": [
+        "missing_provenance",
+        "privacy_leak"
+      ]
     }
   ]
 }
